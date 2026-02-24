@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>执法音视频集中存储系统 - 网络拓扑结构图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "SimHei", sans-serif; background: #f0f4f8; padding: 20px; min-width: 1200px; }
+  .title { text-align: center; font-size: 26px; font-weight: bold; color: #1a3a5c; margin-bottom: 6px; }
+  .subtitle { text-align: center; font-size: 14px; color: #666; margin-bottom: 24px; }
+
+  .topo { max-width: 1300px; margin: 0 auto; position: relative; }
+
+  /* ===== Zone Styling ===== */
+  .zone {
+    border: 2px solid; border-radius: 14px; padding: 18px; margin-bottom: 20px; position: relative;
+  }
+  .zone-label {
+    position: absolute; top: -13px; left: 24px; padding: 2px 14px;
+    font-size: 14px; font-weight: bold; color: #fff; border-radius: 6px;
+  }
+
+  .zone-external { border-color: #6c757d; background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%); }
+  .zone-external .zone-label { background: #6c757d; }
+
+  .zone-5g { border-color: #0d6efd; background: linear-gradient(180deg, #e8f0fe 0%, #fff 100%); }
+  .zone-5g .zone-label { background: #0d6efd; }
+
+  .zone-dmz { border-color: #dc3545; background: linear-gradient(180deg, #fdecea 0%, #fff 100%); border-style: dashed; }
+  .zone-dmz .zone-label { background: #dc3545; }
+
+  .zone-core { border-color: #198754; background: linear-gradient(180deg, #e8f5e9 0%, #fff 100%); }
+  .zone-core .zone-label { background: #198754; }
+
+  .zone-storage { border-color: #fd7e14; background: linear-gradient(180deg, #fff3e0 0%, #fff 100%); }
+  .zone-storage .zone-label { background: #fd7e14; }
+
+  .zone-field { border-color: #0dcaf0; background: linear-gradient(180deg, #e0f7fa 0%, #fff 100%); }
+  .zone-field .zone-label { background: #0aa2c0; }
+
+  /* ===== Device Node ===== */
+  .devices {
+    display: flex; align-items: flex-start; justify-content: center;
+    gap: 20px; flex-wrap: wrap; padding-top: 10px;
+  }
+
+  .device {
+    display: flex; flex-direction: column; align-items: center;
+    min-width: 100px; max-width: 140px; text-align: center;
+  }
+  .device .d-icon {
+    width: 64px; height: 64px; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center; font-size: 32px;
+    background: #fff; border: 2px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 6px;
+    transition: transform 0.2s;
+  }
+  .device:hover .d-icon { transform: scale(1.08); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .device .d-name { font-size: 12px; font-weight: bold; color: #333; line-height: 1.3; }
+  .device .d-spec { font-size: 10px; color: #888; margin-top: 2px; }
+
+  .device .d-icon.ic-server { border-color: #198754; background: #e8f5e9; }
+  .device .d-icon.ic-storage { border-color: #fd7e14; background: #fff3e0; }
+  .device .d-icon.ic-network { border-color: #0d6efd; background: #e8f0fe; }
+  .device .d-icon.ic-security { border-color: #dc3545; background: #fdecea; }
+  .device .d-icon.ic-terminal { border-color: #0dcaf0; background: #e0f7fa; }
+  .device .d-icon.ic-external { border-color: #6c757d; background: #f1f3f5; }
+  .device .d-icon.ic-wireless { border-color: #6f42c1; background: #f3e8ff; }
+
+  .guochan {
+    display: inline-block; background: #dc3545; color: #fff; font-size: 9px;
+    padding: 0 5px; border-radius: 3px; margin-top: 3px;
+  }
+
+  /* ===== Connection Lines ===== */
+  .conn-row {
+    display: flex; justify-content: center; align-items: center;
+    padding: 6px 0; position: relative;
+  }
+  .conn-line {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .conn-line .pipe {
+    width: 4px; height: 24px; border-radius: 2px;
+  }
+  .conn-line .pipe-blue { background: #0d6efd; }
+  .conn-line .pipe-green { background: #198754; }
+  .conn-line .pipe-red { background: #dc3545; }
+  .conn-line .pipe-orange { background: #fd7e14; }
+  .conn-line .pipe-gray { background: #adb5bd; }
+  .conn-line .pipe-purple { background: #6f42c1; }
+
+  .conn-label {
+    font-size: 10px; color: #666; background: #fff; padding: 1px 8px;
+    border-radius: 10px; border: 1px solid #dee2e6; white-space: nowrap;
+  }
+
+  /* ===== Multi-Connection Row ===== */
+  .multi-conn {
+    display: flex; justify-content: space-around; align-items: center; padding: 4px 60px;
+  }
+
+  /* ===== Horizontal layout ===== */
+  .h-layout {
+    display: flex; gap: 16px; align-items: stretch;
+  }
+  .h-layout > .zone { flex: 1; margin-bottom: 0; }
+
+  /* ===== Switch/Core visual ===== */
+  .switch-bar {
+    background: linear-gradient(90deg, #0d6efd, #4d94ff);
+    color: #fff; text-align: center; padding: 10px 20px; border-radius: 8px;
+    font-size: 14px; font-weight: bold; margin: 0 40px;
+    box-shadow: 0 2px 10px rgba(13,110,253,0.3); position: relative;
+  }
+  .switch-bar .sw-desc {
+    font-size: 11px; font-weight: normal; opacity: 0.85; margin-top: 2px;
+  }
+  .switch-bar::before, .switch-bar::after {
+    content: ''; position: absolute; top: 50%; width: 40px; height: 3px;
+    background: #0d6efd;
+  }
+  .switch-bar::before { left: -40px; }
+  .switch-bar::after { right: -40px; }
+
+  .switch-bar.green {
+    background: linear-gradient(90deg, #198754, #28a76d);
+    box-shadow: 0 2px 10px rgba(25,135,84,0.3);
+  }
+  .switch-bar.green::before, .switch-bar.green::after { background: #198754; }
+
+  .switch-bar.orange {
+    background: linear-gradient(90deg, #fd7e14, #ffa94d);
+    box-shadow: 0 2px 10px rgba(253,126,20,0.3);
+  }
+
+  /* ===== Dual-line box ===== */
+  .dual-row {
+    display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;
+  }
+
+  /* ===== Firewall visual ===== */
+  .firewall-row {
+    display: flex; align-items: center; justify-content: center; margin: 0 40px; gap: 0;
+  }
+  .fw-wall {
+    flex: 1; height: 4px; background: repeating-linear-gradient(90deg, #dc3545 0, #dc3545 10px, transparent 10px, transparent 14px);
+  }
+  .fw-icon {
+    background: #dc3545; color: #fff; padding: 8px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: bold; white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(220,53,69,0.3);
+  }
+
+  /* ===== Legend ===== */
+  .legend {
+    display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;
+    padding: 12px 20px; background: #fff; border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04); max-width: 1300px; margin-left: auto; margin-right: auto;
+  }
+  .legend-title { font-size: 13px; font-weight: bold; color: #333; margin-right: 10px; line-height: 24px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #555; }
+  .legend-line { width: 20px; height: 4px; border-radius: 2px; }
+
+  .note {
+    max-width: 1300px; margin: 16px auto 0; padding: 14px 20px; background: #fff;
+    border-radius: 8px; border-left: 4px solid #0d6efd; font-size: 13px; color: #555; line-height: 1.8;
+  }
+  .note strong { color: #333; }
+</style>
+</head>
+<body>
+
+<div class="title">执法音视频集中存储系统 - 网络拓扑结构图</div>
+<div class="subtitle">Network Topology Diagram</div>
+
+<div class="topo">
+
+  <!-- ============ Layer 1: External / Upper Level ============ -->
+  <div class="zone zone-external">
+    <div class="zone-label">上级网络 / 外部系统</div>
+    <div class="devices">
+      <div class="device">
+        <div class="d-icon ic-external">🏛️</div>
+        <div class="d-name">市局警务综合平台</div>
+        <div class="d-spec">数据上报汇聚</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-external">📋</div>
+        <div class="d-name">现有执法管理平台</div>
+        <div class="d-spec">存量数据归集</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-external">🌐</div>
+        <div class="d-name">公安信息网</div>
+        <div class="d-spec">专网互联</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection: External -> Firewall -->
+  <div class="conn-row">
+    <div class="conn-line">
+      <div class="pipe pipe-gray"></div>
+      <div class="conn-label">公安专网链路</div>
+      <div class="pipe pipe-gray"></div>
+    </div>
+  </div>
+
+  <!-- ============ Layer 2: DMZ / Security Border ============ -->
+  <div class="zone zone-dmz">
+    <div class="zone-label">安全边界区 (DMZ)</div>
+    <div class="firewall-row">
+      <div class="fw-wall"></div>
+      <div class="fw-icon">🛡️ 防火墙</div>
+      <div class="fw-wall"></div>
+    </div>
+    <div class="devices" style="margin-top: 12px;">
+      <div class="device">
+        <div class="d-icon ic-security">🔐</div>
+        <div class="d-name">VPN网关</div>
+        <div class="d-spec">加密隧道接入</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-security">🛡️</div>
+        <div class="d-name">入侵检测(IDS)</div>
+        <div class="d-spec">威胁监测告警</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-security">📝</div>
+        <div class="d-name">安全审计系统</div>
+        <div class="d-spec">操作日志审计</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-security">🔑</div>
+        <div class="d-name">网络准入控制</div>
+        <div class="d-spec">设备身份认证</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Connection -->
+  <div class="conn-row">
+    <div class="conn-line">
+      <div class="pipe pipe-red"></div>
+      <div class="conn-label">安全通道</div>
+      <div class="pipe pipe-red"></div>
+    </div>
+  </div>
+
+  <!-- ============ Layer 3: Core Switch ============ -->
+  <div class="switch-bar green">
+    🔀 核心交换区（万兆核心交换机 × 2 堆叠）
+    <div class="sw-desc">双机冗余 | 万兆互联 | VLAN隔离</div>
+  </div>
+
+  <!-- Connection: Core -> branches -->
+  <div class="multi-conn">
+    <div class="conn-line">
+      <div class="pipe pipe-green"></div>
+      <div class="conn-label">千兆/万兆</div>
+      <div class="pipe pipe-green"></div>
+    </div>
+    <div class="conn-line">
+      <div class="pipe pipe-green"></div>
+      <div class="conn-label">万兆光纤</div>
+      <div class="pipe pipe-green"></div>
+    </div>
+    <div class="conn-line">
+      <div class="pipe pipe-green"></div>
+      <div class="conn-label">存储网络</div>
+      <div class="pipe pipe-green"></div>
+    </div>
+  </div>
+
+  <!-- ============ Layer 4: Three Zones Side by Side ============ -->
+  <div class="h-layout">
+
+    <!-- Zone A: Server Area -->
+    <div class="zone zone-core">
+      <div class="zone-label">服务器区</div>
+      <div class="devices">
+        <div class="device">
+          <div class="d-icon ic-server">🖥️</div>
+          <div class="d-name">数据接入网关服务器</div>
+          <div class="d-spec">协议适配/校验</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-server">🖥️</div>
+          <div class="d-name">应用管理服务器</div>
+          <div class="d-spec">业务逻辑/调度</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-server">🖥️</div>
+          <div class="d-name">流媒体接收服务器</div>
+          <div class="d-spec">5G视频流接收</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-server">🖥️</div>
+          <div class="d-name">转码/存储优化服务器</div>
+          <div class="d-spec">副本压缩/转码</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-server">🖥️</div>
+          <div class="d-name">数据库服务器</div>
+          <div class="d-spec">元数据/索引</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-server">🖥️</div>
+          <div class="d-name">运维监控服务器</div>
+          <div class="d-spec">告警/巡检/日志</div>
+          <div class="guochan">国产化</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone B: Storage Area -->
+    <div class="zone zone-storage">
+      <div class="zone-label">存储区</div>
+      <div class="devices">
+        <div class="device">
+          <div class="d-icon ic-storage">⚡</div>
+          <div class="d-name">热存储阵列</div>
+          <div class="d-spec">全闪SSD<br>近期活跃数据</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-storage">💾</div>
+          <div class="d-name">温存储阵列</div>
+          <div class="d-spec">大容量HDD<br>中期留存数据</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-storage">🗄️</div>
+          <div class="d-name">冷存储/归档</div>
+          <div class="d-spec">高密度存储<br>长期归档数据</div>
+          <div class="guochan">国产化</div>
+        </div>
+        <div class="device">
+          <div class="d-icon ic-storage">🔒</div>
+          <div class="d-name">原始证据存储</div>
+          <div class="d-spec">WORM保护<br>不可篡改</div>
+          <div class="guochan">国产化</div>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:12px;">
+        <div class="switch-bar orange" style="display:inline-block; margin:0; font-size:12px; padding:6px 16px;">
+          存储交换网络（独立万兆）
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Connection: Core -> Access Switch -->
+  <div class="conn-row">
+    <div class="conn-line">
+      <div class="pipe pipe-green"></div>
+      <div class="conn-label">汇聚链路</div>
+      <div class="pipe pipe-green"></div>
+    </div>
+  </div>
+
+  <!-- ============ Layer 5: Access Switch ============ -->
+  <div class="switch-bar">
+    🔀 接入交换区（千兆接入交换机）
+    <div class="sw-desc">终端设备接入 | PoE供电 | 端口安全</div>
+  </div>
+
+  <!-- Connection: Access -> Terminals -->
+  <div class="multi-conn">
+    <div class="conn-line">
+      <div class="pipe pipe-blue"></div>
+      <div class="conn-label">有线</div>
+      <div class="pipe pipe-blue"></div>
+    </div>
+    <div class="conn-line">
+      <div class="pipe pipe-purple"></div>
+      <div class="conn-label">5G</div>
+      <div class="pipe pipe-purple"></div>
+    </div>
+    <div class="conn-line">
+      <div class="pipe pipe-blue"></div>
+      <div class="conn-label">USB/有线</div>
+      <div class="pipe pipe-blue"></div>
+    </div>
+  </div>
+
+  <!-- ============ Layer 6: Field / Terminal ============ -->
+  <div class="zone zone-field">
+    <div class="zone-label">前端接入区 / 执法终端</div>
+    <div class="devices">
+      <div class="device">
+        <div class="d-icon ic-wireless">📡</div>
+        <div class="d-name">5G执法记录仪</div>
+        <div class="d-spec">5G无线实时回传</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-wireless">📶</div>
+        <div class="d-name">5G基站/CPE</div>
+        <div class="d-spec">无线网络接入点</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-terminal">📹</div>
+        <div class="d-name">手持式离线执法仪</div>
+        <div class="d-spec">本地存储录制</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-terminal">🖥️</div>
+        <div class="d-name">数据采集站</div>
+        <div class="d-spec">批量导入/充电</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-terminal">💻</div>
+        <div class="d-name">终端管理工作站</div>
+        <div class="d-spec">直连导入/管理</div>
+      </div>
+      <div class="device">
+        <div class="d-icon ic-terminal">🖥️</div>
+        <div class="d-name">调阅查询终端</div>
+        <div class="d-spec">视频检索/回放</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-title">图例：</div>
+  <div class="legend-item"><div class="legend-line" style="background:#198754;"></div>万兆链路</div>
+  <div class="legend-item"><div class="legend-line" style="background:#0d6efd;"></div>千兆链路</div>
+  <div class="legend-item"><div class="legend-line" style="background:#6f42c1;"></div>5G无线</div>
+  <div class="legend-item"><div class="legend-line" style="background:#dc3545;"></div>安全通道</div>
+  <div class="legend-item"><div class="legend-line" style="background:#adb5bd;"></div>专网链路</div>
+  <div class="legend-item"><div class="legend-line" style="background:#fd7e14;"></div>存储网络</div>
+  <div class="legend-item" style="margin-left:20px;">
+    <span style="background:#dc3545;color:#fff;font-size:9px;padding:0 5px;border-radius:3px;">国产化</span>
+    国产CPU+国产OS
+  </div>
+</div>
+
+<!-- Notes -->
+<div class="note">
+  <strong>拓扑说明：</strong><br>
+  1. <strong>核心交换</strong>采用双机堆叠冗余部署，万兆互联，保障高可用。服务器区与存储区通过独立的存储交换网络隔离，避免业务流量与存储流量争抢带宽。<br>
+  2. <strong>安全边界区</strong>（DMZ）部署防火墙、VPN网关、入侵检测、网络准入控制，实现纵深安全防护。所有外部访问均需通过安全边界区审查。<br>
+  3. <strong>存储区</strong>按热/温/冷三级分层部署，原始证据存储采用WORM（一次写入多次读取）机制保障数据不可篡改。<br>
+  4. <strong>前端接入区</strong>支持5G无线回传与有线导入两种模式，通过接入交换机统一汇聚至核心网络。<br>
+  5. 所有标注<span style="background:#dc3545;color:#fff;font-size:10px;padding:0 5px;border-radius:3px;">国产化</span>的设备均采用国产CPU（鲲鹏/飞腾/海光）与国产操作系统（麒麟/统信）。
+</div>
+
+</body>
+</html>

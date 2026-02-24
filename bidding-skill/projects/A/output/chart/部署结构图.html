@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1500">
+<title>部署结构图 — 北京市公安局涉案财物智能化保管系统</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Microsoft YaHei", "微软雅黑", ui-sans-serif, system-ui, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  min-height: 100vh;
+  padding: 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ━━━━━━━━━━━━━━━━ MAIN WRAPPER ━━━━━━━━━━━━━━━━ */
+.chart-wrapper {
+  width: 1460px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,.25), 0 0 0 1px rgba(0,0,0,.04);
+  overflow: hidden;
+}
+
+/* ━━━━━━━━━━━━━━━━ HEADER ━━━━━━━━━━━━━━━━ */
+.chart-header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 60%, #2563eb 100%);
+  padding: 22px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.chart-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,.08) 0%, transparent 60%);
+}
+.chart-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 3px;
+  position: relative;
+}
+.chart-header p {
+  font-size: 12.5px;
+  color: #bfdbfe;
+  position: relative;
+}
+
+/* ━━━━━━━━━━━━━━━━ DIAGRAM BODY ━━━━━━━━━━━━━━━━ */
+.diagram-body {
+  display: flex;
+  align-items: stretch;
+  padding: 28px 24px 24px;
+  gap: 0;
+  min-height: 600px;
+}
+
+/* ━━━━━━━━━━━━━━━━ LEFT PANEL: 各分局 ━━━━━━━━━━━━━━━━ */
+.left-panel {
+  width: 268px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 2px solid #bfdbfe;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(37,99,235,.1);
+}
+.panel-header {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-header svg { flex-shrink: 0; }
+.panel-header-title { font-size: 14px; font-weight: 700; }
+.panel-header-note { font-size: 10.5px; margin-left: auto; }
+
+.left-panel .panel-header {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-bottom: 1px solid #bfdbfe;
+}
+.left-panel .panel-header-title { color: #1d4ed8; }
+.left-panel .panel-header-note { color: #93c5fd; }
+
+.branch-grid {
+  flex: 1;
+  background: #f8faff;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  align-content: start;
+}
+
+.branch-node {
+  background: #fff;
+  border: 2px solid #93c5fd;
+  border-radius: 8px;
+  padding: 8px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: default;
+  transition: transform .15s, box-shadow .15s;
+}
+.branch-node:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 12px rgba(37,99,235,.18);
+  border-color: #60a5fa;
+}
+.branch-node .b-icon {
+  width: 28px;
+  height: 28px;
+  background: #eff6ff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.branch-node .b-label {
+  font-size: 10px;
+  color: #374151;
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.branch-more {
+  grid-column: span 3;
+  background: #eff6ff;
+  border: 1px dashed #93c5fd;
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+  color: #6b7280;
+}
+.branch-more em { color: #dc2626; font-style: normal; font-weight: 600; }
+
+.branch-summary {
+  padding: 10px 12px;
+  background: #fff;
+  border-top: 1px solid #dbeafe;
+  font-size: 10.5px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+.badge-conf { background: #dcfce7; color: #166534; font-size: 9.5px; padding: 1px 5px; border-radius: 3px; margin-left: 3px; }
+
+/* ━━━━━━━━━━━━━━━━ FLOW CONNECTOR ━━━━━━━━━━━━━━━━ */
+.flow-connector {
+  width: 80px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.flow-line {
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  position: relative;
+}
+.flow-line-forward {
+  background: linear-gradient(to right, #3b82f6, #22c55e);
+}
+.flow-line-forward::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: -4px;
+  border: 5px solid transparent;
+  border-left: 8px solid #22c55e;
+}
+.flow-line-back {
+  background: linear-gradient(to right, #9ca3af, #6b7280);
+}
+.flow-line-back::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -4px;
+  border: 5px solid transparent;
+  border-right: 8px solid #9ca3af;
+}
+.flow-label {
+  font-size: 9.5px;
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.4;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 3px 5px;
+  width: 72px;
+}
+.flow-label.confirmed { background: #f0fdf4; border-color: #86efac; color: #166534; }
+.flow-label.pending   { background: #fff7ed; border-color: #fcd34d; color: #92400e; }
+
+/* ━━━━━━━━━━━━━━━━ CENTER PANEL: 管理中心 ━━━━━━━━━━━━━━━━ */
+.center-panel {
+  flex: 1;
+  border: 3px solid #3b82f6;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(37,99,235,.15), 0 0 0 1px rgba(37,99,235,.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.center-header {
+  background: linear-gradient(135deg, #166534 0%, #15803d 50%, #16a34a 100%);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.center-header-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.center-header-text h2 { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 1px; }
+.center-header-text p  { font-size: 10.5px; color: #bbf7d0; margin-top: 2px; }
+
+.center-body {
+  flex: 1;
+  padding: 14px;
+  background: #f8faff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Sub-section cards */
+.sub-section {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.sub-header {
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+}
+.sub-header svg { flex-shrink: 0; }
+.sub-header-title { font-size: 13px; font-weight: 700; }
+.sub-header-note  { font-size: 10px; margin-left: auto; opacity: .8; }
+.sub-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  background: #fff;
+}
+.sub-tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* Software section — purple */
+.sec-software .sub-header { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
+.sec-software .sub-tag { background: #f5f3ff; color: #4c1d95; border-color: #c4b5fd; }
+
+/* Storage section — blue */
+.sec-storage .sub-header { background: linear-gradient(135deg, #1d4ed8, #1e40af); }
+.sec-storage .sub-tag { background: #eff6ff; color: #1e3a8a; border-color: #93c5fd; }
+
+/* Display section — orange */
+.sec-display .sub-header { background: linear-gradient(135deg, #c2410c, #9a3412); }
+.sec-display .sub-tag { background: #fff7ed; color: #7c2d12; border-color: #fdba74; }
+
+/* Security section — red */
+.sec-security .sub-header { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+.sec-security .sub-tag { background: #fff1f2; color: #881337; border-color: #fca5a5; }
+
+/* pending note inside sub-body */
+.pending-note {
+  width: 100%;
+  font-size: 10px;
+  color: #9ca3af;
+  padding-top: 4px;
+  border-top: 1px dashed #e5e7eb;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* ━━━━━━━━━━━━━━━━ RIGHT CONNECTOR ━━━━━━━━━━━━━━━━ */
+.right-connector {
+  width: 64px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ━━━━━━━━━━━━━━━━ RIGHT PANEL: 市局云平台 ━━━━━━━━━━━━━━━━ */
+.right-panel {
+  width: 200px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cloud-card {
+  background: #fff;
+  border: 2px dashed #fb923c;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(234,88,12,.1);
+}
+.cloud-header {
+  background: linear-gradient(135deg, #ea580c, #c2410c);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cloud-header-icon {
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,.2);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cloud-header h3 { font-size: 13px; font-weight: 700; color: #fff; }
+.cloud-body { padding: 10px 12px; }
+.cloud-row { font-size: 11px; color: #4b5563; padding: 4px 0; border-bottom: 1px solid #fde8d8; line-height: 1.5; }
+.cloud-row:last-child { border-bottom: none; }
+.cloud-row .hl { color: #9a3412; font-weight: 600; }
+.cloud-row .grey { color: #9ca3af; font-style: italic; }
+
+.ext-note-card {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.ext-note-card h4 { font-size: 12px; font-weight: 700; color: #92400e; margin-bottom: 6px; }
+.ext-note-card p  { font-size: 10.5px; color: #78716c; line-height: 1.6; }
+
+/* ━━━━━━━━━━━━━━━━ FOOTER ━━━━━━━━━━━━━━━━ */
+.chart-footer {
+  padding: 12px 24px 16px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 7px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  color: #374151;
+}
+.lb { width: 22px; height: 14px; border-radius: 3px; }
+.lb-blue   { border: 2px solid #93c5fd; background: #eff6ff; }
+.lb-solid  { border: 3px solid #3b82f6; background: #dbeafe; }
+.lb-dashed { border: 2px dashed #fb923c; background: #fff7ed; }
+.lb-conf   { background: linear-gradient(to right,#3b82f6,#22c55e); height: 3px; border-radius: 2px; margin-top: 6px; }
+.lb-pend   { background: #9ca3af; height: 2px; border-radius: 2px; margin-top: 6px; }
+.footnote { font-size: 11px; color: #9ca3af; font-style: italic; line-height: 1.7; }
+.footnote em { color: #dc2626; font-style: normal; }
+</style>
+</head>
+<body>
+<div class="chart-wrapper">
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <div class="chart-header">
+    <h1>北京市公安局涉案财物智能化保管系统 — 部署结构图</h1>
+    <p>北京宽和精英科技发展有限公司 &nbsp;|&nbsp; 依据：specs/部署结构.md &nbsp;|&nbsp; 原文确认节点：涉案财物管理中心 / 各分局 / 市局云平台</p>
+  </div>
+
+  <!-- ═══════════ DIAGRAM BODY ═══════════ -->
+  <div class="diagram-body">
+
+    <!-- ── LEFT: 各分局 ── -->
+    <div class="left-panel">
+      <div class="panel-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round">
+          <rect x="3" y="7" width="18" height="14" rx="1"/>
+          <path d="M3 7l9-4 9 4"/>
+          <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+          <rect x="11" y="13" width="2" height="3"/>
+        </svg>
+        <span class="panel-header-title">各分局节点</span>
+        <span class="panel-header-note">数量待确认</span>
+      </div>
+      <div class="branch-grid">
+        <!-- 6 representative branch nodes -->
+        <div class="branch-node">
+          <div class="b-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="7" width="18" height="14" rx="1"/><path d="M3 7l9-4 9 4"/>
+              <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+            </svg>
+          </div>
+          <div class="b-label">分局<br>节点 1</div>
+        </div>
+        <div class="branch-node">
+          <div class="b-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="7" width="18" height="14" rx="1"/><path d="M3 7l9-4 9 4"/>
+              <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+            </svg>
+          </div>
+          <div class="b-label">分局<br>节点 2</div>
+        </div>
+        <div class="branch-node">
+          <div class="b-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="7" width="18" height="14" rx="1"/><path d="M3 7l9-4 9 4"/>
+              <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+            </svg>
+          </div>
+          <div class="b-label">分局<br>节点 3</div>
+        </div>
+        <div class="branch-node">
+          <div class="b-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="7" width="18" height="14" rx="1"/><path d="M3 7l9-4 9 4"/>
+              <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+            </svg>
+          </div>
+          <div class="b-label">分局<br>节点 4</div>
+        </div>
+        <div class="branch-node">
+          <div class="b-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="7" width="18" height="14" rx="1"/><path d="M3 7l9-4 9 4"/>
+              <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+            </svg>
+          </div>
+          <div class="b-label">分局<br>节点 5</div>
+        </div>
+        <div class="branch-node">
+          <div class="b-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="7" width="18" height="14" rx="1"/><path d="M3 7l9-4 9 4"/>
+              <line x1="9" y1="21" x2="9" y2="11"/><line x1="15" y1="21" x2="15" y2="11"/>
+            </svg>
+          </div>
+          <div class="b-label">分局<br>节点 6</div>
+        </div>
+        <div class="branch-more">
+          ···&nbsp;&nbsp;实际数量<em>待确认</em>&nbsp;&nbsp;···
+        </div>
+      </div>
+      <div class="branch-summary">
+        各分局已确认部署：<br>
+        视频监控系统 <span class="badge-conf">原文确认</span><br>
+        门禁系统 <span class="badge-conf">原文确认</span><br>
+        数据上传接口 <span class="badge-conf">原文确认</span><br>
+        出入库异常预警接口 <span class="badge-conf">原文确认</span>
+      </div>
+    </div>
+
+    <!-- ── FLOW CONNECTOR (left→center) ── -->
+    <div class="flow-connector">
+      <div>
+        <div class="flow-line flow-line-forward" style="margin-bottom:4px;"></div>
+        <div class="flow-label confirmed">系统数据上传<br>（方向已确认）</div>
+      </div>
+      <div>
+        <div class="flow-line flow-line-back" style="margin-bottom:4px; background:linear-gradient(to right,#9ca3af,#6b7280);"></div>
+        <div class="flow-label pending">视频/门禁/<br>预警对接<br>（方向待确认）</div>
+      </div>
+    </div>
+
+    <!-- ── CENTER: 涉案财物管理中心 ── -->
+    <div class="center-panel">
+      <div class="center-header">
+        <div class="center-header-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <div class="center-header-text">
+          <h2>涉案财物管理中心（主节点）</h2>
+          <p>运维服务主体 &nbsp;·&nbsp; 原文明确确认节点</p>
+        </div>
+      </div>
+
+      <div class="center-body">
+
+        <!-- 软件平台层 -->
+        <div class="sub-section sec-software">
+          <div class="sub-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            <span class="sub-header-title">软件平台层</span>
+            <span class="sub-header-note">26 项功能模块</span>
+          </div>
+          <div class="sub-body">
+            <span class="sub-tag">平台管理软件</span>
+            <span class="sub-tag">智能化库管系统</span>
+            <span class="sub-tag">可视化管理</span>
+            <span class="sub-tag">综合预警</span>
+            <span class="sub-tag">门禁权限综合管理</span>
+            <span class="sub-tag">RFID防拆卸报警</span>
+            <span class="sub-tag">CA认证</span>
+            <span class="sub-tag">轨迹与监控·门禁联动</span>
+            <span class="sub-tag">物品综合台账</span>
+            <span class="sub-tag">安防综合查询</span>
+            <span class="sub-tag">屏幕信息推送管理</span>
+            <span class="sub-tag">道路动态指引</span>
+            <span class="sub-tag">…共26项</span>
+            <p class="pending-note">软件与服务器承载关系原文未定义，待确认</p>
+          </div>
+        </div>
+
+        <!-- 处理/存储层 -->
+        <div class="sub-section sec-storage">
+          <div class="sub-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <rect x="2" y="2" width="20" height="8" rx="2"/>
+              <rect x="2" y="14" width="20" height="8" rx="2"/>
+              <line x1="6" y1="6" x2="6.01" y2="6" stroke-width="3"/>
+              <line x1="6" y1="18" x2="6.01" y2="18" stroke-width="3"/>
+            </svg>
+            <span class="sub-header-title">处理 / 存储层</span>
+            <span class="sub-header-note">部署位置待确认</span>
+          </div>
+          <div class="sub-body">
+            <span class="sub-tag">存储管理服务器 ×1台</span>
+            <span class="sub-tag">监控磁盘阵列机 ×12台</span>
+            <span class="sub-tag">监控硬盘 ×408块</span>
+            <span class="sub-tag">图像拼接处理器 ×9套</span>
+            <span class="sub-tag">高清矩阵 ×1套</span>
+            <span class="sub-tag">高清编码器 ×1个</span>
+            <p class="pending-note">以上设备原文未明确说明部署节点，根据属性推断位于管理中心，待采购人确认</p>
+          </div>
+        </div>
+
+        <!-- 展示设备 -->
+        <div class="sub-section sec-display">
+          <div class="sub-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <polyline points="8 21 12 17 16 21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            <span class="sub-header-title">展示设备层</span>
+            <span class="sub-header-note">部署位置待确认</span>
+          </div>
+          <div class="sub-body">
+            <span class="sub-tag">55寸液晶拼接单元 ×9套</span>
+            <span class="sub-tag">数据显示终端及配件 ×19套</span>
+            <span class="sub-tag">高拍仪 ×1台</span>
+            <p class="pending-note">原文未明确部署位置，推断位于管理中心，待确认</p>
+          </div>
+        </div>
+
+        <!-- 安全层 -->
+        <div class="sub-section sec-security">
+          <div class="sub-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span class="sub-header-title">安全防护层</span>
+            <span class="sub-header-note">公安网环境</span>
+          </div>
+          <div class="sub-body">
+            <span class="sub-tag">防火墙 ×1个</span>
+            <span class="sub-tag">公安网杀毒软件</span>
+            <p class="pending-note">防火墙部署位置及网络策略原文未定义，待确认</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── RIGHT CONNECTOR ── -->
+    <div class="right-connector">
+      <div>
+        <div class="flow-line flow-line-forward" style="width:44px; background:linear-gradient(to right,#9ca3af,#9ca3af);"></div>
+        <div class="flow-label pending" style="width:56px;">连接关系<br>待确认</div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT: 市局云平台 ── -->
+    <div class="right-panel">
+      <div class="cloud-card">
+        <div class="cloud-header">
+          <div class="cloud-header-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+              <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+            </svg>
+          </div>
+          <h3>市局云平台</h3>
+        </div>
+        <div class="cloud-body">
+          <div class="cloud-row"><span class="hl">运维巡检对象</span></div>
+          <div class="cloud-row">原文依据：运维巡检第7条</div>
+          <div class="cloud-row"><span class="grey">与本系统连接关系原文未定义</span></div>
+          <div class="cloud-row"><span class="grey">是否部署于云平台：待确认</span></div>
+          <div class="cloud-row"><span class="grey">网络关系：待确认</span></div>
+        </div>
+      </div>
+
+      <div class="ext-note-card">
+        <h4>外部对接系统</h4>
+        <p>
+          执法办案平台<br>
+          政法系统<br>
+          远程示证<br>
+          <br>
+          以上系统与管理中心的物理部署关系原文未定义，仅确认存在数据对接关系（详见数据流转图）。
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /diagram-body -->
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <div class="chart-footer">
+    <div class="legend-row">
+      <div class="legend-item"><div class="lb lb-solid"></div>实线边框：原文明确确认的主节点</div>
+      <div class="legend-item"><div class="lb lb-blue"></div>蓝色虚边框：分支节点（原文多次提及，数量待确认）</div>
+      <div class="legend-item"><div class="lb lb-dashed"></div>橙色虚边框：外部平台（仅作巡检对象提及）</div>
+      <div class="legend-item"><div class="lb-conf lb" style="width:30px;"></div>实线箭头：方向已确认的流转</div>
+      <div class="legend-item"><div class="lb-pend lb" style="width:30px;"></div>灰线箭头：连接/方向待确认</div>
+    </div>
+    <p class="footnote">
+      注1：各分局数量原文未明确，仅确认存在"各分局"分布节点，示意图展示6个代表性节点。&nbsp;
+      注2：管理中心各子系统部署位置原文未明确，均标注"待确认"，<em>须采购人提供实际部署说明文档</em>。&nbsp;
+      注3：依据 specs/部署结构.md，禁止引入未定义元素。风格参考 specs/部署图.mhtml。
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

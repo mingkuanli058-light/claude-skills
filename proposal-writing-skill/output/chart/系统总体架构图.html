@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>执法音视频集中存储与管理系统 - 系统总体架构图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "SimHei", sans-serif; background: #fff; padding: 40px; }
+  .title { text-align: center; font-size: 24px; font-weight: bold; color: #1a1a2e; margin-bottom: 30px; }
+
+  .diagram { width: 1000px; margin: 0 auto; position: relative; }
+
+  .layer { display: flex; align-items: stretch; margin-bottom: 10px; }
+  .layer-label {
+    width: 130px; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: bold; color: #fff; border-radius: 6px 0 0 6px;
+    text-align: center; padding: 12px 8px; flex-shrink: 0; line-height: 1.4;
+  }
+  .layer-content {
+    flex: 1; display: flex; gap: 10px; padding: 14px 16px;
+    border-radius: 0 6px 6px 0; border: 2px solid; border-left: none; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+  }
+  .node {
+    padding: 12px 14px; border-radius: 6px; font-size: 13px; color: #333;
+    text-align: center; min-width: 130px; flex: 1; background: #fff;
+    border: 1px solid #ccc; line-height: 1.5;
+  }
+  .node .n-title { font-weight: bold; font-size: 13px; }
+  .node .n-desc { font-size: 11px; color: #777; margin-top: 3px; }
+
+  .arrow-row { text-align: center; font-size: 20px; color: #888; margin: 2px 0 2px 130px; }
+
+  /* Layer colors */
+  .lt { background: #34495e; } .lc-t { border-color: #34495e; background: #f5f6f7; }
+  .la { background: #27ae60; } .lc-a { border-color: #27ae60; background: #f0faf4; }
+  .lp { background: #2980b9; } .lc-p { border-color: #2980b9; background: #edf5fc; }
+  .ls { background: #8e44ad; } .lc-s { border-color: #8e44ad; background: #f8f0fc; }
+  .li { background: #7f8c8d; } .lc-i { border-color: #7f8c8d; background: #f7f8f8; }
+
+  /* Side security bar */
+  .side-bar {
+    position: absolute; right: -36px; top: 0; bottom: 0; width: 30px;
+    background: #c0392b; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    writing-mode: vertical-rl; color: #fff; font-size: 13px;
+    font-weight: bold; letter-spacing: 6px;
+  }
+
+  .note {
+    text-align: center; font-size: 12px; color: #999; margin-top: 24px;
+    max-width: 1000px; margin-left: auto; margin-right: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="title">执法音视频集中存储与管理系统 — 系统总体架构图</div>
+
+<div class="diagram">
+
+  <!-- 访问与调阅终端层 -->
+  <div class="layer">
+    <div class="layer-label lt">访问与调阅<br>终端层</div>
+    <div class="layer-content lc-t">
+      <div class="node"><div class="n-title">执法监督管理终端</div><div class="n-desc">数据检索 / 调阅</div></div>
+      <div class="node"><div class="n-title">数据调阅终端</div><div class="n-desc">音视频播放 / 下载</div></div>
+      <div class="node"><div class="n-title">系统管理终端</div><div class="n-desc">权限管理 / 运维操作</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660;</div>
+
+  <!-- 执法音视频接入节点层 -->
+  <div class="layer">
+    <div class="layer-label la">执法音视频<br>接入节点层</div>
+    <div class="layer-content lc-a">
+      <div class="node"><div class="n-title">5G 执法记录仪回传</div><div class="n-desc">5G 无线接入</div></div>
+      <div class="node"><div class="n-title">采集站导入</div><div class="n-desc">批量有线导入</div></div>
+      <div class="node"><div class="n-title">执法仪本地导入</div><div class="n-desc">直连导入</div></div>
+      <div class="node"><div class="n-title">既有平台数据归集</div><div class="n-desc">标准接口对接</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660;</div>
+
+  <!-- 管理与检索平台层 -->
+  <div class="layer">
+    <div class="layer-label lp">管理与检索<br>平台层</div>
+    <div class="layer-content lc-p">
+      <div class="node"><div class="n-title">数据入库管理</div><div class="n-desc">校验 / 元数据提取 / 入库</div></div>
+      <div class="node"><div class="n-title">检索调阅服务</div><div class="n-desc">多维检索 / 并发播放</div></div>
+      <div class="node"><div class="n-title">生命周期管理</div><div class="n-desc">在线 / 归档 / 到期处理</div></div>
+      <div class="node"><div class="n-title">运维监控服务</div><div class="n-desc">容量监测 / 告警 / 巡检</div></div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660;</div>
+
+  <!-- 集中存储资源池层 -->
+  <div class="layer">
+    <div class="layer-label ls">集中存储<br>资源池层</div>
+    <div class="layer-content lc-s">
+      <div class="node" style="flex:2; border-color:#8e44ad; border-width:2px;">
+        <div class="n-title">网络存储设备（视频NAS）</div>
+        <div class="n-desc">8U 机架式 48 盘位 / 台 × 2 台<br>企业级硬盘 68 块（阵列扩展）<br>支持 ONVIF / GB28181 / RTSP<br>多种 RAID/VRAID 数据保护</div>
+      </div>
+      <div class="node" style="flex:1; border-color:#2980b9; border-width:2px;">
+        <div class="n-title">达梦数据库 V8.4</div>
+        <div class="n-desc">元数据 / 业务数据<br>索引 / 审计日志</div>
+      </div>
+    </div>
+  </div>
+  <div class="arrow-row">&#9660;</div>
+
+  <!-- 基础设施层 -->
+  <div class="layer">
+    <div class="layer-label li">基础设施层</div>
+    <div class="layer-content lc-i">
+      <div class="node"><div class="n-title">国产 CPU 服务器</div><div class="n-desc">应用服务器 ×1<br>（鲲鹏920系列处理器）</div></div>
+      <div class="node"><div class="n-title">国产操作系统</div><div class="n-desc">系统软件基础平台</div></div>
+      <div class="node"><div class="n-title">网络交换设备</div><div class="n-desc">核心交换 / 接入交换<br>公安专网环境</div></div>
+    </div>
+  </div>
+
+  <!-- 安全保障体系 -->
+  <div class="side-bar">安全保障体系</div>
+
+</div>
+
+<div class="note">
+  图件仅表达系统角色关系，不展示实现细节级组件。<br>
+  系统采用中心化部署模式，不涉及双中心、异地容灾、云化部署结构。
+</div>
+
+</body>
+</html>

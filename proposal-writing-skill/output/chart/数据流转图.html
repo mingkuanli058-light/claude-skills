@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>执法音视频集中存储与管理系统 - 数据流转图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "SimHei", sans-serif; background: #fff; padding: 40px; }
+  .title { text-align: center; font-size: 24px; font-weight: bold; color: #1a1a2e; margin-bottom: 30px; }
+  .diagram { max-width: 1060px; margin: 0 auto; }
+
+  .section-title {
+    font-size: 18px; font-weight: bold; color: #1a1a2e; margin: 28px 0 14px;
+    padding-left: 10px; border-left: 4px solid #2980b9;
+  }
+
+  /* Flow rows */
+  .flow-row {
+    display: flex; align-items: center; background: #fafafa;
+    border-radius: 8px; padding: 14px 16px; margin-bottom: 10px;
+    border-left: 4px solid;
+  }
+  .flow-row.f1 { border-left-color: #2980b9; }
+  .flow-row.f2 { border-left-color: #27ae60; }
+  .flow-row.f3 { border-left-color: #e67e22; }
+  .flow-row.f4 { border-left-color: #8e44ad; }
+
+  .flow-label {
+    width: 90px; flex-shrink: 0; text-align: center;
+    font-size: 13px; font-weight: bold; color: #333;
+  }
+  .flow-label .fl-num {
+    display: inline-block; width: 28px; height: 28px; line-height: 28px;
+    border-radius: 50%; color: #fff; font-size: 14px; margin-bottom: 4px;
+  }
+  .f1 .fl-num { background: #2980b9; }
+  .f2 .fl-num { background: #27ae60; }
+  .f3 .fl-num { background: #e67e22; }
+  .f4 .fl-num { background: #8e44ad; }
+
+  .flow-label .fl-text { display: block; font-size: 11px; color: #666; }
+
+  .flow-steps { display: flex; align-items: center; flex: 1; gap: 0; flex-wrap: wrap; }
+
+  .step {
+    background: #fff; border: 2px solid #ddd; border-radius: 8px;
+    padding: 10px 14px; text-align: center; min-width: 110px;
+  }
+  .step .s-name { font-size: 12px; font-weight: bold; color: #333; }
+  .step .s-desc { font-size: 10px; color: #888; margin-top: 2px; }
+
+  .step.s-device { border-color: #2980b9; background: #edf5fc; }
+  .step.s-gateway { border-color: #e67e22; background: #fdf3e8; }
+  .step.s-storage { border-color: #8e44ad; background: #f8f0fc; }
+  .step.s-ext { border-color: #7f8c8d; background: #f5f5f5; }
+
+  .arrow {
+    padding: 0 6px; font-size: 16px; color: #aaa;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .arrow .a-text { font-size: 9px; color: #999; }
+
+  /* Lifecycle section */
+  .lifecycle {
+    background: #fafafa; border-radius: 10px; padding: 24px;
+    display: flex; align-items: center; justify-content: center; gap: 0;
+    flex-wrap: wrap; margin-top: 10px;
+  }
+  .lc-node {
+    border-radius: 10px; padding: 16px 20px; text-align: center;
+    min-width: 150px; color: #fff;
+  }
+  .lc-node .lc-title { font-size: 14px; font-weight: bold; }
+  .lc-node .lc-desc { font-size: 11px; opacity: 0.9; margin-top: 4px; }
+
+  .lc-ingest { background: #27ae60; }
+  .lc-online { background: #2980b9; }
+  .lc-archive { background: #e67e22; }
+  .lc-expire { background: #7f8c8d; }
+
+  .lc-arrow { padding: 0 12px; font-size: 22px; color: #999; }
+
+  .constraint-box {
+    text-align: center; margin-top: 16px; padding: 12px 20px;
+    background: #fdf3e8; border: 1px solid #e67e22; border-radius: 8px;
+    font-size: 13px; color: #333; line-height: 1.6;
+  }
+  .constraint-box strong { color: #c0392b; }
+
+  .note {
+    text-align: center; font-size: 12px; color: #999; margin-top: 24px; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="title">执法音视频集中存储与管理系统 — 数据流转图</div>
+
+<div class="diagram">
+
+  <!-- Part 1: 数据接入路径 -->
+  <div class="section-title">一、数据接入路径</div>
+
+  <!-- Flow 1: 5G回传 -->
+  <div class="flow-row f1">
+    <div class="flow-label"><span class="fl-num">1</span><span class="fl-text">5G回传</span></div>
+    <div class="flow-steps">
+      <div class="step s-device"><div class="s-name">5G 执法记录仪</div><div class="s-desc">现场执法采集</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">5G无线</span></div>
+      <div class="step s-gateway"><div class="s-name">数据接入节点</div><div class="s-desc">接收 / 校验 / 登记</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">入库</span></div>
+      <div class="step s-storage"><div class="s-name">网络存储设备<br>（视频NAS）</div><div class="s-desc">原始数据完整保存</div></div>
+    </div>
+  </div>
+
+  <!-- Flow 2: 采集站导入 -->
+  <div class="flow-row f2">
+    <div class="flow-label"><span class="fl-num">2</span><span class="fl-text">采集站导入</span></div>
+    <div class="flow-steps">
+      <div class="step s-device"><div class="s-name">执法仪</div><div class="s-desc">本地存储</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">底座/USB</span></div>
+      <div class="step s-device"><div class="s-name">数据采集站</div><div class="s-desc">批量导入</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">有线网络</span></div>
+      <div class="step s-gateway"><div class="s-name">数据接入节点</div><div class="s-desc">接收 / 校验 / 登记</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">入库</span></div>
+      <div class="step s-storage"><div class="s-name">网络存储设备<br>（视频NAS）</div><div class="s-desc">原始数据完整保存</div></div>
+    </div>
+  </div>
+
+  <!-- Flow 3: 执法仪本地导入 -->
+  <div class="flow-row f3">
+    <div class="flow-label"><span class="fl-num">3</span><span class="fl-text">本地导入</span></div>
+    <div class="flow-steps">
+      <div class="step s-device"><div class="s-name">执法仪</div><div class="s-desc">本地存储</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">直连</span></div>
+      <div class="step s-gateway"><div class="s-name">数据接入节点</div><div class="s-desc">接收 / 校验 / 登记</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">入库</span></div>
+      <div class="step s-storage"><div class="s-name">网络存储设备<br>（视频NAS）</div><div class="s-desc">原始数据完整保存</div></div>
+    </div>
+  </div>
+
+  <!-- Flow 4: 既有平台归集 -->
+  <div class="flow-row f4">
+    <div class="flow-label"><span class="fl-num">4</span><span class="fl-text">平台归集</span></div>
+    <div class="flow-steps">
+      <div class="step s-ext"><div class="s-name">既有执法管理平台</div><div class="s-desc">新增数据归集</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">标准接口</span></div>
+      <div class="step s-gateway"><div class="s-name">数据接入节点</div><div class="s-desc">接收 / 校验 / 登记</div></div>
+      <div class="arrow"><span>&#10132;</span><span class="a-text">入库</span></div>
+      <div class="step s-storage"><div class="s-name">网络存储设备<br>（视频NAS）</div><div class="s-desc">原始数据完整保存</div></div>
+    </div>
+  </div>
+
+  <!-- Part 2: 数据生命周期 -->
+  <div class="section-title">二、数据生命周期流转</div>
+
+  <div class="lifecycle">
+    <div class="lc-node lc-ingest">
+      <div class="lc-title">接入阶段</div>
+      <div class="lc-desc">数据校验<br>元数据提取<br>写入存储</div>
+    </div>
+    <div class="lc-arrow">&#10132;</div>
+    <div class="lc-node lc-online">
+      <div class="lc-title">在线存储阶段</div>
+      <div class="lc-desc">在线检索调阅<br>不少于 3 年</div>
+    </div>
+    <div class="lc-arrow">&#10132;</div>
+    <div class="lc-node lc-archive">
+      <div class="lc-title">归档阶段</div>
+      <div class="lc-desc">归档副本可压缩<br>压缩比 ≤20%</div>
+    </div>
+    <div class="lc-arrow">&#10132;</div>
+    <div class="lc-node lc-expire">
+      <div class="lc-title">到期处理</div>
+      <div class="lc-desc">按制度留存<br>或合规处置</div>
+    </div>
+  </div>
+
+  <div class="constraint-box">
+    <strong>证据数据保护原则：</strong>原始执法音视频数据全程完整保存，不得剪接、删改、重编码或结构重组。<br>
+    空间优化策略仅作用于访问副本、归档副本及非证据载体数据，压缩后数据不作为执法证据载体。
+  </div>
+
+</div>
+
+<div class="note">
+  图件仅表达数据流转路径与生命周期阶段关系。<br>
+  所有数据接入均经数据接入节点统一校验后写入网络存储设备（视频NAS）集中存储。
+</div>
+
+</body>
+</html>

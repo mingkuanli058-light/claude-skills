@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>执法音视频集中存储与管理系统 - 部署结构图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "SimHei", sans-serif; background: #fff; padding: 40px; }
+  .title { text-align: center; font-size: 24px; font-weight: bold; color: #1a1a2e; margin-bottom: 30px; }
+  .diagram { max-width: 1000px; margin: 0 auto; }
+
+  .center-label {
+    text-align: center; font-size: 16px; font-weight: bold; color: #1a1a2e;
+    margin-bottom: 16px; padding: 8px; background: #f0f0f0; border-radius: 6px;
+  }
+
+  .deploy-zone {
+    border: 2px solid; border-radius: 10px; padding: 20px;
+    margin-bottom: 16px; position: relative;
+  }
+  .dz-label {
+    position: absolute; top: -12px; left: 20px; padding: 2px 14px;
+    font-size: 13px; font-weight: bold; color: #fff; border-radius: 4px;
+  }
+
+  .dz-room { border-color: #34495e; background: #f8f9fa; }
+  .dz-room .dz-label { background: #34495e; }
+
+  .dz-srv { border-color: #2980b9; background: #edf5fc; }
+  .dz-srv .dz-label { background: #2980b9; }
+
+  .dz-sto { border-color: #8e44ad; background: #f8f0fc; }
+  .dz-sto .dz-label { background: #8e44ad; }
+
+  .dz-net { border-color: #27ae60; background: #f0faf4; }
+  .dz-net .dz-label { background: #27ae60; }
+
+  .dz-term { border-color: #e67e22; background: #fdf3e8; }
+  .dz-term .dz-label { background: #e67e22; }
+
+  .nodes {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    padding-top: 6px;
+  }
+  .nd {
+    background: #fff; border: 2px solid #ddd; border-radius: 8px;
+    padding: 14px 18px; text-align: center; min-width: 140px;
+  }
+  .nd .nd-name { font-size: 13px; font-weight: bold; color: #333; }
+  .nd .nd-detail { font-size: 11px; color: #777; margin-top: 4px; line-height: 1.5; }
+  .nd .nd-qty { font-size: 12px; color: #2980b9; font-weight: bold; margin-top: 4px; }
+
+  .inner-zones { display: flex; gap: 14px; align-items: stretch; }
+  .inner-zones > .deploy-zone { flex: 1; margin-bottom: 0; }
+
+  .conn-row {
+    display: flex; justify-content: center; padding: 6px 0; gap: 30px;
+  }
+  .conn-item { display: flex; flex-direction: column; align-items: center; }
+  .conn-pipe { width: 3px; height: 14px; border-radius: 2px; }
+  .conn-text { font-size: 10px; color: #888; margin: 2px 0; }
+
+  .note {
+    text-align: center; font-size: 12px; color: #999; margin-top: 24px; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="title">执法音视频集中存储与管理系统 — 部署结构图</div>
+
+<div class="diagram">
+
+  <div class="center-label">中心化部署 — 公安专网机房</div>
+
+  <div class="deploy-zone dz-room">
+    <div class="dz-label">机房部署区</div>
+
+    <!-- 网络区 -->
+    <div class="deploy-zone dz-net" style="margin-top: 8px;">
+      <div class="dz-label">网络交换区</div>
+      <div class="nodes">
+        <div class="nd">
+          <div class="nd-name">核心网络交换设备</div>
+          <div class="nd-detail">业务网络承载<br>存储网络承载</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="conn-row">
+      <div class="conn-item"><div class="conn-pipe" style="background:#27ae60;"></div><div class="conn-text">业务网络</div><div class="conn-pipe" style="background:#27ae60;"></div></div>
+      <div class="conn-item"><div class="conn-pipe" style="background:#8e44ad;"></div><div class="conn-text">存储网络</div><div class="conn-pipe" style="background:#8e44ad;"></div></div>
+    </div>
+
+    <!-- 服务器区 + 存储区 -->
+    <div class="inner-zones">
+
+      <div class="deploy-zone dz-srv">
+        <div class="dz-label">服务器区</div>
+        <div class="nodes">
+          <div class="nd">
+            <div class="nd-name">应用服务器</div>
+            <div class="nd-detail">管理与检索平台<br>数据接入服务<br>鲲鹏920 / 国产OS</div>
+            <div class="nd-qty">×1 台</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="deploy-zone dz-sto">
+        <div class="dz-label">存储区</div>
+        <div class="nodes">
+          <div class="nd" style="border-color:#8e44ad; min-width: 180px;">
+            <div class="nd-name">网络存储设备<br>（视频NAS）</div>
+            <div class="nd-detail">8U 机架式 48 盘位<br>ONVIF / GB28181 / RTSP<br>多种 RAID/VRAID 保护<br>企业级硬盘 68 块（扩展）</div>
+            <div class="nd-qty">×2 台</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 数据库 -->
+    <div style="margin-top: 12px; text-align: center;">
+      <div class="nd" style="display: inline-block; border-color: #2980b9;">
+        <div class="nd-name">达梦数据库 V8.4</div>
+        <div class="nd-detail">元数据 / 业务数据 / 索引 / 审计日志<br>随系统中心化部署统一建设</div>
+        <div class="nd-qty">×1 套</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 连线 -->
+  <div class="conn-row">
+    <div class="conn-item"><div class="conn-pipe" style="background:#e67e22;"></div><div class="conn-text">公安专网接入</div><div class="conn-pipe" style="background:#e67e22;"></div></div>
+  </div>
+
+  <!-- 前端接入 / 终端 -->
+  <div class="deploy-zone dz-term">
+    <div class="dz-label">前端接入 / 访问终端</div>
+    <div class="nodes">
+      <div class="nd"><div class="nd-name">5G 执法记录仪</div><div class="nd-detail">5G 无线回传</div></div>
+      <div class="nd"><div class="nd-name">数据采集站</div><div class="nd-detail">批量有线导入</div></div>
+      <div class="nd"><div class="nd-name">执法仪本地导入终端</div><div class="nd-detail">直连导入</div></div>
+      <div class="nd"><div class="nd-name">调阅 / 管理终端</div><div class="nd-detail">检索 / 播放 / 管理</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="note">
+  系统采用中心化部署模式，全部设备集中部署于公安专网机房环境。<br>
+  不涉及双中心架构、异地容灾、云化部署及跨区域数据调度。<br>
+  设备数量与投资预算总表一致。
+</div>
+
+</body>
+</html>

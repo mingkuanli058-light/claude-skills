@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>执法音视频集中存储与管理系统 - 网络拓扑图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", "SimHei", sans-serif; background: #fff; padding: 40px; }
+  .title { text-align: center; font-size: 24px; font-weight: bold; color: #1a1a2e; margin-bottom: 30px; }
+  .diagram { max-width: 1060px; margin: 0 auto; }
+
+  .zone {
+    border: 2px solid; border-radius: 10px; padding: 18px 20px; margin-bottom: 16px;
+    position: relative;
+  }
+  .zone-label {
+    position: absolute; top: -12px; left: 20px; padding: 2px 14px;
+    font-size: 13px; font-weight: bold; color: #fff; border-radius: 4px;
+  }
+
+  .zone-ext { border-color: #7f8c8d; background: #fafafa; }
+  .zone-ext .zone-label { background: #7f8c8d; }
+
+  .zone-net { border-color: #27ae60; background: #f0faf4; }
+  .zone-net .zone-label { background: #27ae60; }
+
+  .zone-srv { border-color: #2980b9; background: #edf5fc; }
+  .zone-srv .zone-label { background: #2980b9; }
+
+  .zone-sto { border-color: #8e44ad; background: #f8f0fc; }
+  .zone-sto .zone-label { background: #8e44ad; }
+
+  .zone-term { border-color: #e67e22; background: #fdf3e8; }
+  .zone-term .zone-label { background: #e67e22; }
+
+  .devices {
+    display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+    padding-top: 8px;
+  }
+  .dev {
+    background: #fff; border: 2px solid #ddd; border-radius: 8px;
+    padding: 12px 16px; text-align: center; min-width: 120px; max-width: 200px;
+  }
+  .dev .d-name { font-size: 13px; font-weight: bold; color: #333; }
+  .dev .d-spec { font-size: 11px; color: #888; margin-top: 3px; }
+  .dev .d-qty { font-size: 11px; color: #2980b9; margin-top: 2px; font-weight: bold; }
+
+  .conn {
+    display: flex; justify-content: center; align-items: center;
+    padding: 4px 0; gap: 30px;
+  }
+  .conn-item {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .conn-pipe { width: 3px; height: 18px; border-radius: 2px; }
+  .conn-label { font-size: 10px; color: #888; margin: 2px 0; }
+
+  .pipe-green { background: #27ae60; }
+  .pipe-blue { background: #2980b9; }
+  .pipe-purple { background: #8e44ad; }
+  .pipe-gray { background: #aaa; }
+
+  .switch-bar {
+    background: #27ae60; color: #fff; text-align: center; padding: 10px 20px;
+    border-radius: 6px; font-size: 14px; font-weight: bold; margin: 0 60px;
+  }
+  .switch-bar .sw-sub { font-size: 11px; font-weight: normal; opacity: 0.85; margin-top: 2px; }
+
+  .h-layout { display: flex; gap: 16px; align-items: stretch; }
+  .h-layout > .zone { flex: 1; margin-bottom: 0; }
+
+  .note {
+    text-align: center; font-size: 12px; color: #999; margin-top: 24px;
+    max-width: 1060px; margin-left: auto; margin-right: auto; line-height: 1.8;
+  }
+
+  .legend {
+    display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+    margin-top: 16px; font-size: 12px; color: #666;
+  }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-line { width: 20px; height: 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="title">执法音视频集中存储与管理系统 — 网络拓扑图</div>
+
+<div class="diagram">
+
+  <!-- 外部系统 -->
+  <div class="zone zone-ext">
+    <div class="zone-label">外部系统（既有）</div>
+    <div class="devices">
+      <div class="dev"><div class="d-name">既有执法管理平台</div><div class="d-spec">数据归集对接</div></div>
+      <div class="dev"><div class="d-name">市局平台</div><div class="d-spec">既有机制数据交换</div></div>
+    </div>
+  </div>
+
+  <!-- 连线 -->
+  <div class="conn">
+    <div class="conn-item"><div class="conn-pipe pipe-gray"></div><div class="conn-label">公安专网</div><div class="conn-pipe pipe-gray"></div></div>
+  </div>
+
+  <!-- 网络交换区 -->
+  <div class="switch-bar">
+    核心网络交换设备
+    <div class="sw-sub">公安专网环境 | 业务网络与存储网络逻辑隔离</div>
+  </div>
+
+  <!-- 连线 -->
+  <div class="conn">
+    <div class="conn-item"><div class="conn-pipe pipe-green"></div><div class="conn-label">业务网络</div><div class="conn-pipe pipe-green"></div></div>
+    <div class="conn-item"><div class="conn-pipe pipe-purple"></div><div class="conn-label">存储网络</div><div class="conn-pipe pipe-purple"></div></div>
+  </div>
+
+  <!-- 服务器区 + 存储区 并列 -->
+  <div class="h-layout">
+
+    <!-- 服务器区 -->
+    <div class="zone zone-srv">
+      <div class="zone-label">服务器区</div>
+      <div class="devices">
+        <div class="dev">
+          <div class="d-name">应用服务器</div>
+          <div class="d-spec">管理平台 / 数据接入服务<br>鲲鹏920 / 国产OS</div>
+          <div class="d-qty">×1 台</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 存储区 -->
+    <div class="zone zone-sto">
+      <div class="zone-label">存储区</div>
+      <div class="devices">
+        <div class="dev" style="border-color:#8e44ad; min-width: 220px;">
+          <div class="d-name">网络存储设备（视频NAS）</div>
+          <div class="d-spec">8U 机架式 48 盘位<br>支持 ONVIF / GB28181 / RTSP<br>多种 RAID/VRAID 保护<br>企业级硬盘 68 块（扩展）</div>
+          <div class="d-qty">×2 台</div>
+        </div>
+        <div class="dev" style="border-color:#2980b9; min-width: 160px;">
+          <div class="d-name">达梦数据库 V8.4</div>
+          <div class="d-spec">元数据 / 业务数据<br>索引 / 审计日志</div>
+          <div class="d-qty">×1 套</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 连线 -->
+  <div class="conn">
+    <div class="conn-item"><div class="conn-pipe pipe-blue"></div><div class="conn-label">接入网络</div><div class="conn-pipe pipe-blue"></div></div>
+  </div>
+
+  <!-- 前端接入区 -->
+  <div class="zone zone-term">
+    <div class="zone-label">前端接入区 / 访问终端</div>
+    <div class="devices">
+      <div class="dev"><div class="d-name">5G 执法记录仪</div><div class="d-spec">5G 无线回传</div></div>
+      <div class="dev"><div class="d-name">数据采集站</div><div class="d-spec">批量有线导入</div></div>
+      <div class="dev"><div class="d-name">执法仪本地导入终端</div><div class="d-spec">直连导入</div></div>
+      <div class="dev"><div class="d-name">调阅终端</div><div class="d-spec">检索 / 播放</div></div>
+      <div class="dev"><div class="d-name">管理终端</div><div class="d-spec">系统管理 / 运维</div></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-line pipe-green"></div>业务网络</div>
+  <div class="legend-item"><div class="legend-line pipe-purple"></div>存储网络</div>
+  <div class="legend-item"><div class="legend-line pipe-blue"></div>接入网络</div>
+  <div class="legend-item"><div class="legend-line pipe-gray"></div>公安专网链路</div>
+</div>
+
+<div class="note">
+  图件仅表达系统角色关系与网络连接结构。<br>
+  系统采用中心化部署模式，部署于公安专网环境。设备数量与投资预算总表一致。
+</div>
+
+</body>
+</html>

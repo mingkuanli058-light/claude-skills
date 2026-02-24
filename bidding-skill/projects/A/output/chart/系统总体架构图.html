@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1500">
+<title>系统总体架构图 — 北京市公安局涉案财物智能化保管系统</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Microsoft YaHei", "微软雅黑", "SimHei", sans-serif;
+  background: #e8ecf1;
+  padding: 24px;
+  min-height: 100vh;
+  display: flex; align-items: flex-start; justify-content: center;
+}
+.chart {
+  width: 1460px;
+  background: #fff;
+  border: 1px solid #b0bec5;
+  box-shadow: 0 4px 20px rgba(0,0,0,.14);
+}
+
+/* ── Header ── */
+.chart-header {
+  background: #1a3a6b;
+  color: #fff;
+  padding: 16px 24px;
+  text-align: center;
+  border-bottom: 3px solid #d4a000;
+}
+.chart-header h1 { font-size: 20px; letter-spacing: 3px; }
+.chart-header .sub { font-size: 12px; opacity: .75; margin-top: 5px; }
+
+/* ── Body ── */
+.chart-body {
+  display: flex;
+  padding: 18px 18px 12px;
+  gap: 14px;
+}
+
+/* ── Layer column ── */
+.layers {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.layer {
+  display: flex;
+  border-radius: 4px;
+  border: 1px solid;
+  overflow: hidden;
+  min-height: 52px;
+}
+.layer-label {
+  width: 82px;
+  min-width: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 4px;
+  color: #fff;
+  line-height: 1.4;
+}
+.layer-content {
+  flex: 1;
+  padding: 9px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-content: center;
+}
+.tag {
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 2px;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+/* ── Layer: 展示 ── */
+.l-display { border-color: #388e3c; }
+.l-display .layer-label { background: #388e3c; }
+.l-display { background: #f1f8f1; }
+.l-display .tag { background: #c8e6c9; color: #1b5e20; border: 1px solid #a5d6a7; }
+
+/* ── Layer: 软件平台 ── */
+.l-software { border-color: #3949ab; }
+.l-software .layer-label { background: #3949ab; }
+.l-software { background: #f0f1fa; }
+.l-software .tag { background: #c5cae9; color: #1a237e; border: 1px solid #9fa8da; }
+
+/* ── Layer: 处理存储 ── */
+.l-storage { border-color: #1565c0; }
+.l-storage .layer-label { background: #1565c0; }
+.l-storage { background: #e8f1fb; }
+.l-storage .tag { background: #bbdefb; color: #0d47a1; border: 1px solid #90caf9; }
+
+/* ── Layer: 感知采集 ── */
+.l-sensor { border-color: #0277bd; }
+.l-sensor .layer-label { background: #0277bd; }
+.l-sensor { background: #e8f5fe; }
+.l-sensor .tag { background: #b3e5fc; color: #01579b; border: 1px solid #81d4fa; }
+
+/* ── Layer: 安全 ── */
+.l-security { border-color: #b71c1c; }
+.l-security .layer-label { background: #b71c1c; }
+.l-security { background: #fff5f5; }
+.l-security .tag { background: #ffcdd2; color: #b71c1c; border: 1px solid #ef9a9a; }
+
+/* ── External panel ── */
+.external {
+  width: 178px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e65100;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.ext-header {
+  background: #e65100;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 9px 6px;
+  letter-spacing: 1px;
+}
+.ext-body { display: flex; flex-direction: column; flex: 1; background: #fff8f0; }
+.ext-item {
+  flex: 1;
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 12.5px;
+  color: #4e2200;
+  border-bottom: 1px solid #ffe0b2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.ext-item:last-child { border-bottom: none; }
+.ext-item .ext-name { font-weight: bold; font-size: 13px; }
+.ext-item .ext-note { font-size: 10.5px; color: #888; }
+.ext-confirmed { color: #1a3a6b; font-weight: bold; font-size: 10.5px; }
+.ext-pending { color: #999; font-size: 10.5px; }
+
+/* ── Footer ── */
+.chart-footer {
+  padding: 9px 18px 14px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 2px;
+}
+.footnote { font-size: 11px; color: #9e9e9e; font-style: italic; line-height: 1.6; }
+.footnote em { color: #c62828; font-style: normal; }
+</style>
+</head>
+<body>
+<div class="chart">
+
+  <div class="chart-header">
+    <h1>北京市公安局涉案财物智能化保管系统 — 系统总体架构图</h1>
+    <div class="sub">北京宽和精英科技发展有限公司 &nbsp;|&nbsp; 依据：specs/系统架构.md</div>
+  </div>
+
+  <div class="chart-body">
+    <div class="layers">
+
+      <!-- 展示层 -->
+      <div class="layer l-display">
+        <div class="layer-label">展示层</div>
+        <div class="layer-content">
+          <span class="tag">55寸液晶拼接单元 ×9套</span>
+          <span class="tag">数据显示终端及配件 ×19套</span>
+          <span class="tag">高拍仪 ×1台</span>
+        </div>
+      </div>
+
+      <!-- 软件平台层 -->
+      <div class="layer l-software">
+        <div class="layer-label">软件<br>平台层</div>
+        <div class="layer-content">
+          <span class="tag">平台管理软件</span>
+          <span class="tag">智能化库管系统</span>
+          <span class="tag">道路动态指引</span>
+          <span class="tag">指引关系分配</span>
+          <span class="tag">指引启动</span>
+          <span class="tag">物品统计</span>
+          <span class="tag">安防统计</span>
+          <span class="tag">预警统计</span>
+          <span class="tag">安防综合查询</span>
+          <span class="tag">物品综合查询</span>
+          <span class="tag">物品信息实时互动显示</span>
+          <span class="tag">可视化管理</span>
+          <span class="tag">可视化分配</span>
+          <span class="tag">可视化结构图绘制</span>
+          <span class="tag">屏幕信息推送管理</span>
+          <span class="tag">一体化设置及集成</span>
+          <span class="tag">物品综合台账</span>
+          <span class="tag">安防综合台账</span>
+          <span class="tag">轨迹与监控·门禁联动</span>
+          <span class="tag">综合预警</span>
+          <span class="tag">门禁权限综合管理</span>
+          <span class="tag">RFID防拆卸报警</span>
+          <span class="tag">CA认证</span>
+          <span class="tag">与执法办案平台对接接口</span>
+          <span class="tag">与政法系统对接接口</span>
+          <span class="tag">与远程示证对接接口</span>
+        </div>
+      </div>
+
+      <!-- 处理/存储层 -->
+      <div class="layer l-storage">
+        <div class="layer-label">处理/<br>存储层</div>
+        <div class="layer-content">
+          <span class="tag">存储管理服务器 ×1台</span>
+          <span class="tag">监控磁盘阵列机 ×12台（含监控硬盘 ×408块）</span>
+          <span class="tag">图像拼接处理器 ×9套</span>
+          <span class="tag">高清矩阵 ×1套</span>
+          <span class="tag">高清编码器 ×1个</span>
+        </div>
+      </div>
+
+      <!-- 感知/采集层 -->
+      <div class="layer l-sensor">
+        <div class="layer-label">感知/<br>采集层</div>
+        <div class="layer-content">
+          <span class="tag">高清室内半球摄像机 ×138</span>
+          <span class="tag">高清室外摄像枪机 ×7</span>
+          <span class="tag">室外全景球机 ×4</span>
+          <span class="tag">室内全景球机 ×2</span>
+          <span class="tag">门禁控制器 ×2套</span>
+          <span class="tag">网络门禁控制器 ×26</span>
+          <span class="tag">键盘读卡器 ×26</span>
+          <span class="tag">电磁吸力锁 ×26</span>
+          <span class="tag">虹膜识别 ×2</span>
+          <span class="tag">人脸识别一体机 ×2</span>
+          <span class="tag">定位基站 ×11</span>
+          <span class="tag">定位器 ×42</span>
+          <span class="tag">基站电源 ×2</span>
+          <span class="tag">手持式RFID读写器 ×2</span>
+          <span class="tag">桌面式RFID读写器 ×2</span>
+          <span class="tag">报警主机 ×1</span>
+        </div>
+      </div>
+
+      <!-- 安全层 -->
+      <div class="layer l-security">
+        <div class="layer-label">安全层</div>
+        <div class="layer-content">
+          <span class="tag">防火墙 ×1个</span>
+          <span class="tag">公安网杀毒软件</span>
+        </div>
+      </div>
+
+    </div><!-- /layers -->
+
+    <!-- External systems panel -->
+    <div class="external">
+      <div class="ext-header">外部对接系统</div>
+      <div class="ext-body">
+        <div class="ext-item">
+          <div class="ext-name">执法办案平台</div>
+          <div class="ext-confirmed">← 流转信息数据回传（方向已确认）</div>
+        </div>
+        <div class="ext-item">
+          <div class="ext-name">政法系统</div>
+          <div class="ext-pending">↔ 对接（数据内容及方向待确认）</div>
+        </div>
+        <div class="ext-item">
+          <div class="ext-name">远程示证</div>
+          <div class="ext-pending">↔ 对接（数据内容及方向待确认）</div>
+        </div>
+        <div class="ext-item">
+          <div class="ext-name">市局云平台</div>
+          <div class="ext-pending">运维巡检对象（连接关系待确认）</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /chart-body -->
+
+  <div class="chart-footer">
+    <p class="footnote">
+      注1：架构层级划分依据 specs/系统架构.md 第五节逻辑归类，原文未定义层级关系，<em>待采购人或建设方确认</em>。&nbsp;
+      注2：所有元素均来自招标文件原文，禁止引入未定义组件。&nbsp;
+      注3：外部系统对接方向详见数据流转图。
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
