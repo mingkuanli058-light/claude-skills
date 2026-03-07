@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Chart Renderer</title>
+
+<style>
+
+body{
+margin:0;
+background:#0f172a;
+font-family:"Microsoft YaHei",Arial;
+}
+
+#canvas{
+width:1920px;
+height:1080px;
+margin:auto;
+position:relative;
+background:linear-gradient(135deg,#0f172a,#1e293b);
+overflow:hidden;
+}
+
+/* 标头 */
+
+.header{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:80px;
+background:rgba(0,0,0,0.4);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+color:white;
+font-weight:bold;
+letter-spacing:2px;
+}
+
+/* 标尾 */
+
+.footer{
+position:absolute;
+bottom:0;
+left:0;
+width:100%;
+height:40px;
+background:rgba(0,0,0,0.4);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 40px;
+color:#cbd5e1;
+font-size:14px;
+}
+
+/* 区域 */
+
+.zone{
+position:absolute;
+border:2px dashed rgba(255,255,255,0.3);
+border-radius:12px;
+background:rgba(255,255,255,0.03);
+color:#e2e8f0;
+padding-top:30px;
+text-align:center;
+font-size:18px;
+}
+
+/* 节点 */
+
+.node{
+position:absolute;
+width:220px;
+height:90px;
+border-radius:10px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:white;
+font-size:16px;
+box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+.node-icon{
+font-size:28px;
+margin-bottom:6px;
+}
+
+/* 节点类型颜色 */
+
+.switch{
+background:linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.server{
+background:linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.storage{
+background:linear-gradient(135deg,#a855f7,#7e22ce);
+}
+
+.terminal{
+background:linear-gradient(135deg,#64748b,#334155);
+}
+
+/* 图例 */
+
+.legend{
+position:absolute;
+right:40px;
+top:120px;
+background:rgba(0,0,0,0.5);
+border-radius:10px;
+padding:20px;
+color:white;
+font-size:14px;
+}
+
+.legend-item{
+display:flex;
+align-items:center;
+margin-bottom:10px;
+}
+
+.legend-icon{
+font-size:20px;
+margin-right:10px;
+}
+
+/* SVG */
+
+svg{
+position:absolute;
+top:0;
+left:0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="canvas">
+
+<div class="header" id="title"></div>
+
+<svg id="links" width="1920" height="1080">
+
+<defs>
+
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto">
+<path d="M0,0 L10,3 L0,6 Z" fill="#94a3b8"/>
+</marker>
+
+</defs>
+
+</svg>
+
+<div id="zones"></div>
+
+<div class="legend" id="legend">
+<b>图例</b>
+
+<div class="legend-item">
+<div class="legend-icon">🖧</div>交换机
+</div>
+
+<div class="legend-item">
+<div class="legend-icon">🖥</div>服务器
+</div>
+
+<div class="legend-item">
+<div class="legend-icon">💾</div>存储
+</div>
+
+<div class="legend-item">
+<div class="legend-icon">🧑‍💻</div>终端
+</div>
+
+</div>
+
+<div class="footer">
+
+<div id="project"></div>
+
+<div id="company"></div>
+
+<div id="date"></div>
+
+</div>
+
+</div>
+
+
+<script id="chart-data" type="application/json">
+{{chart_data}}
+</script>
+
+<script>
+
+const chart = JSON.parse(
+document.getElementById("chart-data").textContent
+)
+
+const canvas = document.getElementById("canvas")
+const svg = document.getElementById("links")
+
+document.getElementById("title").innerText = chart.title
+document.getElementById("project").innerText = chart.project
+document.getElementById("company").innerText = chart.company
+document.getElementById("date").innerText = chart.date
+
+const nodeMap = {}
+
+/* 画区域 */
+
+if(chart.zones){
+
+chart.zones.forEach(z=>{
+
+const div=document.createElement("div")
+
+div.className="zone"
+
+div.style.left=z.x+"px"
+div.style.top=z.y+"px"
+div.style.width=z.width+"px"
+div.style.height=z.height+"px"
+
+div.innerText=z.label
+
+canvas.appendChild(div)
+
+})
+
+}
+
+/* 画节点 */
+
+function drawNode(node,x,y){
+
+const div=document.createElement("div")
+
+div.className="node "+node.type
+
+div.style.left=x+"px"
+div.style.top=y+"px"
+
+div.innerHTML=
+
+'<div class="node-icon">'+node.icon+'</div>'+
+'<div>'+node.label+'</div>'
+
+canvas.appendChild(div)
+
+nodeMap[node.id]={x:x,y:y}
+
+}
+
+/* 画连线 */
+
+function drawLink(from,to){
+
+const line=document.createElementNS("http://www.w3.org/2000/svg","line")
+
+line.setAttribute("x1",from.x+110)
+line.setAttribute("y1",from.y+90)
+
+line.setAttribute("x2",to.x+110)
+line.setAttribute("y2",to.y)
+
+line.setAttribute("stroke","#94a3b8")
+line.setAttribute("stroke-width","3")
+line.setAttribute("marker-end","url(#arrow)")
+
+svg.appendChild(line)
+
+}
+
+/* 自动布局 */
+
+const startY=220
+const gapY=180
+
+chart.layers.forEach((layer,layerIndex)=>{
+
+const gapX=1920/(layer.length+1)
+
+layer.forEach((nodeId,i)=>{
+
+const node=chart.nodes.find(n=>n.id==nodeId)
+
+const x=(i+1)*gapX-110
+const y=startY+layerIndex*gapY
+
+drawNode(node,x,y)
+
+})
+
+})
+
+/* 画连接 */
+
+chart.links.forEach(l=>{
+
+drawLink(nodeMap[l.from],nodeMap[l.to])
+
+})
+
+</script>
+
+</body>
+</html>

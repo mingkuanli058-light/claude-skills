@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>A-02 网络拓扑图</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+background:#ffffff;
+font-family:"Microsoft YaHei","微软雅黑",SimHei,Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:20px;
+}
+
+svg{
+border:1px solid #e8e8e8;
+background:#fafafa;
+}
+</style>
+</head>
+
+<body>
+
+<svg id="topologyChart" width="1200" height="760" viewBox="0 0 1200 760"
+xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+
+<marker id="arrowB" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#4A7FBF"/>
+</marker>
+
+<marker id="arrowG" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#555"/>
+</marker>
+
+<!-- 服务器图标 -->
+<g id="server_icon">
+<rect x="-30" y="-22" width="60" height="44" rx="3"
+fill="#fff" stroke="#4A7FBF" stroke-width="1.5"/>
+<rect x="-26" y="-18" width="52" height="11" rx="1"
+fill="#D6E8FF" stroke="#4A7FBF" stroke-width="0.5"/>
+<rect x="-26" y="-4" width="52" height="11" rx="1"
+fill="#D6E8FF" stroke="#4A7FBF" stroke-width="0.5"/>
+<rect x="-26" y="10" width="52" height="11" rx="1"
+fill="#D6E8FF" stroke="#4A7FBF" stroke-width="0.5"/>
+<circle cx="19" cy="-12" r="2.5" fill="#5cb85c"/>
+<circle cx="19" cy="2" r="2.5" fill="#5cb85c"/>
+<circle cx="19" cy="16" r="2.5" fill="#aaa"/>
+</g>
+
+<!-- 交换机 -->
+<g id="switch_icon">
+<rect x="-40" y="-14" width="80" height="28" rx="3"
+fill="#fff" stroke="#888" stroke-width="1.5"/>
+<rect x="-36" y="-10" width="72" height="8" rx="1"
+fill="#e8e8e8" stroke="#aaa" stroke-width="0.5"/>
+</g>
+
+<!-- NAS -->
+<g id="nas_icon">
+<rect x="-32" y="-24" width="64" height="48" rx="3"
+fill="#fff" stroke="#C69B00" stroke-width="1.5"/>
+<rect x="-28" y="-20" width="56" height="9"
+fill="#FFFAEB" stroke="#C69B00" stroke-width="0.5"/>
+<rect x="-28" y="-9" width="56" height="9"
+fill="#FFFAEB" stroke="#C69B00" stroke-width="0.5"/>
+<rect x="-28" y="2" width="56" height="9"
+fill="#FFFAEB" stroke="#C69B00" stroke-width="0.5"/>
+</g>
+
+<!-- 柜体 -->
+<g id="cabinet_icon">
+<rect x="-20" y="-38" width="40" height="76" rx="2"
+fill="#FFF0E6" stroke="#C06020" stroke-width="1.5"/>
+<line x1="-20" y1="-20" x2="20" y2="-20" stroke="#C06020" stroke-width="0.6"/>
+<line x1="-20" y1="-2" x2="20" y2="-2" stroke="#C06020" stroke-width="0.6"/>
+<line x1="-20" y1="16" x2="20" y2="16" stroke="#C06020" stroke-width="0.6"/>
+</g>
+
+</defs>
+
+<!-- 标题 -->
+<text id="title_main" x="600" y="30" text-anchor="middle"
+font-size="20" font-weight="bold">网络拓扑图</text>
+
+<text id="title_project" x="600" y="50" text-anchor="middle"
+font-size="12" fill="#777">项目名称</text>
+
+<line x1="40" y1="60" x2="1160" y2="60"
+stroke="#ddd" stroke-width="1"/>
+
+</svg>
+
+<script>
+
+fetch("../../output/chart_spec/network_topology.json")
+.then(res=>res.json())
+.then(spec=>{
+
+const svg=document.getElementById("topologyChart")
+
+document.getElementById("title_project").textContent =
+spec.project_name
+
+//交换机
+let sw=document.createElementNS("http://www.w3.org/2000/svg","use")
+sw.setAttribute("href","#switch_icon")
+sw.setAttribute("transform","translate(600,280)")
+svg.appendChild(sw)
+
+//服务器
+spec.servers.forEach((srv,i)=>{
+
+let s=document.createElementNS("http://www.w3.org/2000/svg","use")
+s.setAttribute("href","#server_icon")
+s.setAttribute("transform","translate(900,"+(240+i*120)+")")
+svg.appendChild(s)
+
+let text=document.createElementNS("http://www.w3.org/2000/svg","text")
+text.setAttribute("x",900)
+text.setAttribute("y",(280+i*120))
+text.setAttribute("text-anchor","middle")
+text.setAttribute("font-size","11")
+text.textContent=srv.name
+
+svg.appendChild(text)
+
+})
+
+//NAS
+if(spec.storage){
+
+let nas=document.createElementNS("http://www.w3.org/2000/svg","use")
+nas.setAttribute("href","#nas_icon")
+nas.setAttribute("transform","translate(900,440)")
+svg.appendChild(nas)
+
+}
+
+//主柜
+for(let i=0;i<spec.cabinets.main;i++){
+
+let cab=document.createElementNS("http://www.w3.org/2000/svg","use")
+cab.setAttribute("href","#cabinet_icon")
+
+let col=i%8
+let row=Math.floor(i/8)
+
+cab.setAttribute("transform",
+"translate("+(100+col*60)+","+(520+row*100)+")")
+
+svg.appendChild(cab)
+
+}
+
+})
+
+</script>
+
+</body>
+</html>

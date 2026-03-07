@@ -1,0 +1,54 @@
+{
+  "chart_type": "data_flow",
+  "title": "通州分局双中心业务运行安全监测系统数据流转",
+  "meta": {
+    "project": "通州分局双中心业务运行安全监测系统",
+    "company": "北京市公安局通州分局",
+    "date": "2026",
+    "chart_style": "presentation"
+  },
+  "layers": [
+    "数据采集",
+    "数据处理",
+    "数据存储",
+    "数据应用"
+  ],
+  "nodes": [
+    {"id": "data_face", "type": "terminal", "layer": "数据采集", "label": "人脸识别终端"},
+    {"id": "data_camera_guard", "type": "camera", "layer": "数据采集", "label": "岗位值守摄像头"},
+    {"id": "data_camera_property", "type": "camera", "layer": "数据采集", "label": "保管室摄像头"},
+    {"id": "process_checkin", "type": "process", "layer": "数据处理", "label": "打卡管理服务"},
+    {"id": "process_behavior", "type": "process", "layer": "数据处理", "label": "视频行为分析服务"},
+    {"id": "process_property", "type": "process", "layer": "数据处理", "label": "涉案财物视频分析服务"},
+    {"id": "storage_database", "type": "database", "layer": "数据存储", "label": "业务数据库"},
+    {"id": "storage_video", "type": "storage", "layer": "数据存储", "label": "事件视频存储"},
+    {"id": "app_unified", "type": "app", "layer": "数据应用", "label": "统一管理视图"},
+    {"id": "app_checkin", "type": "app", "layer": "数据应用", "label": "打卡管理视图"},
+    {"id": "app_behavior", "type": "app", "layer": "数据应用", "label": "告警管理视图"},
+    {"id": "app_property", "type": "app", "layer": "数据应用", "label": "台账管理视图"}
+  ],
+  "links": [
+    {"from": "data_face", "to": "process_checkin"},
+    {"from": "data_camera_guard", "to": "process_behavior"},
+    {"from": "data_camera_property", "to": "process_property"},
+    {"from": "process_checkin", "to": "storage_database"},
+    {"from": "process_checkin", "to": "storage_video"},
+    {"from": "process_behavior", "to": "storage_database"},
+    {"from": "process_behavior", "to": "storage_video"},
+    {"from": "process_property", "to": "storage_database"},
+    {"from": "process_property", "to": "storage_video"},
+    {"from": "storage_database", "to": "app_unified"},
+    {"from": "storage_database", "to": "app_checkin"},
+    {"from": "storage_database", "to": "app_behavior"},
+    {"from": "storage_database", "to": "app_property"},
+    {"from": "storage_video", "to": "app_unified"},
+    {"from": "storage_video", "to": "app_behavior"},
+    {"from": "storage_video", "to": "app_property"}
+  ],
+  "groups": [
+    {"id": "group_collection", "label": "数据采集设备", "nodes": ["data_face", "data_camera_guard", "data_camera_property"]},
+    {"id": "group_process", "label": "数据处理服务", "nodes": ["process_checkin", "process_behavior", "process_property"]},
+    {"id": "group_storage", "label": "数据存储", "nodes": ["storage_database", "storage_video"]},
+    {"id": "group_application", "label": "应用视图", "nodes": ["app_unified", "app_checkin", "app_behavior", "app_property"]}
+  ]
+}

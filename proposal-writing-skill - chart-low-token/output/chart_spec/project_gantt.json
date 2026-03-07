@@ -1,0 +1,270 @@
+{
+  "chart_type": "project_gantt",
+  "title": "通州分局双中心业务运行安全监测系统实施甘特图",
+  "meta": {
+    "project": "通州分局双中心业务运行安全监测系统",
+    "company": "北京市公安局通州分局",
+    "date": "2026",
+    "chart_style": "presentation"
+  },
+  "tasks": [
+    {
+      "id": "task_1",
+      "name": "项目准备阶段",
+      "start_date": "2026-03-01",
+      "end_date": "2026-03-31",
+      "duration": 31,
+      "dependencies": [],
+      "milestone": true,
+      "progress": 0,
+      "resources": "项目管理团队"
+    },
+    {
+      "id": "task_1_1",
+      "name": "需求分析与确认",
+      "start_date": "2026-03-01",
+      "end_date": "2026-03-10",
+      "duration": 10,
+      "dependencies": [],
+      "milestone": false,
+      "progress": 0,
+      "resources": "需求分析团队"
+    },
+    {
+      "id": "task_1_2",
+      "name": "技术方案设计",
+      "start_date": "2026-03-11",
+      "end_date": "2026-03-20",
+      "duration": 10,
+      "dependencies": ["task_1_1"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "技术设计团队"
+    },
+    {
+      "id": "task_1_3",
+      "name": "项目计划制定",
+      "start_date": "2026-03-21",
+      "end_date": "2026-03-31",
+      "duration": 11,
+      "dependencies": ["task_1_2"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "项目管理团队"
+    },
+    {
+      "id": "task_2",
+      "name": "设备采购阶段",
+      "start_date": "2026-04-01",
+      "end_date": "2026-05-15",
+      "duration": 45,
+      "dependencies": ["task_1"],
+      "milestone": true,
+      "progress": 0,
+      "resources": "采购团队"
+    },
+    {
+      "id": "task_2_1",
+      "name": "设备招标",
+      "start_date": "2026-04-01",
+      "end_date": "2026-04-15",
+      "duration": 15,
+      "dependencies": ["task_1"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "采购团队"
+    },
+    {
+      "id": "task_2_2",
+      "name": "设备采购",
+      "start_date": "2026-04-16",
+      "end_date": "2026-04-30",
+      "duration": 15,
+      "dependencies": ["task_2_1"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "采购团队"
+    },
+    {
+      "id": "task_2_3",
+      "name": "设备到货验收",
+      "start_date": "2026-05-01",
+      "end_date": "2026-05-15",
+      "duration": 15,
+      "dependencies": ["task_2_2"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "技术团队"
+    },
+    {
+      "id": "task_3",
+      "name": "安装部署阶段",
+      "start_date": "2026-05-16",
+      "end_date": "2026-07-15",
+      "duration": 61,
+      "dependencies": ["task_2"],
+      "milestone": true,
+      "progress": 0,
+      "resources": "实施团队"
+    },
+    {
+      "id": "task_3_1",
+      "name": "服务器部署",
+      "start_date": "2026-05-16",
+      "end_date": "2026-05-30",
+      "duration": 15,
+      "dependencies": ["task_2"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "实施团队"
+    },
+    {
+      "id": "task_3_2",
+      "name": "前端设备安装",
+      "start_date": "2026-06-01",
+      "end_date": "2026-06-30",
+      "duration": 30,
+      "dependencies": ["task_3_1"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "实施团队"
+    },
+    {
+      "id": "task_3_3",
+      "name": "网络接入配置",
+      "start_date": "2026-07-01",
+      "end_date": "2026-07-15",
+      "duration": 15,
+      "dependencies": ["task_3_2"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "网络团队"
+    },
+    {
+      "id": "task_4",
+      "name": "系统集成阶段",
+      "start_date": "2026-07-16",
+      "end_date": "2026-08-15",
+      "duration": 31,
+      "dependencies": ["task_3"],
+      "milestone": true,
+      "progress": 0,
+      "resources": "集成团队"
+    },
+    {
+      "id": "task_4_1",
+      "name": "系统软件安装",
+      "start_date": "2026-07-16",
+      "end_date": "2026-07-25",
+      "duration": 10,
+      "dependencies": ["task_3"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "集成团队"
+    },
+    {
+      "id": "task_4_2",
+      "name": "系统配置与调试",
+      "start_date": "2026-07-26",
+      "end_date": "2026-08-05",
+      "duration": 11,
+      "dependencies": ["task_4_1"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "集成团队"
+    },
+    {
+      "id": "task_4_3",
+      "name": "系统对接测试",
+      "start_date": "2026-08-06",
+      "end_date": "2026-08-15",
+      "duration": 10,
+      "dependencies": ["task_4_2"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "测试团队"
+    },
+    {
+      "id": "task_5",
+      "name": "测试验收阶段",
+      "start_date": "2026-08-16",
+      "end_date": "2026-08-31",
+      "duration": 16,
+      "dependencies": ["task_4"],
+      "milestone": true,
+      "progress": 0,
+      "resources": "验收团队"
+    },
+    {
+      "id": "task_5_1",
+      "name": "系统功能测试",
+      "start_date": "2026-08-16",
+      "end_date": "2026-08-20",
+      "duration": 5,
+      "dependencies": ["task_4"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "测试团队"
+    },
+    {
+      "id": "task_5_2",
+      "name": "系统性能测试",
+      "start_date": "2026-08-21",
+      "end_date": "2026-08-25",
+      "duration": 5,
+      "dependencies": ["task_5_1"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "测试团队"
+    },
+    {
+      "id": "task_5_3",
+      "name": "系统验收",
+      "start_date": "2026-08-26",
+      "end_date": "2026-08-31",
+      "duration": 6,
+      "dependencies": ["task_5_2"],
+      "milestone": false,
+      "progress": 0,
+      "resources": "验收团队"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "milestone_1",
+      "name": "项目启动",
+      "date": "2026-03-01",
+      "description": "项目正式启动"
+    },
+    {
+      "id": "milestone_2",
+      "name": "技术方案确认",
+      "date": "2026-03-31",
+      "description": "技术方案设计完成并确认"
+    },
+    {
+      "id": "milestone_3",
+      "name": "设备到货",
+      "date": "2026-05-15",
+      "description": "所有设备到货并验收完成"
+    },
+    {
+      "id": "milestone_4",
+      "name": "设备安装完成",
+      "date": "2026-07-15",
+      "description": "所有设备安装部署完成"
+    },
+    {
+      "id": "milestone_5",
+      "name": "系统集成完成",
+      "date": "2026-08-15",
+      "description": "系统集成与对接测试完成"
+    },
+    {
+      "id": "milestone_6",
+      "name": "项目验收",
+      "date": "2026-08-31",
+      "description": "项目验收完成，系统正式上线"
+    }
+  ]
+}

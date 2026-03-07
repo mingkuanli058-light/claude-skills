@@ -1,0 +1,66 @@
+{
+  "chart_type": "system_architecture",
+  "title": "通州分局双中心业务运行安全监测系统总体架构",
+  "meta": {
+    "project": "通州分局双中心业务运行安全监测系统",
+    "company": "北京市公安局通州分局",
+    "date": "2026",
+    "chart_style": "presentation"
+  },
+  "layers": [
+    "用户层",
+    "业务应用层",
+    "业务支撑层",
+    "数据层",
+    "网络层",
+    "硬件层"
+  ],
+  "nodes": [
+    {"id": "user_police", "type": "user", "layer": "用户层", "label": "派出所执勤民警"},
+    {"id": "user_manager", "type": "user", "layer": "用户层", "label": "分局管理人员"},
+    {"id": "terminal_police", "type": "terminal", "layer": "用户层", "label": "业务终端"},
+    {"id": "unified_view", "type": "app", "layer": "业务应用层", "label": "统一管理视图"},
+    {"id": "checkin_app", "type": "app", "layer": "业务应用层", "label": "打卡管理应用"},
+    {"id": "behavior_app", "type": "app", "layer": "业务应用层", "label": "视频行为分析应用"},
+    {"id": "property_app", "type": "app", "layer": "业务应用层", "label": "涉案财物视频分析应用"},
+    {"id": "checkin_service", "type": "process", "layer": "业务支撑层", "label": "打卡管理服务"},
+    {"id": "behavior_service", "type": "process", "layer": "业务支撑层", "label": "视频行为分析服务"},
+    {"id": "property_service", "type": "process", "layer": "业务支撑层", "label": "涉案财物视频分析服务"},
+    {"id": "database", "type": "database", "layer": "数据层", "label": "业务数据库"},
+    {"id": "video_storage", "type": "storage", "layer": "数据层", "label": "事件视频存储"},
+    {"id": "network", "type": "gateway", "layer": "网络层", "label": "公安网络"},
+    {"id": "server_checkin", "type": "platform", "layer": "硬件层", "label": "打卡管理服务器"},
+    {"id": "server_behavior", "type": "platform", "layer": "硬件层", "label": "视频行为分析服务器"},
+    {"id": "server_property", "type": "platform", "layer": "硬件层", "label": "涉案财物视频分析服务器"}
+  ],
+  "links": [
+    {"from": "user_police", "to": "terminal_police"},
+    {"from": "user_manager", "to": "unified_view"},
+    {"from": "terminal_police", "to": "checkin_app"},
+    {"from": "unified_view", "to": "checkin_app"},
+    {"from": "unified_view", "to": "behavior_app"},
+    {"from": "unified_view", "to": "property_app"},
+    {"from": "checkin_app", "to": "checkin_service"},
+    {"from": "behavior_app", "to": "behavior_service"},
+    {"from": "property_app", "to": "property_service"},
+    {"from": "checkin_service", "to": "database"},
+    {"from": "checkin_service", "to": "video_storage"},
+    {"from": "behavior_service", "to": "database"},
+    {"from": "behavior_service", "to": "video_storage"},
+    {"from": "property_service", "to": "database"},
+    {"from": "property_service", "to": "video_storage"},
+    {"from": "checkin_service", "to": "network"},
+    {"from": "behavior_service", "to": "network"},
+    {"from": "property_service", "to": "network"},
+    {"from": "network", "to": "server_checkin"},
+    {"from": "network", "to": "server_behavior"},
+    {"from": "network", "to": "server_property"}
+  ],
+  "groups": [
+    {"id": "group_application", "label": "业务应用系统", "nodes": ["unified_view", "checkin_app", "behavior_app", "property_app"]},
+    {"id": "group_service", "label": "业务支撑服务", "nodes": ["checkin_service", "behavior_service", "property_service"]},
+    {"id": "group_data", "label": "数据存储", "nodes": ["database", "video_storage"]},
+    {"id": "group_hardware", "label": "服务器集群", "nodes": ["server_checkin", "server_behavior", "server_property"]}
+  ],
+  "pillars": ["标准规范体系", "信息安全体系", "运行管理体系"]
+}

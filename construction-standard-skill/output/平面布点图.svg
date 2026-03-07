@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="970" height="740" viewBox="0 0 970 740">
+  <defs>
+    <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#555"/>
+    </marker>
+    <marker id="arrR" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto-start-reverse">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="970" height="740" fill="#edf0f5"/>
+
+  <!-- ===== TITLE BLOCK ===== -->
+  <rect x="0" y="0" width="970" height="65" fill="#1a3560"/>
+  <text x="485" y="27" font-family="Microsoft YaHei,SimHei,Arial" font-size="19" font-weight="bold" fill="white" text-anchor="middle">接报案室视音频系统 — 平面布点示意图</text>
+  <text x="485" y="51" font-family="Microsoft YaHei,SimHei,Arial" font-size="12" fill="#9ab3cc" text-anchor="middle">单间典型布置 | 房间尺寸：6000mm × 4000mm | 比例：1:100 | 共11间（11个派出所）</text>
+
+  <!-- Info strip -->
+  <rect x="0" y="65" width="970" height="25" fill="#dde3ee" stroke="#bbc5d0" stroke-width="1"/>
+  <text x="16" y="82" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#334">项目：公安接报案室视音频全程记录系统</text>
+  <text x="400" y="82" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#334">图号：ZD-布点-01</text>
+  <text x="565" y="82" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#334">版次：V1.0</text>
+  <text x="660" y="82" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#334">日期：2026-03-02</text>
+  <text x="810" y="82" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#334">制图：施工技术组</text>
+
+  <!-- ======== ROOM PLAN ======== -->
+  <!-- Room: (80,100)-(680,500), 600×400px = 6m×4m at 1:100 -->
+
+  <!-- Floor grid (1m grid, light) -->
+  <g stroke="#d8dde8" stroke-width="0.6" stroke-dasharray="4,4">
+    <line x1="180" y1="100" x2="180" y2="500"/>
+    <line x1="280" y1="100" x2="280" y2="500"/>
+    <line x1="380" y1="100" x2="380" y2="500"/>
+    <line x1="480" y1="100" x2="480" y2="500"/>
+    <line x1="580" y1="100" x2="580" y2="500"/>
+    <line x1="80"  y1="200" x2="680" y2="200"/>
+    <line x1="80"  y1="300" x2="680" y2="300"/>
+    <line x1="80"  y1="400" x2="680" y2="400"/>
+  </g>
+
+  <!-- Room floor fill -->
+  <rect x="80" y="100" width="600" height="400" fill="white" fill-opacity="0.97"/>
+
+  <!-- FOV: CAM-01 (NW corner, looking toward SE) -->
+  <polygon points="110,130 80,500 600,500" fill="#3366cc" fill-opacity="0.08"/>
+  <polygon points="110,130 80,500 600,500" fill="none" stroke="#3366cc" stroke-width="1" stroke-dasharray="6,3"/>
+
+  <!-- FOV: CAM-02 (NE corner, looking toward SW) -->
+  <polygon points="650,130 160,500 680,500" fill="#3366cc" fill-opacity="0.08"/>
+  <polygon points="650,130 160,500 680,500" fill="none" stroke="#3366cc" stroke-width="1" stroke-dasharray="6,3"/>
+
+  <!-- Room walls (drawn on top of FOV) -->
+  <rect x="80" y="100" width="600" height="400" fill="none" stroke="#2a2a2a" stroke-width="3"/>
+
+  <!-- Door opening on north wall (NW side, ~0.9m/90px wide) -->
+  <rect x="110" y="97" width="90" height="6" fill="#edf0f5" stroke="none"/>
+  <path d="M 110,100 A 90,90 0 0 0 200,100" fill="none" stroke="#999" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="110" y1="100" x2="200" y2="100" stroke="#999" stroke-width="1.2" stroke-dasharray="5,3"/>
+  <line x1="110" y1="97" x2="110" y2="107" stroke="#2a2a2a" stroke-width="3"/>
+  <line x1="200" y1="97" x2="200" y2="107" stroke="#2a2a2a" stroke-width="3"/>
+  <!-- Door label -->
+  <text x="155" y="93" font-family="Microsoft YaHei,SimHei,Arial" font-size="9" fill="#888" text-anchor="middle">门（900mm）</text>
+
+  <!-- ===== RECEPTION DESK (接报案台) — near south wall, centered ===== -->
+  <!-- Width: 360px = 3.6m, Depth: 55px ≈ 0.55m, y: 435-490 -->
+  <rect x="210" y="435" width="360" height="55" rx="3" fill="#d5e2f8" stroke="#3355aa" stroke-width="2"/>
+  <text x="390" y="463" font-family="Microsoft YaHei,SimHei,Arial" font-size="12" font-weight="bold" fill="#1a2a4a" text-anchor="middle">接 报 案 台</text>
+  <text x="390" y="480" font-family="Arial,SimHei" font-size="10" fill="#445588" text-anchor="middle">3600mm × 550mm</text>
+
+  <!-- Monitors on desk -->
+  <rect x="225" y="440" width="30" height="20" rx="2" fill="#445566" stroke="#333" stroke-width="1"/>
+  <rect x="265" y="440" width="30" height="20" rx="2" fill="#445566" stroke="#333" stroke-width="1"/>
+  <rect x="465" y="440" width="30" height="20" rx="2" fill="#445566" stroke="#333" stroke-width="1"/>
+  <rect x="505" y="440" width="30" height="20" rx="2" fill="#445566" stroke="#333" stroke-width="1"/>
+
+  <!-- Police chairs (south side of desk) -->
+  <rect x="252" y="493" width="28" height="20" rx="4" fill="#aabbdd" stroke="#3355aa" stroke-width="1"/>
+  <rect x="376" y="493" width="28" height="20" rx="4" fill="#aabbdd" stroke="#3355aa" stroke-width="1"/>
+  <rect x="500" y="493" width="28" height="20" rx="4" fill="#aabbdd" stroke="#3355aa" stroke-width="1"/>
+
+  <!-- ===== CLIENT / VISITOR AREA (当事人区域) ===== -->
+  <rect x="210" y="210" width="360" height="165" rx="5" fill="#fff9ee" fill-opacity="0.75" stroke="#cc8800" stroke-width="1.5" stroke-dasharray="8,4"/>
+  <text x="390" y="295" font-family="Microsoft YaHei,SimHei,Arial" font-size="12" font-weight="bold" fill="#cc8800" text-anchor="middle">当 事 人 区 域</text>
+
+  <!-- Visitor chairs row 1 -->
+  <rect x="258" y="235" width="28" height="22" rx="4" fill="#ffeedd" stroke="#cc8800" stroke-width="1"/>
+  <rect x="376" y="235" width="28" height="22" rx="4" fill="#ffeedd" stroke="#cc8800" stroke-width="1"/>
+  <rect x="494" y="235" width="28" height="22" rx="4" fill="#ffeedd" stroke="#cc8800" stroke-width="1"/>
+  <!-- Visitor chairs row 2 -->
+  <rect x="258" y="275" width="28" height="22" rx="4" fill="#ffeedd" stroke="#cc8800" stroke-width="1"/>
+  <rect x="376" y="275" width="28" height="22" rx="4" fill="#ffeedd" stroke="#cc8800" stroke-width="1"/>
+  <rect x="494" y="275" width="28" height="22" rx="4" fill="#ffeedd" stroke="#cc8800" stroke-width="1"/>
+
+  <!-- Divider line between zones (subtle) -->
+  <line x1="80" y1="400" x2="680" y2="400" stroke="#e0d8c8" stroke-width="1" stroke-dasharray="12,6"/>
+
+  <!-- ===== CAMERA SYMBOLS ===== -->
+  <!-- CAM-01: NW ceiling corner, 300mm from each wall → (110, 130) -->
+  <circle cx="110" cy="130" r="17" fill="white" stroke="#3366cc" stroke-width="2"/>
+  <rect x="101" y="123" width="13" height="10" rx="2" fill="#3366cc"/>
+  <polygon points="114,123 123,119 123,133 114,133" fill="#3366cc"/>
+  <circle cx="106" cy="128" r="3.2" fill="white" fill-opacity="0.75"/>
+  <text x="110" y="115" font-family="Arial,SimHei" font-size="9" fill="#3366cc" text-anchor="middle" font-weight="bold">CAM-01</text>
+
+  <!-- CAM-02: NE ceiling corner, 300mm from each wall → (650, 130) -->
+  <circle cx="650" cy="130" r="17" fill="white" stroke="#3366cc" stroke-width="2"/>
+  <rect x="641" y="123" width="13" height="10" rx="2" fill="#3366cc"/>
+  <polygon points="654,123 663,119 663,133 654,133" fill="#3366cc"/>
+  <circle cx="646" cy="128" r="3.2" fill="white" fill-opacity="0.75"/>
+  <text x="650" y="115" font-family="Arial,SimHei" font-size="9" fill="#3366cc" text-anchor="middle" font-weight="bold">CAM-02</text>
+
+  <!-- ===== MICROPHONE SYMBOL (MIC-01) ===== -->
+  <!-- Ceiling-mounted above desk center, shown at plan position (390, 405) -->
+  <circle cx="390" cy="405" r="14" fill="white" stroke="#cc4400" stroke-width="2"/>
+  <rect x="386" y="396" width="8" height="13" rx="4" fill="#cc4400"/>
+  <path d="M383,408 Q383,418 390,418 Q397,418 397,408" fill="none" stroke="#cc4400" stroke-width="1.5"/>
+  <line x1="390" y1="418" x2="390" y2="422" stroke="#cc4400" stroke-width="1.5"/>
+  <line x1="385" y1="422" x2="395" y2="422" stroke="#cc4400" stroke-width="1.5"/>
+  <text x="390" y="392" font-family="Arial,SimHei" font-size="9" fill="#cc4400" text-anchor="middle" font-weight="bold">MIC-01</text>
+  <!-- Leader line to desk -->
+  <line x1="390" y1="419" x2="390" y2="433" stroke="#cc4400" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- ===== DIMENSION LINES ===== -->
+  <!-- Horizontal: 6000mm, below room -->
+  <line x1="80" y1="526" x2="680" y2="526" stroke="#555" stroke-width="1.2" marker-start="url(#arrR)" marker-end="url(#arr)"/>
+  <line x1="80" y1="514" x2="80"  y2="532" stroke="#555" stroke-width="1"/>
+  <line x1="680" y1="514" x2="680" y2="532" stroke="#555" stroke-width="1"/>
+  <text x="380" y="542" font-family="Arial" font-size="12" fill="#333" text-anchor="middle" font-weight="bold">6000mm</text>
+
+  <!-- Vertical: 4000mm, right of room -->
+  <line x1="706" y1="100" x2="706" y2="500" stroke="#555" stroke-width="1.2" marker-start="url(#arrR)" marker-end="url(#arr)"/>
+  <line x1="694" y1="100" x2="714" y2="100" stroke="#555" stroke-width="1"/>
+  <line x1="694" y1="500" x2="714" y2="500" stroke="#555" stroke-width="1"/>
+  <text x="726" y="304" font-family="Arial" font-size="12" fill="#333" text-anchor="middle" font-weight="bold" transform="rotate(90,726,304)">4000mm</text>
+
+  <!-- CAM-01 offset: 300mm from west wall -->
+  <line x1="80" y1="130" x2="110" y2="130" stroke="#3366cc" stroke-width="0.9" stroke-dasharray="3,2"/>
+  <text x="95" y="127" font-family="Arial" font-size="8" fill="#3366cc" text-anchor="middle">300</text>
+  <!-- CAM-01 offset: 300mm from north wall -->
+  <line x1="110" y1="100" x2="110" y2="130" stroke="#3366cc" stroke-width="0.9" stroke-dasharray="3,2"/>
+  <text x="129" y="118" font-family="Arial" font-size="8" fill="#3366cc">300</text>
+
+  <!-- CAM-02 offset: 300mm from east wall -->
+  <line x1="650" y1="130" x2="680" y2="130" stroke="#3366cc" stroke-width="0.9" stroke-dasharray="3,2"/>
+  <text x="665" y="127" font-family="Arial" font-size="8" fill="#3366cc" text-anchor="middle">300</text>
+  <!-- CAM-02 offset: 300mm from north wall -->
+  <line x1="650" y1="100" x2="650" y2="130" stroke="#3366cc" stroke-width="0.9" stroke-dasharray="3,2"/>
+  <text x="636" y="118" font-family="Arial" font-size="8" fill="#3366cc" text-anchor="end">300</text>
+
+  <!-- Wall labels -->
+  <text x="380" y="92" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#666" text-anchor="middle">北墙（入口侧）</text>
+  <text x="380" y="513" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#666" text-anchor="middle">南墙</text>
+  <text x="57" y="304" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#666" text-anchor="middle" transform="rotate(-90,57,304)">西墙</text>
+  <text x="694" y="304" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#666" text-anchor="middle" transform="rotate(90,694,304)">东墙</text>
+
+  <!-- 1m grid tick labels (north wall) -->
+  <text x="180" y="95" font-family="Arial" font-size="8" fill="#bbb" text-anchor="middle">1m</text>
+  <text x="280" y="95" font-family="Arial" font-size="8" fill="#bbb" text-anchor="middle">2m</text>
+  <text x="380" y="95" font-family="Arial" font-size="8" fill="#bbb" text-anchor="middle">3m</text>
+  <text x="480" y="95" font-family="Arial" font-size="8" fill="#bbb" text-anchor="middle">4m</text>
+  <text x="580" y="95" font-family="Arial" font-size="8" fill="#bbb" text-anchor="middle">5m</text>
+
+  <!-- ===== NORTH ARROW ===== -->
+  <g transform="translate(715,118)">
+    <circle cx="0" cy="0" r="18" fill="white" stroke="#556" stroke-width="1.5"/>
+    <polygon points="0,-15 -7,8 0,3 7,8" fill="#1a3560"/>
+    <text x="0" y="-20" font-family="Arial" font-size="11" font-weight="bold" fill="#1a3560" text-anchor="middle">N</text>
+  </g>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="745" y="95" width="213" height="440" rx="5" fill="white" stroke="#bbc5d0" stroke-width="1.5"/>
+  <rect x="745" y="95" width="213" height="28" rx="5" fill="#1a3560"/>
+  <text x="851" y="114" font-family="Microsoft YaHei,SimHei,Arial" font-size="13" font-weight="bold" fill="white" text-anchor="middle">图 例</text>
+
+  <!-- Legend: Camera -->
+  <circle cx="770" cy="150" r="12" fill="white" stroke="#3366cc" stroke-width="1.5"/>
+  <rect x="762" y="144" width="11" height="9" rx="1" fill="#3366cc"/>
+  <polygon points="773,144 781,141 781,153 773,153" fill="#3366cc"/>
+  <text x="792" y="154" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#333">POE半球摄像机（×2/间）</text>
+
+  <!-- Legend: Microphone -->
+  <circle cx="770" cy="182" r="12" fill="white" stroke="#cc4400" stroke-width="1.5"/>
+  <rect x="766" y="173" width="8" height="12" rx="4" fill="#cc4400"/>
+  <text x="792" y="186" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#333">全向拾音器（×1/间）</text>
+
+  <!-- Legend: FOV -->
+  <rect x="760" y="205" width="20" height="13" fill="#3366cc" fill-opacity="0.12" stroke="#3366cc" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="792" y="216" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#333">摄像机视野范围</text>
+
+  <!-- Legend: Client area -->
+  <rect x="760" y="230" width="20" height="13" fill="#fff9ee" stroke="#cc8800" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="792" y="241" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#333">当事人区域</text>
+
+  <!-- Legend: Desk -->
+  <rect x="760" y="255" width="20" height="13" fill="#d5e2f8" stroke="#3355aa" stroke-width="1.5"/>
+  <text x="792" y="266" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" fill="#333">接报案台</text>
+
+  <line x1="755" y1="282" x2="949" y2="282" stroke="#dde" stroke-width="1"/>
+
+  <!-- Equipment per room -->
+  <text x="755" y="300" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" font-weight="bold" fill="#1a3560">本间主要设备：</text>
+  <text x="762" y="318" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 半球POE摄像机 × 2台</text>
+  <text x="762" y="335" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 全向拾音器 × 1只</text>
+  <text x="762" y="352" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 8口POE交换机 × 2台</text>
+  <text x="762" y="369" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 硬盘录像机（4路）× 1台</text>
+  <text x="762" y="386" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 监控硬盘 ≥8TB × 2块</text>
+  <text x="762" y="403" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 存储卡 ≥128G × 2张</text>
+  <text x="762" y="420" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 六类网线（实测布线）</text>
+  <text x="762" y="437" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• PVC线槽 20×10mm</text>
+  <text x="762" y="454" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">• 电源插排 × 2个</text>
+
+  <line x1="755" y1="467" x2="949" y2="467" stroke="#dde" stroke-width="1"/>
+
+  <!-- Project totals -->
+  <text x="755" y="484" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" font-weight="bold" fill="#1a3560">项目汇总（全部11间）：</text>
+  <text x="762" y="501" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">摄像机：34台（22用＋12备）</text>
+  <text x="762" y="518" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">拾音器：12只（11用＋1备）</text>
+  <text x="762" y="535" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#444">硬盘录像机：11台</text>
+
+  <!-- ===== SCALE BAR ===== -->
+  <g transform="translate(80,558)">
+    <text x="100" y="-5" font-family="Arial" font-size="10" fill="#555" text-anchor="middle">比例尺 1:100</text>
+    <rect x="0"   y="0" width="50" height="8" fill="#555"/>
+    <rect x="50"  y="0" width="50" height="8" fill="white" stroke="#555" stroke-width="1"/>
+    <rect x="100" y="0" width="50" height="8" fill="#555"/>
+    <rect x="150" y="0" width="50" height="8" fill="white" stroke="#555" stroke-width="1"/>
+    <text x="0"   y="20" font-family="Arial" font-size="10" fill="#444" text-anchor="middle">0</text>
+    <text x="50"  y="20" font-family="Arial" font-size="10" fill="#444" text-anchor="middle">1m</text>
+    <text x="100" y="20" font-family="Arial" font-size="10" fill="#444" text-anchor="middle">2m</text>
+    <text x="150" y="20" font-family="Arial" font-size="10" fill="#444" text-anchor="middle">3m</text>
+    <text x="200" y="20" font-family="Arial" font-size="10" fill="#444" text-anchor="middle">4m</text>
+  </g>
+
+  <!-- ===== NOTES ===== -->
+  <rect x="80" y="592" width="650" height="132" rx="4" fill="white" stroke="#bbc5d0" stroke-width="1.2"/>
+  <rect x="80" y="592" width="650" height="24" rx="4" fill="#e0e6ee" stroke="#bbc5d0" stroke-width="1.2"/>
+  <text x="90" y="609" font-family="Microsoft YaHei,SimHei,Arial" font-size="11" font-weight="bold" fill="#1a3560">施工技术说明：</text>
+  <text x="90" y="630" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#333">1. 摄像机均为吸顶安装，安装高度 2.7m～3.0m，距墙面 300mm，固定螺栓不少于4颗，须做防松处理。</text>
+  <text x="90" y="647" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#333">2. 拾音器吸顶安装于接报案台正上方，距桌面高度 2.2m～2.5m，采用屏蔽线缆接线。</text>
+  <text x="90" y="664" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#333">3. 六类网线走 PVC 线槽（20mm×10mm），沿顶角敷设，强弱电线槽平行间距 ≥150mm，交叉时垂直穿越。</text>
+  <text x="90" y="681" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#333">4. POE 交换机置于接报案台下方桌内，集中供电，电源线独立穿管保护，插排固定不裸露。</text>
+  <text x="90" y="698" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#333">5. 本图为典型间示意，各派出所施工前须现场勘测核对，平面尺寸以实测为准，特殊布局另行出图。</text>
+  <text x="90" y="715" font-family="Microsoft YaHei,SimHei,Arial" font-size="10" fill="#555">6. 验收时须确认摄像机覆盖接报案台及当事人区域全部有效区域，无死角。</text>
+</svg>

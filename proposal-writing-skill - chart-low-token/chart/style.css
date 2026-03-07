@@ -1,0 +1,69 @@
+/**
+ * Chart Renderer 样式
+ * 政务/公安投标架构图专用风格
+ *
+ * 本文件内容已内嵌于 renderer.html，
+ * 此处作为独立参考文件保留。
+ */
+
+/* 基础 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #e2e8f0;
+  font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 画布外层 */
+#wrap {
+  width: 1920px;
+  height: 1080px;
+  margin: 20px auto;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+/* 导出按钮（不参与导出） */
+#export-btn {
+  position: fixed;
+  top: 12px; right: 12px;
+  padding: 8px 22px;
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+#export-btn:hover { background: #1e40af; }
+
+/* ────────────────────────────────────────────────
+   调色板（政务风格，深蓝主色）
+──────────────────────────────────────────────── */
+
+/* Layer 0 — 蓝色（应用层 / 接入层） */
+.layer-0-bg     { fill: #DBEAFE; }
+.layer-0-border { stroke: #1d4ed8; }
+.layer-0-strip  { fill: #1d4ed8; }
+
+/* Layer 1 — 绿色（平台层 / 业务层） */
+.layer-1-bg     { fill: #DCFCE7; }
+.layer-1-border { stroke: #15803d; }
+.layer-1-strip  { fill: #15803d; }
+
+/* Layer 2 — 黄色（网络层） */
+.layer-2-bg     { fill: #FEF9C3; }
+.layer-2-border { stroke: #a16207; }
+.layer-2-strip  { fill: #ca8a04; }
+
+/* Layer 3 — 紫色（感知层） */
+.layer-3-bg     { fill: #F3E8FF; }
+.layer-3-border { stroke: #7e22ce; }
+.layer-3-strip  { fill: #7e22ce; }
+
+/* Layer 4 — 红色（安全层） */
+.layer-4-bg     { fill: #FCE7F3; }
+.layer-4-border { stroke: #be185d; }
+.layer-4-strip  { fill: #be185d; }

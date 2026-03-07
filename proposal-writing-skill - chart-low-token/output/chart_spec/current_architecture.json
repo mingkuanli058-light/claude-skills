@@ -1,0 +1,42 @@
+{
+  "chart_type": "network_topology",
+  "title": "北京市公安局涉案财物智能化保管系统现网结构图",
+  "meta": {
+    "project": "北京市公安局涉案财物智能化保管系统",
+    "company": "北京宽和精英科技发展有限公司",
+    "date": "2026"
+  },
+  "layers": [
+    "前端设备区",
+    "网络传输区",
+    "后端系统区"
+  ],
+  "nodes": [
+    {"id": "frontend_bodycam", "type": "camera", "layer": "前端设备区", "label": "执法记录仪（50台）"},
+    {"id": "frontend_terminal", "type": "terminal", "layer": "前端设备区", "label": "业务终端电脑（20台）"},
+    {"id": "frontend_admin", "type": "terminal", "layer": "前端设备区", "label": "管理终端（3台）"},
+    {"id": "network_core_switch", "type": "switch", "layer": "网络传输区", "label": "核心交换机（1台）"},
+    {"id": "network_access_switch", "type": "switch", "layer": "网络传输区", "label": "汇聚交换机（2台）"},
+    {"id": "network_firewall", "type": "firewall", "layer": "网络传输区", "label": "边界防火墙（1台）"},
+    {"id": "backend_app_server", "type": "server", "layer": "后端系统区", "label": "应用服务器（2台）"},
+    {"id": "backend_db_server", "type": "database", "layer": "后端系统区", "label": "数据库服务器（1台）"},
+    {"id": "backend_file_server", "type": "storage", "layer": "后端系统区", "label": "文件存储服务器（1台）"},
+    {"id": "backend_nvr", "type": "nvr", "layer": "后端系统区", "label": "视频存储录像机（2台）"}
+  ],
+  "links": [
+    {"from": "frontend_bodycam", "to": "network_access_switch"},
+    {"from": "frontend_terminal", "to": "network_access_switch"},
+    {"from": "frontend_admin", "to": "network_access_switch"},
+    {"from": "network_access_switch", "to": "network_core_switch"},
+    {"from": "network_core_switch", "to": "network_firewall"},
+    {"from": "network_firewall", "to": "backend_app_server"},
+    {"from": "backend_app_server", "to": "backend_db_server"},
+    {"from": "backend_app_server", "to": "backend_file_server"},
+    {"from": "backend_app_server", "to": "backend_nvr"}
+  ],
+  "groups": [
+    {"id": "group_frontend", "label": "前端设备", "nodes": ["frontend_bodycam", "frontend_terminal", "frontend_admin"]},
+    {"id": "group_network", "label": "网络设备", "nodes": ["network_core_switch", "network_access_switch", "network_firewall"]},
+    {"id": "group_backend", "label": "后端系统", "nodes": ["backend_app_server", "backend_db_server", "backend_file_server", "backend_nvr"]}
+  ]
+}

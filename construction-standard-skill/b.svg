@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="532" height="448" font-family="Arial, 'Microsoft YaHei', sans-serif">
+<defs>
+<filter id="drop_shadow" x="-15%" y="-15%" width="130%" height="130%">
+  <feDropShadow dx="3" dy="4" stdDeviation="4" flood-color="#00000028"/>
+</filter>
+<filter id="soft_shadow" x="-10%" y="-10%" width="120%" height="120%">
+  <feDropShadow dx="1" dy="2" stdDeviation="2" flood-color="#00000020"/>
+</filter>
+<linearGradient id="fixed_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+  <stop offset="0%"   stop-color="#EBF8FF"/>
+  <stop offset="100%" stop-color="#63B3ED" stop-opacity="0.5"/>
+</linearGradient>
+<linearGradient id="room_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+  <stop offset="0%"   stop-color="#F7FAFC"/>
+  <stop offset="100%" stop-color="#EDF2F7"/>
+</linearGradient>
+<radialGradient id="fan_grad_0" cx="0%" cy="50%" r="100%" gradientTransform="rotate(0)">
+  <stop offset="0%"   stop-color="#C53030" stop-opacity="0.30"/>
+  <stop offset="100%" stop-color="#C53030" stop-opacity="0.03"/>
+</radialGradient>
+<radialGradient id="fan_grad_1" cx="0%" cy="50%" r="100%" gradientTransform="rotate(0)">
+  <stop offset="0%"   stop-color="#2B6CB0" stop-opacity="0.30"/>
+  <stop offset="100%" stop-color="#2B6CB0" stop-opacity="0.03"/>
+</radialGradient>
+<radialGradient id="fan_grad_2" cx="0%" cy="50%" r="100%" gradientTransform="rotate(0)">
+  <stop offset="0%"   stop-color="#276749" stop-opacity="0.30"/>
+  <stop offset="100%" stop-color="#276749" stop-opacity="0.03"/>
+</radialGradient>
+<radialGradient id="fan_grad_3" cx="0%" cy="50%" r="100%" gradientTransform="rotate(0)">
+  <stop offset="0%"   stop-color="#6B46C1" stop-opacity="0.30"/>
+  <stop offset="100%" stop-color="#6B46C1" stop-opacity="0.03"/>
+</radialGradient>
+<clipPath id="room_clip">
+  <rect x="72" y="58" width="240" height="300"/>
+</clipPath>
+<symbol id="sym_dome" viewBox="-12 -12 24 24" overflow="visible">
+  <!-- 外环：currentColor -->
+  <circle cx="0" cy="0" r="11" fill="none" stroke="currentColor" stroke-width="2.2"/>
+  <!-- 灰色穹顶外壳 -->
+  <circle cx="0" cy="0" r="8.5" fill="#4A5568"/>
+  <!-- 深色镜头 -->
+  <circle cx="0" cy="0" r="5.2" fill="#1A365D"/>
+  <!-- 底座 -->
+  <rect x="-7" y="5.5" width="14" height="3" rx="1.5" fill="#2D3748"/>
+  <!-- 镜头高光 -->
+  <circle cx="-1.8" cy="-1.8" r="1.6" fill="white" opacity="0.55"/>
+</symbol>
+<symbol id="sym_bullet" viewBox="-12 -12 24 24" overflow="visible">
+  <!-- 机身 -->
+  <rect x="-11" y="-4.5" width="18" height="9" rx="2.5" fill="#4A5568"/>
+  <!-- 镜头端盖 -->
+  <rect x="5.5" y="-3.5" width="6.5" height="7" rx="2" fill="#2D3748"/>
+  <!-- 镜头玻璃 -->
+  <circle cx="9" cy="0" r="2.8" fill="#1A365D"/>
+  <!-- 安装支架 -->
+  <rect x="-3" y="4.5" width="6" height="4.5" rx="1" fill="#2D3748"/>
+  <!-- 机身描边：currentColor -->
+  <rect x="-11" y="-4.5" width="18" height="9" rx="2.5" fill="none"
+        stroke="currentColor" stroke-width="1.8"/>
+  <!-- 镜头高光 -->
+  <circle cx="8" cy="-1.2" r="0.9" fill="white" opacity="0.6"/>
+</symbol>
+</defs>
+<g id="background_layer">
+<rect width="532" height="448" fill="white"/>
+<line x1="72.0" y1="58" x2="72.0" y2="358" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="132.0" y1="58" x2="132.0" y2="358" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="192.0" y1="58" x2="192.0" y2="358" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="252.0" y1="58" x2="252.0" y2="358" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="312.0" y1="58" x2="312.0" y2="358" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="72" y1="58.0" x2="312" y2="58.0" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="72" y1="118.0" x2="312" y2="118.0" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="72" y1="178.0" x2="312" y2="178.0" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="72" y1="238.0" x2="312" y2="238.0" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="72" y1="298.0" x2="312" y2="298.0" stroke="#E2E8F0" stroke-width="0.5"/>
+<line x1="72" y1="358.0" x2="312" y2="358.0" stroke="#E2E8F0" stroke-width="0.5"/>
+</g>
+<g id="architecture_layer">
+<rect x="72" y="58" width="240" height="300" fill="url(#room_grad)" stroke="#1A202C" stroke-width="5" filter="url(#drop_shadow)"/>
+<rect x="72" y="58" width="240" height="300" fill="none" stroke="#1A202C" stroke-width="1.2" opacity="0.25"/>
+<text x="266.0" y="22" text-anchor="middle" font-size="16" font-weight="bold" fill="#2C5282">空间平面布点 — 办案区审讯室</text>
+<text x="266.0" y="40" text-anchor="middle" font-size="10" fill="#718096">空间尺寸：5m（长）× 4m（宽）× 3m（层高）</text>
+<line x1="72" y1="44" x2="312" y2="44" stroke="#A0AEC0" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="72" y1="40" x2="72" y2="48" stroke="#A0AEC0" stroke-width="1.2"/>
+<line x1="312" y1="40" x2="312" y2="48" stroke="#A0AEC0" stroke-width="1.2"/>
+<rect x="181.6" y="34.5" width="20.8" height="19.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="47.3" text-anchor="middle" font-size="9" fill="#718096">4m</text>
+<line x1="54" y1="58" x2="54" y2="358" stroke="#A0AEC0" stroke-width="1" stroke-dasharray="3,2"/>
+<line x1="50" y1="58" x2="58" y2="58" stroke="#A0AEC0" stroke-width="1.2"/>
+<line x1="50" y1="358" x2="58" y2="358" stroke="#A0AEC0" stroke-width="1.2"/>
+<text x="48.0" y="208.0" text-anchor="middle" font-size="9" fill="#718096" transform="rotate(-90,48.0,208.0)">5m</text>
+<polygon points="288,70 281,89 288,85 295,89" fill="#2C5282" opacity="0.85"/>
+<text x="288" y="104" text-anchor="middle" font-size="9" font-weight="bold" fill="#2C5282">N</text>
+<rect x="78.0" y="371" width="60.0" height="10" fill="#4A5568"/>
+<rect x="138.0" y="371" width="60.0" height="10" fill="white"/>
+<rect x="198.0" y="371" width="60.0" height="10" fill="#4A5568"/>
+<rect x="258.0" y="371" width="60.0" height="10" fill="white"/>
+<rect x="318.0" y="371" width="60.0" height="10" fill="#4A5568"/>
+<rect x="78" y="371" width="300" height="10" rx="2" fill="none" stroke="#A0AEC0" stroke-width="1"/>
+<text x="78" y="392" font-size="8" fill="#A0AEC0">0</text>
+<text x="378.0" y="392" text-anchor="end" font-size="8" fill="#A0AEC0">5m</text>
+</g>
+<g id="fixed_element_layer">
+<rect x="165.0" y="352.0" width="54.0" height="6.0" rx="3" fill="url(#fixed_grad)" stroke="#2B6CB0" stroke-width="1.5" filter="url(#soft_shadow)"/>
+<rect x="182.7" y="345.5" width="18.5" height="19.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="358.3" text-anchor="middle" font-size="9" fill="#2B6CB0">门</text>
+<rect x="306.0" y="337.0" width="6.0" height="3.0" rx="3" fill="url(#fixed_grad)" stroke="#2B6CB0" stroke-width="1.5" filter="url(#soft_shadow)"/>
+<rect x="286.9" y="329.0" width="44.2" height="19.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="309.0" y="341.8" text-anchor="middle" font-size="9" fill="#2B6CB0">出门按钮</text>
+<rect x="144.0" y="184.0" width="96.0" height="48.0" rx="3" fill="url(#fixed_grad)" stroke="#2B6CB0" stroke-width="1.5" filter="url(#soft_shadow)"/>
+<rect x="174.2" y="198.5" width="35.6" height="19.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="211.3" text-anchor="middle" font-size="9" fill="#2B6CB0">审讯桌</text>
+<rect x="174.0" y="160.0" width="36.0" height="36.0" rx="3" fill="url(#fixed_grad)" stroke="#2B6CB0" stroke-width="1.5" filter="url(#soft_shadow)"/>
+<rect x="174.2" y="168.5" width="35.6" height="19.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="181.3" text-anchor="middle" font-size="9" fill="#2B6CB0">审讯椅</text>
+<rect x="174.0" y="250.0" width="36.0" height="36.0" rx="3" fill="url(#fixed_grad)" stroke="#2B6CB0" stroke-width="1.5" filter="url(#soft_shadow)"/>
+<rect x="169.9" y="258.5" width="44.2" height="19.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="271.3" text-anchor="middle" font-size="9" fill="#2B6CB0">民警座位</text>
+</g>
+<g id="device_layer">
+<g id="device_fans_0" clip-path="url(#room_clip)">
+<path d="M 90.0,76.0 L 66.6,183.5 A 110.0,110.0 0 0,1 199.9,80.4 Z" fill="url(#fan_grad_0)" stroke="#C53030" stroke-width="0.6" stroke-opacity="0.25"/>
+<path d="M 294.0,340.0 L 317.4,232.5 A 110.0,110.0 0 0,1 184.1,335.6 Z" fill="url(#fan_grad_0)" stroke="#C53030" stroke-width="0.6" stroke-opacity="0.25"/>
+</g>
+<g id="device_arrows_0">
+<line x1="90.0" y1="76.0" x2="110.8" y2="102.9" stroke="#C53030" stroke-width="1.8" opacity="0.85"/>
+<polygon points="110.8,102.9 109.7,95.0 103.4,99.9" fill="#C53030" opacity="0.85"/>
+<line x1="294.0" y1="340.0" x2="273.2" y2="313.1" stroke="#C53030" stroke-width="1.8" opacity="0.85"/>
+<polygon points="273.2,313.1 274.3,321.0 280.6,316.1" fill="#C53030" opacity="0.85"/>
+</g>
+<g id="device_icons_0">
+<circle cx="90.0" cy="76.0" r="17" fill="#C53030" opacity="0.12"/>
+<g style="color:#C53030"><use href="#sym_dome" x="78.0" y="64.0" width="24" height="24"/></g>
+<circle cx="294.0" cy="340.0" r="17" fill="#C53030" opacity="0.12"/>
+<g style="color:#C53030"><use href="#sym_dome" x="282.0" y="328.0" width="24" height="24"/></g>
+</g>
+<g id="device_labels_0">
+<rect x="70.6" y="42.0" width="38.8" height="18.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="90.0" y="54.0" text-anchor="middle" font-size="8" fill="#C53030">H=2.8m</text>
+<rect x="274.6" y="306.0" width="38.8" height="18.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="294.0" y="318.0" text-anchor="middle" font-size="8" fill="#C53030">H=2.8m</text>
+</g>
+<g id="device_fans_1" clip-path="url(#room_clip)">
+<path d="M 192.0,76.0 L 107.7,146.7 A 110.0,110.0 0 0,1 276.3,146.7 Z" fill="url(#fan_grad_1)" stroke="#2B6CB0" stroke-width="0.6" stroke-opacity="0.25"/>
+</g>
+<g id="device_arrows_1">
+<line x1="192.0" y1="76.0" x2="192.0" y2="110.0" stroke="#2B6CB0" stroke-width="1.8" opacity="0.85"/>
+<polygon points="192.0,110.0 196.0,103.1 188.0,103.1" fill="#2B6CB0" opacity="0.85"/>
+</g>
+<g id="device_icons_1">
+<circle cx="192.0" cy="76.0" r="17" fill="#2B6CB0" opacity="0.12"/>
+<g style="color:#2B6CB0"><use href="#sym_dome" x="180.0" y="64.0" width="24" height="24"/></g>
+</g>
+<g id="device_labels_1">
+<rect x="172.6" y="42.0" width="38.8" height="18.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="54.0" text-anchor="middle" font-size="8" fill="#2B6CB0">H=1.6m</text>
+</g>
+<g id="device_fans_2" clip-path="url(#room_clip)">
+<path d="M 192.0,136.0 L 107.7,206.7 A 110.0,110.0 0 0,1 276.3,206.7 Z" fill="url(#fan_grad_2)" stroke="#276749" stroke-width="0.6" stroke-opacity="0.25"/>
+</g>
+<g id="device_arrows_2">
+<line x1="192.0" y1="136.0" x2="192.0" y2="170.0" stroke="#276749" stroke-width="1.8" opacity="0.85"/>
+<polygon points="192.0,170.0 196.0,163.1 188.0,163.1" fill="#276749" opacity="0.85"/>
+</g>
+<g id="device_icons_2">
+<circle cx="192.0" cy="136.0" r="17" fill="#276749" opacity="0.12"/>
+<g style="color:#276749"><use href="#sym_dome" x="180.0" y="124.0" width="24" height="24"/></g>
+</g>
+<g id="device_labels_2">
+<rect x="172.6" y="102.0" width="38.8" height="18.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="192.0" y="114.0" text-anchor="middle" font-size="8" fill="#276749">H=0.8m</text>
+</g>
+<g id="device_fans_3" clip-path="url(#room_clip)">
+<path d="M 152.0,58.0 L 88.8,148.0 A 110.0,110.0 0 0,1 251.6,104.6 Z" fill="url(#fan_grad_3)" stroke="#6B46C1" stroke-width="0.6" stroke-opacity="0.25"/>
+<path d="M 232.0,58.0 L 132.4,104.6 A 110.0,110.0 0 0,1 295.2,148.0 Z" fill="url(#fan_grad_3)" stroke="#6B46C1" stroke-width="0.6" stroke-opacity="0.25"/>
+</g>
+<g id="device_arrows_3">
+<line x1="152.0" y1="58.0" x2="160.8" y2="90.9" stroke="#6B46C1" stroke-width="1.8" opacity="0.85"/>
+<polygon points="160.8,90.9 162.8,83.1 155.1,85.2" fill="#6B46C1" opacity="0.85"/>
+<line x1="232.0" y1="58.0" x2="223.2" y2="90.9" stroke="#6B46C1" stroke-width="1.8" opacity="0.85"/>
+<polygon points="223.2,90.9 228.9,85.2 221.2,83.1" fill="#6B46C1" opacity="0.85"/>
+</g>
+<g id="device_icons_3">
+<circle cx="152.0" cy="58.0" r="17" fill="#6B46C1" opacity="0.12"/>
+<g style="color:#6B46C1"><use href="#sym_dome" x="140.0" y="46.0" width="24" height="24"/></g>
+<circle cx="232.0" cy="58.0" r="17" fill="#6B46C1" opacity="0.12"/>
+<g style="color:#6B46C1"><use href="#sym_dome" x="220.0" y="46.0" width="24" height="24"/></g>
+</g>
+<g id="device_labels_3">
+<rect x="132.6" y="24.0" width="38.8" height="18.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="152.0" y="36.0" text-anchor="middle" font-size="8" fill="#6B46C1">H=0.8m</text>
+<rect x="212.6" y="24.0" width="38.8" height="18.0" rx="3" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="0.8" opacity="0.92"/>
+<text x="232.0" y="36.0" text-anchor="middle" font-size="8" fill="#6B46C1">H=0.8m</text>
+</g>
+</g>
+<g id="annotation_layer">
+</g>
+<g id="legend_layer">
+<rect x="330" y="58" width="194" height="360" rx="6" fill="white" stroke="#E2E8F0" stroke-width="1.2" filter="url(#soft_shadow)"/>
+<text x="340" y="78" font-size="11" font-weight="bold" fill="#2C5282">图 例</text>
+<line x1="338" y1="84" x2="516" y2="84" stroke="#E2E8F0" stroke-width="1"/>
+<circle cx="348" cy="106" r="14" fill="#C53030" opacity="0.12"/>
+<g style="color:#C53030"><use href="#sym_dome" x="336" y="94" width="24" height="24"/></g>
+<text x="364" y="103" font-size="10" font-weight="bold" fill="#2D3748">摄像机</text>
+<text x="364" y="115" font-size="9" fill="#718096">×2  顶角安装</text>
+<text x="364" y="127" font-size="8" fill="#A0AEC0">[diagonal]</text>
+<circle cx="348" cy="158" r="14" fill="#2B6CB0" opacity="0.12"/>
+<g style="color:#2B6CB0"><use href="#sym_dome" x="336" y="146" width="24" height="24"/></g>
+<text x="364" y="155" font-size="10" font-weight="bold" fill="#2D3748">特写摄像机</text>
+<text x="364" y="167" font-size="9" fill="#718096">×1  墙面安装</text>
+<text x="364" y="179" font-size="8" fill="#A0AEC0">[single_side]</text>
+<circle cx="348" cy="210" r="14" fill="#276749" opacity="0.12"/>
+<g style="color:#276749"><use href="#sym_dome" x="336" y="198" width="24" height="24"/></g>
+<text x="364" y="207" font-size="10" font-weight="bold" fill="#2D3748">拾音器</text>
+<text x="364" y="219" font-size="9" fill="#718096">×1  桌面安装</text>
+<text x="364" y="231" font-size="8" fill="#A0AEC0">[radial]</text>
+<circle cx="348" cy="262" r="14" fill="#6B46C1" opacity="0.12"/>
+<g style="color:#6B46C1"><use href="#sym_dome" x="336" y="250" width="24" height="24"/></g>
+<text x="364" y="259" font-size="10" font-weight="bold" fill="#2D3748">显示器</text>
+<text x="364" y="271" font-size="9" fill="#718096">×2  桌面放置</text>
+<text x="364" y="283" font-size="8" fill="#A0AEC0">[single_side]</text>
+<line x1="338" y1="302" x2="516" y2="302" stroke="#E2E8F0" stroke-width="1"/>
+<text x="340" y="318" font-size="9" font-weight="bold" fill="#718096">建议</text>
+<text x="342" y="334" font-size="8" fill="#A0AEC0">&#8226; 门口可增加单侧摄像机</text>
+<text x="342" y="352" font-size="8" fill="#A0AEC0">&#8226; 拾音器可改为双点布置</text>
+<text x="342" y="370" font-size="8" fill="#A0AEC0">&#8226; 特写摄像机高度微调</text>
+<text x="340" y="390" font-size="8" fill="#2C5282">覆盖：通过</text>
+<text x="340" y="403" font-size="8" fill="#A0AEC0">冲突：无</text>
+</g>
+</svg>

@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.1",
+  "drawing_type": "空间平面布点",
+  "layout_data": {
+    "space": {
+      "count": 1,
+      "name": "办案区审讯室",
+      "size": {
+        "length_m": 5,
+        "width_m": 4,
+        "height_m": 3
+      },
+      "coordinate_system": {
+        "origin": "top_left",
+        "x_direction": "right",
+        "y_direction": "down"
+      }
+    },
+    "fixed_elements": [
+      {
+        "name": "门",
+        "size": {
+          "width_m": 0.9,
+          "depth_m": 0.1
+        },
+        "position": {
+          "anchor": "south",
+          "align": "center",
+          "offset_m": 0
+        }
+      },
+      {
+        "name": "出门按钮",
+        "size": {
+          "width_m": 0.1,
+          "depth_m": 0.05
+        },
+        "position": {
+          "anchor": "south",
+          "align": "right",
+          "offset_m": 0.3
+        }
+      },
+      {
+        "name": "审讯桌",
+        "size": {
+          "width_m": 1.6,
+          "depth_m": 0.8
+        },
+        "position": {
+          "anchor": "center",
+          "align": "center",
+          "offset_m": 0
+        }
+      },
+      {
+        "name": "审讯椅",
+        "size": {
+          "width_m": 0.6,
+          "depth_m": 0.6
+        },
+        "position": {
+          "anchor": "north",
+          "align": "center",
+          "offset_m": 1.7
+        }
+      },
+      {
+        "name": "民警座位",
+        "size": {
+          "width_m": 0.6,
+          "depth_m": 0.6
+        },
+        "position": {
+          "anchor": "south",
+          "align": "center",
+          "offset_m": 1.2
+        }
+      }
+    ],
+    "devices": [
+      {
+        "type": "摄像机",
+        "count": 2,
+        "install_method": "顶角安装",
+        "layout_strategy": "diagonal",
+        "constraints": {
+          "offset_from_wall_mm": 300,
+          "install_height_m": 2.8,
+          "target_elements": [
+            "审讯桌",
+            "审讯椅",
+            "民警座位"
+          ],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "特写摄像机",
+        "count": 1,
+        "install_method": "墙面安装",
+        "layout_strategy": "single_side",
+        "constraints": {
+          "offset_from_wall_mm": 300,
+          "install_height_m": 1.6,
+          "target_elements": [
+            "审讯椅"
+          ],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "拾音器",
+        "count": 1,
+        "install_method": "桌面安装",
+        "layout_strategy": "radial",
+        "constraints": {
+          "offset_from_wall_mm": 0,
+          "install_height_m": 0.8,
+          "target_elements": [
+            "审讯桌",
+            "审讯椅",
+            "民警座位"
+          ],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "显示器",
+        "count": 2,
+        "install_method": "桌面放置",
+        "layout_strategy": "single_side",
+        "constraints": {
+          "offset_from_wall_mm": 0,
+          "install_height_m": 0.8,
+          "target_elements": [
+            "审讯桌"
+          ],
+          "avoid_elements": []
+        }
+      }
+    ]
+  },
+  "validation": {
+    "coverage_check": "通过",
+    "blind_area_risk": "门口区域覆盖较弱",
+    "structure_conflict": "无",
+    "risk_notes": []
+  },
+  "optimization_suggestions": [
+    "门口可增加单侧摄像机",
+    "拾音器可改为双点布置",
+    "特写摄像机高度微调"
+  ]
+}

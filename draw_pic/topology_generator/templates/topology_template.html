@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }} — {{ system_name }}</title>
+  <style>
+    /* ── 基础重置 ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+      background: #f0f4f8;
+      color: #2c3e50;
+      padding: 28px 32px;
+      min-height: 100vh;
+    }
+
+    /* ── 页眉 ────────────────────────────────────────────────── */
+    .page-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .badge {
+      background: #1565C0;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1565C0;
+    }
+    .system-name {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+    }
+
+    /* ── 卡片 ────────────────────────────────────────────────── */
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1565C0;
+      border-left: 3px solid #1565C0;
+      padding-left: 9px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── SVG 画布 ─────────────────────────────────────────────── */
+    .svg-wrapper {
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+    svg {
+      display: block;
+      overflow: visible;
+    }
+
+    /* ── 图例 ────────────────────────────────────────────────── */
+    .legend-wrapper {
+      overflow-x: auto;
+    }
+
+    /* ── 说明 ────────────────────────────────────────────────── */
+    ul.notes {
+      list-style: disc;
+      padding-left: 20px;
+      font-size: 12.5px;
+      color: #555;
+      line-height: 2;
+    }
+    ul.notes li { margin-bottom: 2px; }
+
+    /* ── 页脚 ────────────────────────────────────────────────── */
+    .page-footer {
+      text-align: right;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 页眉 -->
+  <div class="page-header">
+    <span class="badge">A-02</span>
+    <span class="page-title">网络拓扑图</span>
+    <span class="system-name">{{ system_name }}</span>
+  </div>
+
+  <!-- 拓扑图 -->
+  <div class="card">
+    <div class="section-label">网络拓扑结构</div>
+    <div class="svg-wrapper">
+      {{ svg_content }}
+    </div>
+  </div>
+
+  <!-- 图例 -->
+  <div class="card">
+    <div class="section-label">图例说明</div>
+    <div class="legend-wrapper">
+      {{ legend_svg }}
+    </div>
+  </div>
+
+  <!-- 文字说明 -->
+  <div class="card">
+    <div class="section-label">说明</div>
+    <ul class="notes">
+      {% for line in note_lines %}
+      <li>{{ line }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="page-footer">
+    本图件依据 chart_registry A-02 规范生成 &nbsp;|&nbsp;
+    设备来源：investment_schema.md &nbsp;|&nbsp;
+    不含 IP 地址 &nbsp;|&nbsp; 不含品牌标识
+  </div>
+
+</body>
+</html>

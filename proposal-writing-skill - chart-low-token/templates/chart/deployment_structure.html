@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>A-04 系统部署结构图</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+background:#ffffff;
+font-family:"Microsoft YaHei","微软雅黑",SimHei,Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:20px;
+}
+
+svg{
+border:1px solid #e8e8e8;
+background:#fafafa;
+}
+
+</style>
+</head>
+
+<body>
+
+<svg id="deployChart"
+width="1200"
+height="720"
+viewBox="0 0 1200 720"
+xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+
+<marker id="arrowBlue" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#4A7FBF"/>
+</marker>
+
+<marker id="arrowOrange" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#C06020"/>
+</marker>
+
+<marker id="arrowGray" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#777"/>
+</marker>
+
+</defs>
+
+<!-- TITLE -->
+
+<text id="title_main"
+x="600" y="30"
+text-anchor="middle"
+font-size="20"
+font-weight="bold">
+系统部署结构图
+</text>
+
+<text id="title_project"
+x="600" y="50"
+text-anchor="middle"
+font-size="12"
+fill="#777">
+项目名称
+</text>
+
+<line x1="40" y1="60" x2="1160" y2="60"
+stroke="#ddd"
+stroke-width="1"/>
+
+<!-- external -->
+
+<g id="external_system"></g>
+
+<!-- datacenter -->
+
+<g id="datacenter"></g>
+
+<!-- devices -->
+
+<g id="devices"></g>
+
+<!-- links -->
+
+<g id="links"></g>
+
+</svg>
+
+<script>
+
+fetch("../../output/chart_spec/deployment_structure.json")
+.then(res=>res.json())
+.then(spec=>{
+
+document.getElementById("title_project").textContent =
+spec.project_name
+
+const external=document.getElementById("external_system")
+const datacenter=document.getElementById("datacenter")
+const devices=document.getElementById("devices")
+const links=document.getElementById("links")
+
+// external system
+
+external.innerHTML+=`
+
+<rect
+x="440"
+y="70"
+width="320"
+height="70"
+rx="5"
+fill="#F5F5F5"
+stroke="#999"
+stroke-width="1.5"
+stroke-dasharray="8,4"
+/>
+
+<text x="600" y="100"
+text-anchor="middle"
+font-size="14"
+font-weight="bold"
+fill="#666">
+${spec.external_system}
+</text>
+
+<text x="600" y="120"
+text-anchor="middle"
+font-size="10"
+fill="#aaa">
+既有系统
+</text>
+
+`
+
+// datacenter frame
+
+datacenter.innerHTML+=`
+
+<rect
+x="40"
+y="200"
+width="1120"
+height="260"
+rx="6"
+fill="#F0F4FB"
+stroke="#4A7FBF"
+stroke-width="2"
+/>
+
+<text x="60" y="226"
+font-size="14"
+font-weight="bold"
+fill="#2255AA">
+机房部署区
+</text>
+
+`
+
+// server
+
+datacenter.innerHTML+=`
+
+<rect
+x="60"
+y="260"
+width="360"
+height="180"
+rx="5"
+fill="#EBF4FF"
+stroke="#4A7FBF"
+stroke-width="1.5"
+/>
+
+<text x="240" y="286"
+text-anchor="middle"
+font-size="13"
+font-weight="bold"
+fill="#2255AA">
+${spec.server.name}
+</text>
+
+`
+
+// storage
+
+datacenter.innerHTML+=`
+
+<rect
+x="760"
+y="260"
+width="360"
+height="180"
+rx="5"
+fill="#FFFAEB"
+stroke="#C69B00"
+stroke-width="1.5"
+/>
+
+<text x="940" y="286"
+text-anchor="middle"
+font-size="13"
+font-weight="bold"
+fill="#7B5800">
+${spec.storage.name}
+</text>
+
+`
+
+// switch
+
+datacenter.innerHTML+=`
+
+<rect
+x="500"
+y="260"
+width="200"
+height="60"
+rx="4"
+fill="#E8E8E8"
+stroke="#888"
+stroke-width="1.5"
+/>
+
+<text x="600" y="300"
+text-anchor="middle"
+font-size="12"
+fill="#444">
+${spec.switch.name}
+</text>
+
+`
+
+// device group
+
+devices.innerHTML+=`
+
+<rect
+x="40"
+y="540"
+width="1120"
+height="130"
+rx="6"
+fill="#FFF0E6"
+stroke="#C06020"
+stroke-width="2"
+/>
+
+<text x="60"
+y="560"
+font-size="14"
+font-weight="bold"
+fill="#8B3000">
+${spec.devices.name}
+</text>
+
+`
+
+// links
+
+links.innerHTML+=`
+
+<line
+x1="600"
+y1="140"
+x2="600"
+y2="200"
+stroke="#777"
+stroke-width="1.5"
+stroke-dasharray="6,4"
+marker-end="url(#arrowGray)"
+/>
+
+`
+
+links.innerHTML+=`
+
+<line
+x1="500"
+y1="280"
+x2="420"
+y2="280"
+stroke="#4A7FBF"
+stroke-width="1.5"
+marker-end="url(#arrowBlue)"
+/>
+
+`
+
+links.innerHTML+=`
+
+<line
+x1="700"
+y1="280"
+x2="760"
+y2="280"
+stroke="#C69B00"
+stroke-width="1.5"
+marker-end="url(#arrowBlue)"
+/>
+
+`
+
+links.innerHTML+=`
+
+<line
+x1="600"
+y1="320"
+x2="600"
+y2="540"
+stroke="#C06020"
+stroke-width="2"
+stroke-dasharray="8,5"
+marker-end="url(#arrowOrange)"
+/>
+
+`
+
+})
+
+</script>
+
+</body>
+</html>

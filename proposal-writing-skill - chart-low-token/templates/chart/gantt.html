@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>B-01 实施甘特图</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+background:#ffffff;
+font-family:"Microsoft YaHei","微软雅黑",SimHei,Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:20px;
+}
+svg{
+border:1px solid #e8e8e8;
+background:#fafafa;
+}
+</style>
+</head>
+
+<body>
+
+<svg id="ganttChart" width="1200" height="560"
+viewBox="0 0 1200 560"
+xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+
+<marker id="arrow" markerWidth="8" markerHeight="7"
+refX="8" refY="3.5" orient="auto">
+<polygon points="0 0, 8 3.5, 0 7" fill="#4A7FBF"/>
+</marker>
+
+</defs>
+
+<!-- TITLE -->
+
+<text id="title_main"
+x="600" y="30"
+text-anchor="middle"
+font-size="20"
+font-weight="bold">
+项目实施进度计划（甘特图）
+</text>
+
+<text id="title_project"
+x="600" y="50"
+text-anchor="middle"
+font-size="12"
+fill="#777">
+项目名称
+</text>
+
+<line x1="40" y1="60" x2="1160" y2="60"
+stroke="#ddd" stroke-width="1"/>
+
+<!-- header -->
+<g id="timeline_header"></g>
+
+<!-- rows -->
+<g id="phase_rows"></g>
+
+<!-- bars -->
+<g id="gantt_bars"></g>
+
+<!-- milestone -->
+<g id="milestones"></g>
+
+</svg>
+
+<script>
+
+fetch("../../output/chart_spec/project_gantt.json")
+.then(res=>res.json())
+.then(spec=>{
+
+document.getElementById("title_project").textContent =
+spec.project_name
+
+const header=document.getElementById("timeline_header")
+const rows=document.getElementById("phase_rows")
+const bars=document.getElementById("gantt_bars")
+const milestones=document.getElementById("milestones")
+
+let timelineStart=270
+let timelineWidth=890
+
+let step=timelineWidth/spec.timeline.length
+
+// header
+spec.timeline.forEach((t,i)=>{
+
+let x=timelineStart+i*step
+
+header.innerHTML+=`
+<rect x="${x}" y="70" width="${step}" height="40"
+fill="#E8EEF6" stroke="#C8D4E8"/>
+
+<text x="${x+step/2}" y="88"
+text-anchor="middle"
+font-size="12"
+font-weight="bold"
+fill="#2255AA">${t.title}</text>
+
+<text x="${x+step/2}" y="103"
+text-anchor="middle"
+font-size="10"
+fill="#666">${t.desc}</text>
+`
+
+})
+
+// rows
+spec.phases.forEach((p,i)=>{
+
+let y=110+i*60
+
+rows.innerHTML+=`
+
+<rect x="40" y="${y}"
+width="230" height="60"
+fill="#F5F8FF"
+stroke="#C8D4E8"/>
+
+<text x="50" y="${y+22}"
+font-size="11"
+font-weight="bold"
+fill="#2255AA">${p.name}</text>
+
+<text x="50" y="${y+40}"
+font-size="10"
+fill="#444">${p.desc}</text>
+
+`
+
+// bar
+
+let x=timelineStart+p.start*step+8
+let width=(p.end-p.start+1)*step-16
+
+bars.innerHTML+=`
+
+<rect x="${x}" y="${y+12}"
+width="${width}"
+height="36"
+rx="4"
+fill="${p.color}"
+opacity="0.85"/>
+
+<text x="${x+width/2}"
+y="${y+35}"
+text-anchor="middle"
+font-size="10"
+fill="#fff"
+font-weight="bold">
+${p.task}
+</text>
+
+`
+
+})
+
+// milestone
+
+spec.milestones.forEach(m=>{
+
+let x=timelineStart+m.time*step
+
+let y=110+m.phase*60+18
+
+milestones.innerHTML+=`
+
+<polygon points="${x},${y}
+${x+8},${y+10}
+${x},${y+20}
+${x-8},${y+10}"
+fill="#C06020"/>
+
+<text x="${x+12}" y="${y+10}"
+font-size="9"
+fill="#C06020">
+${m.name}
+</text>
+
+`
+
+})
+
+})
+
+</script>
+
+</body>
+</html>

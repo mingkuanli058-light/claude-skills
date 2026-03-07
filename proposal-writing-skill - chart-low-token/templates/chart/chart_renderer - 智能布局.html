@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Chart Renderer</title>
+
+<style>
+
+body{
+margin:0;
+background:#f5f6f7;
+font-family:"Microsoft YaHei",Arial;
+}
+
+#canvas{
+width:1920px;
+height:1080px;
+margin:auto;
+background:white;
+position:relative;
+}
+
+.title{
+position:absolute;
+top:30px;
+width:100%;
+text-align:center;
+font-size:32px;
+font-weight:bold;
+}
+
+.node{
+position:absolute;
+width:180px;
+height:70px;
+border:2px solid #5a78ff;
+background:#f0f4ff;
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:16px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+svg{
+position:absolute;
+top:0;
+left:0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="canvas">
+
+<div class="title" id="title"></div>
+
+<svg id="links" width="1920" height="1080"></svg>
+
+</div>
+
+<script id="chart-data" type="application/json">
+{{chart_data}}
+</script>
+
+<script>
+
+const chart = JSON.parse(
+document.getElementById("chart-data").textContent
+)
+
+document.getElementById("title").innerText = chart.title
+
+const svg = document.getElementById("links")
+const canvas = document.getElementById("canvas")
+
+const nodeMap = {}
+
+function drawNode(node,x,y){
+
+const div=document.createElement("div")
+
+div.className="node"
+div.innerText=node.label
+
+div.style.left=x+"px"
+div.style.top=y+"px"
+
+canvas.appendChild(div)
+
+nodeMap[node.id]={x:x,y:y}
+
+}
+
+function drawLink(from,to){
+
+const line=document.createElementNS("http://www.w3.org/2000/svg","line")
+
+line.setAttribute("x1",from.x+90)
+line.setAttribute("y1",from.y+70)
+
+line.setAttribute("x2",to.x+90)
+line.setAttribute("y2",to.y)
+
+line.setAttribute("stroke","#333")
+line.setAttribute("stroke-width","3")
+
+svg.appendChild(line)
+
+}
+
+function render(){
+
+switch(chart.chart_type){
+
+case "network_topology":
+renderTopology()
+break
+
+case "system_architecture":
+renderVertical()
+break
+
+case "deployment_structure":
+renderHorizontal()
+break
+
+case "data_flow":
+renderVertical()
+break
+
+case "gantt":
+renderGantt()
+break
+
+}
+
+}
+
+function renderTopology(){
+
+const centerX=960
+const centerY=500
+
+const radius=420
+
+drawNode(chart.nodes[0],centerX,centerY)
+
+nodeMap[chart.nodes[0].id]={x:centerX,y:centerY}
+
+const count=chart.nodes.length-1
+
+for(let i=1;i<chart.nodes.length;i++){
+
+const angle=(i-1)*(2*Math.PI/count)
+
+const x=centerX+radius*Math.cos(angle)
+const y=centerY+radius*Math.sin(angle)
+
+drawNode(chart.nodes[i],x,y)
+
+}
+
+chart.links.forEach(l=>{
+drawLink(nodeMap[l.from],nodeMap[l.to])
+})
+
+}
+
+function renderVertical(){
+
+const startY=200
+const gap=180
+
+chart.nodes.forEach((n,i)=>{
+
+const x=960
+const y=startY+i*gap
+
+drawNode(n,x,y)
+
+})
+
+chart.links.forEach(l=>{
+drawLink(nodeMap[l.from],nodeMap[l.to])
+})
+
+}
+
+function renderHorizontal(){
+
+const startX=300
+const gap=300
+
+chart.nodes.forEach((n,i)=>{
+
+const x=startX+i*gap
+const y=450
+
+drawNode(n,x,y)
+
+})
+
+chart.links.forEach(l=>{
+drawLink(nodeMap[l.from],nodeMap[l.to])
+})
+
+}
+
+function renderGantt(){
+
+const startX=200
+let y=200
+
+chart.nodes.forEach(n=>{
+
+const bar=document.createElement("div")
+
+bar.style.position="absolute"
+bar.style.left=startX+"px"
+bar.style.top=y+"px"
+bar.style.height="40px"
+bar.style.width="500px"
+bar.style.background="#5a78ff"
+bar.style.color="white"
+bar.style.display="flex"
+bar.style.alignItems="center"
+bar.style.paddingLeft="10px"
+
+bar.innerText=n.label
+
+canvas.appendChild(bar)
+
+y+=80
+
+})
+
+}
+
+render()
+
+</script>
+
+</body>
+</html>

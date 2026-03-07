@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-01　系统总体架构图 — </title>
+  <style>
+    /* ── 基础重置 ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+      background: #f0f4f8;
+      color: #2c3e50;
+      padding: 28px 32px;
+      min-height: 100vh;
+    }
+
+    /* ── 页眉 ────────────────────────────────────────────────── */
+    .page-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .badge {
+      background: #1565C0;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1565C0;
+    }
+    .system-name {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+    }
+
+    /* ── 卡片 ────────────────────────────────────────────────── */
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1565C0;
+      border-left: 3px solid #1565C0;
+      padding-left: 9px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── SVG 画布 ─────────────────────────────────────────────── */
+    .svg-wrapper {
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+    svg {
+      display: block;
+      overflow: visible;
+    }
+
+    /* ── 图例 ────────────────────────────────────────────────── */
+    .legend-wrapper {
+      overflow-x: auto;
+    }
+
+    /* ── 说明 ────────────────────────────────────────────────── */
+    ul.notes {
+      list-style: disc;
+      padding-left: 20px;
+      font-size: 12.5px;
+      color: #555;
+      line-height: 2;
+    }
+    ul.notes li { margin-bottom: 2px; }
+
+    /* ── 页脚 ────────────────────────────────────────────────── */
+    .page-footer {
+      text-align: right;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 页眉 -->
+  <div class="page-header">
+    <span class="badge">A-02</span>
+    <span class="page-title">网络拓扑图</span>
+    <span class="system-name"></span>
+  </div>
+
+  <!-- 拓扑图 -->
+  <div class="card">
+    <div class="section-label">网络拓扑结构</div>
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680" viewBox="0 0 1100 680">
+<defs><marker id="arrow_grey" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#546E7A"/></marker><marker id="arrow_brown" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#6D4C41"/></marker><marker id="arrow_orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#E65100"/></marker><marker id="arrow_green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2E7D32"/></marker></defs>
+<rect x="10" y="30" width="1080" height="70" rx="10" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.5" stroke-dasharray="6,3" opacity=".75"/>
+<text x="22" y="48" font-size="11" fill="#546E7A" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">用户访问层</text>
+<rect x="462" y="47" width="180" height="44" rx="7" fill="#0003"/><rect x="460" y="45" width="180" height="44" rx="7" fill="#ECEFF1" stroke="#546E7A" stroke-width="1.8"/><rect x="460" y="45" width="180" height="5" rx="7" fill="#546E7A"/><rect x="460" y="48" width="180" height="2" fill="#546E7A"/><rect x="468" y="57" width="20" height="14" rx="2" fill="none" stroke="#546E7A" stroke-width="1.5"/><line x1="478" y1="71" x2="478" y2="77" stroke="#546E7A" stroke-width="1.5"/><line x1="472" y1="77" x2="484" y2="77" stroke="#546E7A" stroke-width="2"/><text x="494" y="65" font-size="12" font-weight="700" fill="#37474F" font-family="PingFang SC,Microsoft YaHei,sans-serif">访问终端</text><text x="494" y="79" font-size="10" fill="#37474F" opacity=".75" font-family="PingFang SC,Microsoft YaHei,sans-serif">检索调阅工作站</text>
+<line x1="550" y1="100" x2="550" y2="138" stroke="#546E7A" stroke-width="2" marker-end="url(#arrow_grey)"/><text x="556" y="124" font-size="10" fill="#546E7A" font-family="PingFang SC,Microsoft YaHei,sans-serif">业务网络</text>
+<rect x="10" y="140" width="1080" height="80" rx="10" fill="#EFEBE9" stroke="#6D4C41" stroke-width="1.5" stroke-dasharray="6,3" opacity=".75"/>
+<text x="22" y="158" font-size="11" fill="#6D4C41" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">数据接入层</text>
+<rect x="128" y="156" width="200" height="50" rx="7" fill="#0003"/><rect x="126" y="154" width="200" height="50" rx="7" fill="#EFEBE9" stroke="#6D4C41" stroke-width="1.8"/><rect x="126" y="154" width="200" height="5" rx="7" fill="#6D4C41"/><rect x="126" y="157" width="200" height="2" fill="#6D4C41"/><rect x="134" y="172" width="14" height="14" rx="2" fill="none" stroke="#6D4C41" stroke-width="1.5"/><polygon points="148,175 154,173 154,185 148,183" fill="none" stroke="#6D4C41" stroke-width="1.2"/><text x="160" y="177" font-size="12" font-weight="700" fill="#4E342E" font-family="PingFang SC,Microsoft YaHei,sans-serif">5G执法记录仪</text><text x="160" y="191" font-size="10" fill="#4E342E" opacity=".75" font-family="PingFang SC,Microsoft YaHei,sans-serif">实时回传</text>
+<rect x="344" y="156" width="200" height="50" rx="7" fill="#0003"/><rect x="342" y="154" width="200" height="50" rx="7" fill="#EFEBE9" stroke="#6D4C41" stroke-width="1.8"/><rect x="342" y="154" width="200" height="5" rx="7" fill="#6D4C41"/><rect x="342" y="157" width="200" height="2" fill="#6D4C41"/><rect x="350" y="172" width="14" height="14" rx="2" fill="none" stroke="#6D4C41" stroke-width="1.5"/><polygon points="364,175 370,173 370,185 364,183" fill="none" stroke="#6D4C41" stroke-width="1.2"/><text x="376" y="177" font-size="12" font-weight="700" fill="#4E342E" font-family="PingFang SC,Microsoft YaHei,sans-serif">采集站</text><text x="376" y="191" font-size="10" fill="#4E342E" opacity=".75" font-family="PingFang SC,Microsoft YaHei,sans-serif">批量导入</text>
+<rect x="560" y="156" width="200" height="50" rx="7" fill="#0003"/><rect x="558" y="154" width="200" height="50" rx="7" fill="#EFEBE9" stroke="#6D4C41" stroke-width="1.8"/><rect x="558" y="154" width="200" height="5" rx="7" fill="#6D4C41"/><rect x="558" y="157" width="200" height="2" fill="#6D4C41"/><rect x="566" y="172" width="14" height="14" rx="2" fill="none" stroke="#6D4C41" stroke-width="1.5"/><polygon points="580,175 586,173 586,185 580,183" fill="none" stroke="#6D4C41" stroke-width="1.2"/><text x="592" y="177" font-size="12" font-weight="700" fill="#4E342E" font-family="PingFang SC,Microsoft YaHei,sans-serif">执法仪本地导入</text><text x="592" y="191" font-size="10" fill="#4E342E" opacity=".75" font-family="PingFang SC,Microsoft YaHei,sans-serif">USB 接口直连</text>
+<rect x="776" y="156" width="200" height="50" rx="7" fill="#0003"/><rect x="774" y="154" width="200" height="50" rx="7" fill="#EFEBE9" stroke="#6D4C41" stroke-width="1.8"/><rect x="774" y="154" width="200" height="5" rx="7" fill="#6D4C41"/><rect x="774" y="157" width="200" height="2" fill="#6D4C41"/><rect x="782" y="172" width="14" height="14" rx="2" fill="none" stroke="#6D4C41" stroke-width="1.5"/><polygon points="796,175 802,173 802,185 796,183" fill="none" stroke="#6D4C41" stroke-width="1.2"/><text x="808" y="177" font-size="12" font-weight="700" fill="#4E342E" font-family="PingFang SC,Microsoft YaHei,sans-serif">既有执法管理平台</text><text x="808" y="191" font-size="10" fill="#4E342E" opacity=".75" font-family="PingFang SC,Microsoft YaHei,sans-serif">接口归集</text>
+<line x1="550" y1="220" x2="550" y2="268" stroke="#6D4C41" stroke-width="2" marker-end="url(#arrow_brown)"/><text x="556" y="249" font-size="10" fill="#6D4C41" font-family="PingFang SC,Microsoft YaHei,sans-serif">接入处理 / 校验</text>
+<rect x="10" y="270" width="1080" height="150" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="6,3" opacity=".75"/>
+<text x="22" y="288" font-size="11" fill="#1565C0" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">应用服务层（管理与检索平台，运行于应用服务器 ×1）</text>
+<rect x="55" y="300" width="170" height="100" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><rect x="55" y="300" width="170" height="4" rx="6" fill="#1565C0"/><rect x="55" y="302" width="170" height="2" fill="#1565C0"/><circle cx="140" cy="342" r="16" fill="#1565C0" opacity=".12"/><text x="140" y="348" text-anchor="middle" font-size="20" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">↓</text><text x="140" y="376" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">数据接入模块</text>
+<rect x="260" y="300" width="170" height="100" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><rect x="260" y="300" width="170" height="4" rx="6" fill="#1565C0"/><rect x="260" y="302" width="170" height="2" fill="#1565C0"/><circle cx="345" cy="342" r="16" fill="#1565C0" opacity=".12"/><text x="345" y="348" text-anchor="middle" font-size="20" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">⊞</text><text x="345" y="376" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">存储管理模块</text>
+<rect x="465" y="300" width="170" height="100" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><rect x="465" y="300" width="170" height="4" rx="6" fill="#1565C0"/><rect x="465" y="302" width="170" height="2" fill="#1565C0"/><circle cx="550" cy="342" r="16" fill="#1565C0" opacity=".12"/><text x="550" y="348" text-anchor="middle" font-size="20" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">⊙</text><text x="550" y="376" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">检索调阅模块</text>
+<rect x="670" y="300" width="170" height="100" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><rect x="670" y="300" width="170" height="4" rx="6" fill="#1565C0"/><rect x="670" y="302" width="170" height="2" fill="#1565C0"/><circle cx="755" cy="342" r="16" fill="#1565C0" opacity=".12"/><text x="755" y="348" text-anchor="middle" font-size="20" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">↻</text><text x="755" y="376" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">生命周期管理模块</text>
+<rect x="875" y="300" width="170" height="100" rx="6" fill="#BBDEFB" stroke="#1565C0" stroke-width="1.5"/><rect x="875" y="300" width="170" height="4" rx="6" fill="#1565C0"/><rect x="875" y="302" width="170" height="2" fill="#1565C0"/><circle cx="960" cy="342" r="16" fill="#1565C0" opacity=".12"/><text x="960" y="348" text-anchor="middle" font-size="20" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">⚙</text><text x="960" y="376" text-anchor="middle" font-size="11" fill="#0D47A1" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">运维监控模块</text>
+<line x1="366" y1="420" x2="366" y2="468" stroke="#E65100" stroke-width="2" marker-end="url(#arrow_orange)"/><text x="372" y="449" font-size="10" fill="#E65100" font-family="PingFang SC,Microsoft YaHei,sans-serif">JDBC</text>
+<line x1="733" y1="420" x2="733" y2="468" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrow_green)"/><text x="739" y="449" font-size="10" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">NFS/SMB ≥10GbE</text>
+<rect x="10" y="470" width="1080" height="120" rx="10" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="6,3" opacity=".75"/>
+<text x="22" y="488" font-size="11" fill="#2E7D32" font-weight="700" font-family="PingFang SC,Microsoft YaHei,sans-serif">数据存储层</text>
+<rect x="32" y="490" width="490" height="86" rx="8" fill="#0002"/><rect x="30" y="488" width="490" height="86" rx="8" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/><rect x="30" y="488" width="490" height="6" rx="8" fill="#E65100"/><rect x="30" y="491" width="490" height="3" fill="#E65100"/><text x="44" y="518" font-size="13" font-weight="700" fill="#E65100" font-family="PingFang SC,Microsoft YaHei,sans-serif">达梦数据库 V8.4</text><text x="44" y="540" font-size="10.5" fill="#E65100" opacity=".8" font-family="PingFang SC,Microsoft YaHei,sans-serif">元数据 / 业务数据 / 检索索引 / 审计日志</text>
+<rect x="572" y="490" width="500" height="86" rx="8" fill="#0002"/><rect x="570" y="488" width="500" height="86" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2"/><rect x="570" y="488" width="500" height="6" rx="8" fill="#2E7D32"/><rect x="570" y="491" width="500" height="3" fill="#2E7D32"/><text x="584" y="518" font-size="13" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">Scale-Out NAS 存储资源池（×2 节点）</text><text x="584" y="540" font-size="10.5" fill="#2E7D32" opacity=".8" font-family="PingFang SC,Microsoft YaHei,sans-serif">执法音视频原始文件存储  |  有效容量 ≥ 700TB</text>
+</svg>
+    </div>
+  </div>
+
+  <!-- 图例 -->
+  <div class="card">
+    <div class="section-label">图例说明</div>
+    <div class="legend-wrapper">
+      
+    </div>
+  </div>
+
+  <!-- 文字说明 -->
+  <div class="card">
+    <div class="section-label">说明</div>
+    <ul class="notes">
+      
+      <li>• 本图表达系统逻辑架构，不反映物理部署位置。</li>
+      
+      <li>• 应用服务层全部模块均运行于同一应用服务器（双机冗余），不单独部署。</li>
+      
+      <li>• 数据存储层：达梦数据库 V8.4 存储元数据；NAS 存储资源池存储音视频原始文件。</li>
+      
+      <li>• 接入层四种来源数据均经接入节点完整性校验后方可入库，不直接写入存储资源池。</li>
+      
+    </ul>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="page-footer">
+    本图件依据 chart_registry A-02 规范生成 &nbsp;|&nbsp;
+    设备来源：investment_schema.md &nbsp;|&nbsp;
+    不含 IP 地址 &nbsp;|&nbsp; 不含品牌标识
+  </div>
+
+</body>
+</html>

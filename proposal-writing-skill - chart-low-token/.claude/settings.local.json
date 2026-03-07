@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright:*)",
+      "Bash(pip show:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}

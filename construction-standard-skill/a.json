@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.1",
+  "drawing_type": "空间平面布点",
+  "layout_data": {
+    "space": {
+      "count": 3,
+      "name": "综合执法功能区",
+      "size": {
+        "length_m": 18,
+        "width_m": 12,
+        "height_m": 3.6
+      },
+      "coordinate_system": {
+        "origin": "top_left",
+        "x_direction": "right",
+        "y_direction": "down"
+      }
+    },
+    "fixed_elements": [
+      {
+        "name": "中央工作岛",
+        "size": {
+          "width_m": 4,
+          "depth_m": 2
+        },
+        "position": {
+          "anchor": "center",
+          "align": "center",
+          "offset_m": 0
+        }
+      },
+      {
+        "name": "资料柜组A",
+        "size": {
+          "width_m": 3,
+          "depth_m": 0.6
+        },
+        "position": {
+          "anchor": "west",
+          "align": "center",
+          "offset_m": 0.2
+        }
+      },
+      {
+        "name": "资料柜组B",
+        "size": {
+          "width_m": 3,
+          "depth_m": 0.6
+        },
+        "position": {
+          "anchor": "east",
+          "align": "center",
+          "offset_m": 0.2
+        }
+      },
+      {
+        "name": "隔断墙1",
+        "size": {
+          "width_m": 0.2,
+          "depth_m": 6
+        },
+        "position": {
+          "anchor": "south",
+          "align": "center",
+          "offset_m": 6
+        }
+      },
+      {
+        "name": "设备机柜区",
+        "size": {
+          "width_m": 2,
+          "depth_m": 1
+        },
+        "position": {
+          "anchor": "north",
+          "align": "center",
+          "offset_m": 0.5
+        }
+      }
+    ],
+    "devices": [
+      {
+        "type": "摄像机",
+        "count": 8,
+        "install_method": "墙角高位",
+        "layout_strategy": "perimeter",
+        "constraints": {
+          "offset_from_wall_mm": 300,
+          "install_height_m": 3.2,
+          "target_elements": [],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "摄像机",
+        "count": 2,
+        "install_method": "顶部吸顶",
+        "layout_strategy": "radial",
+        "constraints": {
+          "offset_from_wall_mm": 0,
+          "install_height_m": 3.4,
+          "target_elements": [],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "拾音器",
+        "count": 4,
+        "install_method": "顶面均布",
+        "layout_strategy": "uniform",
+        "constraints": {
+          "offset_from_wall_mm": 0,
+          "install_height_m": 3.2,
+          "target_elements": [],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "报警按钮",
+        "count": 3,
+        "install_method": "固定设施侧装",
+        "layout_strategy": "single_side",
+        "constraints": {
+          "offset_from_wall_mm": 0,
+          "install_height_m": 1.2,
+          "target_elements": [],
+          "avoid_elements": []
+        }
+      },
+      {
+        "type": "门禁读卡器",
+        "count": 2,
+        "install_method": "门侧壁装",
+        "layout_strategy": "single_side",
+        "constraints": {
+          "offset_from_wall_mm": 0,
+          "install_height_m": 1.3,
+          "target_elements": [],
+          "avoid_elements": []
+        }
+      }
+    ]
+  },
+  "validation": {
+    "coverage_check": "通过",
+    "blind_area_risk": "中心区域存在重叠覆盖",
+    "structure_conflict": "无",
+    "risk_notes": []
+  },
+  "optimization_suggestions": [
+    "周界摄像机可增至10台",
+    "拾音器建议分区编号",
+    "门禁数量核对出入口"
+  ]
+}

@@ -1,0 +1,171 @@
+<!--
+  图件系统 V4 — SVG 图标库参考文件
+  本文件所有图标已内嵌于 renderer.html 的 <defs> 中。
+  此处作为独立参考文件保留，便于查阅。
+
+  使用方式（在 renderer.html 内）：
+    <use href="#ic-camera" width="28" height="28" />
+    <use href="#ic-server" width="28" height="28" />
+-->
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<defs>
+
+<!-- 摄像机 camera -->
+<symbol id="ic-camera" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+  <circle cx="12" cy="13" r="4"/>
+</symbol>
+
+<!-- 服务器 server -->
+<symbol id="ic-server" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="2" width="20" height="8" rx="2"/>
+  <rect x="2" y="14" width="20" height="8" rx="2"/>
+  <circle cx="6" cy="6"  r="1.2" fill="currentColor" stroke="none"/>
+  <circle cx="6" cy="18" r="1.2" fill="currentColor" stroke="none"/>
+</symbol>
+
+<!-- 交换机 switch -->
+<symbol id="ic-switch" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="9" width="20" height="6" rx="1"/>
+  <line x1="6"  y1="9" x2="4"  y2="5"/>
+  <line x1="10" y1="9" x2="8"  y2="5"/>
+  <line x1="14" y1="15" x2="16" y2="19"/>
+  <line x1="18" y1="15" x2="20" y2="19"/>
+</symbol>
+
+<!-- 路由器 router -->
+<symbol id="ic-router" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"/>
+  <line x1="2" y1="12" x2="22" y2="12"/>
+  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+</symbol>
+
+<!-- 防火墙 firewall -->
+<symbol id="ic-firewall" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  <path d="M9 12l2 2 4-4" stroke-width="2.5"/>
+</symbol>
+
+<!-- 存储 storage -->
+<symbol id="ic-storage" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+  <path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/>
+  <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+</symbol>
+
+<!-- 数据库 database -->
+<symbol id="ic-database" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="12" cy="5" rx="9" ry="3"/>
+  <path d="M21 12c0 1.66-4.03 3-9 3S3 13.66 3 12"/>
+  <path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/>
+  <line x1="12" y1="10" x2="12" y2="13" stroke-width="1.5"/>
+</symbol>
+
+<!-- 云 cloud -->
+<symbol id="ic-cloud" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+</symbol>
+
+<!-- 终端 terminal -->
+<symbol id="ic-terminal" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="3" width="20" height="14" rx="2"/>
+  <line x1="8" y1="21" x2="16" y2="21"/>
+  <line x1="12" y1="17" x2="12" y2="21"/>
+</symbol>
+
+<!-- 用户 user -->
+<symbol id="ic-user" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+  <circle cx="12" cy="7" r="4"/>
+</symbol>
+
+<!-- 传感器 sensor -->
+<symbol id="ic-sensor" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/>
+  <path d="M16.24 7.76a6 6 0 0 1 0 8.49"/>
+  <path d="M7.76 16.24a6 6 0 0 1 0-8.49"/>
+  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+  <path d="M4.93 19.07a10 10 0 0 1 0-14.14"/>
+</symbol>
+
+<!-- 手机 mobile -->
+<symbol id="ic-mobile" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="5" y="2" width="14" height="20" rx="2"/>
+  <circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/>
+</symbol>
+
+<!-- 网关 gateway -->
+<symbol id="ic-gateway" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="7" width="20" height="10" rx="1"/>
+  <line x1="6"  y1="7" x2="6"  y2="4"/>
+  <line x1="10" y1="7" x2="10" y2="4"/>
+  <line x1="14" y1="17" x2="14" y2="20"/>
+  <line x1="18" y1="17" x2="18" y2="20"/>
+</symbol>
+
+<!-- 应用 app -->
+<symbol id="ic-app" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3"  y="3"  width="7" height="7" rx="1"/>
+  <rect x="14" y="3"  width="7" height="7" rx="1"/>
+  <rect x="3"  y="14" width="7" height="7" rx="1"/>
+  <rect x="14" y="14" width="7" height="7" rx="1"/>
+</symbol>
+
+<!-- 平台 platform -->
+<symbol id="ic-platform" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="16" width="20" height="4" rx="1"/>
+  <line x1="6"  y1="16" x2="6"  y2="8"/>
+  <line x1="12" y1="16" x2="12" y2="4"/>
+  <line x1="18" y1="16" x2="18" y2="10"/>
+</symbol>
+
+<!-- 显示屏 display -->
+<symbol id="ic-display" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="3" width="20" height="14" rx="2"/>
+  <line x1="8"  y1="21" x2="16" y2="21"/>
+  <line x1="12" y1="17" x2="12" y2="21"/>
+</symbol>
+
+<!-- 处理节点 process -->
+<symbol id="ic-process" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="10"/>
+  <polyline points="12 6 12 12 16 14"/>
+</symbol>
+
+<!-- NVR 录像机 nvr -->
+<symbol id="ic-nvr" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="2" y="7" width="20" height="10" rx="2"/>
+  <circle cx="17" cy="12" r="2"/>
+  <line x1="2" y1="12" x2="9" y2="12"/>
+</symbol>
+
+<!-- RFID rfid -->
+<symbol id="ic-rfid" viewBox="0 0 24 24" fill="none"
+  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="4" y="6" width="16" height="12" rx="2"/>
+  <line x1="9"  y1="10" x2="9"  y2="14"/>
+  <line x1="12" y1="9"  x2="12" y2="15"/>
+  <line x1="15" y1="10" x2="15" y2="14"/>
+</symbol>
+
+</defs>
+</svg>

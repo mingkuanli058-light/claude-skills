@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>A-03 数据流转图</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+background:#ffffff;
+font-family:"Microsoft YaHei","微软雅黑",SimHei,Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:20px;
+}
+svg{
+border:1px solid #e8e8e8;
+background:#fafafa;
+}
+</style>
+</head>
+
+<body>
+
+<svg id="dataFlowChart"
+width="1200"
+height="680"
+viewBox="0 0 1200 680"
+xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+
+<marker id="arrowBlue" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#4A7FBF"/>
+</marker>
+
+<marker id="arrowGreen" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#3A8A4F"/>
+</marker>
+
+<marker id="arrowOrange" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#C06020"/>
+</marker>
+
+<marker id="arrowGold" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#C69B00"/>
+</marker>
+
+</defs>
+
+<!-- TITLE -->
+
+<text id="title_main"
+x="600" y="30"
+text-anchor="middle"
+font-size="20"
+font-weight="bold">
+数据流转图
+</text>
+
+<text id="title_project"
+x="600" y="50"
+text-anchor="middle"
+font-size="12"
+fill="#777">
+项目名称
+</text>
+
+<line x1="40" y1="60" x2="1160" y2="60"
+stroke="#ddd" stroke-width="1"/>
+
+<!-- nodes -->
+
+<g id="nodes"></g>
+
+<!-- flows -->
+
+<g id="flows"></g>
+
+</svg>
+
+<script>
+
+fetch("../../output/chart_spec/data_flow.json")
+.then(res=>res.json())
+.then(spec=>{
+
+document.getElementById("title_project").textContent =
+spec.project_name
+
+const nodes=document.getElementById("nodes")
+const flows=document.getElementById("flows")
+
+// nodes
+
+spec.nodes.forEach(n=>{
+
+let fillColor="#fff"
+let strokeColor="#888"
+
+if(n.type==="system"){
+fillColor="#EDF7EE"
+strokeColor="#3A8A4F"
+}
+
+if(n.type==="database"){
+fillColor="#FFFAEB"
+strokeColor="#C69B00"
+}
+
+if(n.type==="device"){
+fillColor="#FFF0E6"
+strokeColor="#C06020"
+}
+
+if(n.type==="external"){
+fillColor="#F5F5F5"
+strokeColor="#999"
+}
+
+nodes.innerHTML+=`
+
+<rect
+x="${n.x}"
+y="${n.y}"
+width="${n.w}"
+height="${n.h}"
+rx="5"
+fill="${fillColor}"
+stroke="${strokeColor}"
+stroke-width="1.5"
+/>
+
+<text
+x="${n.x+n.w/2}"
+y="${n.y+28}"
+text-anchor="middle"
+font-size="12"
+font-weight="bold"
+fill="#333">
+${n.name}
+</text>
+
+`
+
+})
+
+// flows
+
+spec.flows.forEach(f=>{
+
+let marker="arrowBlue"
+
+if(f.type==="database")
+marker="arrowGold"
+
+if(f.type==="device")
+marker="arrowOrange"
+
+flows.innerHTML+=`
+
+<line
+x1="${f.x1}"
+y1="${f.y1}"
+x2="${f.x2}"
+y2="${f.y2}"
+stroke="#666"
+stroke-width="1.5"
+marker-end="url(#${marker})"
+/>
+
+<rect
+x="${f.label_x}"
+y="${f.label_y}"
+width="${f.label_w}"
+height="18"
+rx="3"
+fill="#fff"
+/>
+
+<text
+x="${f.label_x+f.label_w/2}"
+y="${f.label_y+12}"
+text-anchor="middle"
+font-size="9"
+fill="#444">
+${f.label}
+</text>
+
+`
+
+})
+
+})
+
+</script>
+
+</body>
+</html>

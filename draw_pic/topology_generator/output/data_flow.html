@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-03　数据流转图 — </title>
+  <style>
+    /* ── 基础重置 ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+      background: #f0f4f8;
+      color: #2c3e50;
+      padding: 28px 32px;
+      min-height: 100vh;
+    }
+
+    /* ── 页眉 ────────────────────────────────────────────────── */
+    .page-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .badge {
+      background: #1565C0;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+    .page-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1565C0;
+    }
+    .system-name {
+      font-size: 13px;
+      color: #888;
+      font-weight: 400;
+    }
+
+    /* ── 卡片 ────────────────────────────────────────────────── */
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1565C0;
+      border-left: 3px solid #1565C0;
+      padding-left: 9px;
+      margin-bottom: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── SVG 画布 ─────────────────────────────────────────────── */
+    .svg-wrapper {
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+    svg {
+      display: block;
+      overflow: visible;
+    }
+
+    /* ── 图例 ────────────────────────────────────────────────── */
+    .legend-wrapper {
+      overflow-x: auto;
+    }
+
+    /* ── 说明 ────────────────────────────────────────────────── */
+    ul.notes {
+      list-style: disc;
+      padding-left: 20px;
+      font-size: 12.5px;
+      color: #555;
+      line-height: 2;
+    }
+    ul.notes li { margin-bottom: 2px; }
+
+    /* ── 页脚 ────────────────────────────────────────────────── */
+    .page-footer {
+      text-align: right;
+      font-size: 11px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 页眉 -->
+  <div class="page-header">
+    <span class="badge">A-02</span>
+    <span class="page-title">网络拓扑图</span>
+    <span class="system-name"></span>
+  </div>
+
+  <!-- 拓扑图 -->
+  <div class="card">
+    <div class="section-label">网络拓扑结构</div>
+    <div class="svg-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1060" height="680" viewBox="0 0 1060 680">
+<defs><marker id="arrow_write" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#1565C0"/></marker><marker id="arrow_read" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2E7D32"/></marker></defs>
+<rect x="0" y="0" width="530" height="680" rx="0" fill="#E3F2FD" opacity=".3"/>
+<rect x="530" y="0" width="530" height="680" rx="0" fill="#E8F5E9" opacity=".3"/>
+<line x1="530" y1="0" x2="530" y2="680" stroke="#CFD8DC" stroke-width="2" stroke-dasharray="8,4"/>
+<rect x="0" y="0" width="530" height="42" fill="#1565C0" opacity=".9" rx="0"/><text x="265" y="27" text-anchor="middle" font-size="14" font-weight="700" fill="white" font-family="PingFang SC,Microsoft YaHei,sans-serif">数据写入流程</text>
+<rect x="530" y="0" width="530" height="42" fill="#2E7D32" opacity=".9" rx="0"/><text x="795" y="27" text-anchor="middle" font-size="14" font-weight="700" fill="white" font-family="PingFang SC,Microsoft YaHei,sans-serif">数据调阅流程</text>
+<rect x="157" y="70" width="220" height="72" rx="8" fill="#0002"/><rect x="155" y="68" width="220" height="72" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.8" /><rect x="155" y="68" width="220" height="5" rx="8" fill="#1565C0"/><rect x="155" y="71" width="220" height="2" fill="#1565C0"/><circle cx="171" cy="84" r="12" fill="#1565C0"/><text x="171" y="89" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">W1</text><text x="187" y="97" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">接入节点</text><text x="187" y="111" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">接收数据</text><text x="163" y="132" font-size="9.5" fill="#1565C0" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">来源：5G回传 / 采集站 / 本地导入 / 既有平台归集</text>
+<rect x="157" y="170" width="220" height="72" rx="8" fill="#0002"/><rect x="155" y="168" width="220" height="72" rx="8" fill="#FFF9C4" stroke="#1565C0" stroke-width="1.8" stroke-dasharray="5,3"/><rect x="155" y="168" width="220" height="5" rx="8" fill="#1565C0"/><rect x="155" y="171" width="220" height="2" fill="#1565C0"/><circle cx="171" cy="184" r="12" fill="#1565C0"/><text x="171" y="189" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">W2</text><text x="187" y="197" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">完整性校验</text><text x="187" y="211" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">元数据提取</text><text x="163" y="232" font-size="9.5" fill="#1565C0" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">哈希校验 + 时间/设备/人员等元数据</text>
+<rect x="157" y="270" width="220" height="72" rx="8" fill="#0002"/><rect x="155" y="268" width="220" height="72" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.8" /><rect x="155" y="268" width="220" height="5" rx="8" fill="#1565C0"/><rect x="155" y="271" width="220" height="2" fill="#1565C0"/><circle cx="171" cy="284" r="12" fill="#1565C0"/><text x="171" y="289" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">W3</text><text x="187" y="297" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">写入</text><text x="187" y="311" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">NAS存储资源池</text><text x="163" y="332" font-size="9.5" fill="#1565C0" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">通过存储网络（≥10GbE）写入原始文件</text>
+<rect x="157" y="370" width="220" height="72" rx="8" fill="#0002"/><rect x="155" y="368" width="220" height="72" rx="8" fill="#E3F2FD" stroke="#E65100" stroke-width="1.8" /><rect x="155" y="368" width="220" height="5" rx="8" fill="#E65100"/><rect x="155" y="371" width="220" height="2" fill="#E65100"/><circle cx="171" cy="384" r="12" fill="#E65100"/><text x="171" y="389" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">W4</text><text x="187" y="397" font-size="12" font-weight="700" fill="#E65100" font-family="PingFang SC,Microsoft YaHei,sans-serif">达梦数据库</text><text x="187" y="411" font-size="12" font-weight="700" fill="#E65100" font-family="PingFang SC,Microsoft YaHei,sans-serif">建立元数据记录</text><text x="163" y="432" font-size="9.5" fill="#E65100" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">文件路径 + 校验值 + 生命周期状态</text>
+<rect x="157" y="470" width="220" height="72" rx="8" fill="#0002"/><rect x="155" y="468" width="220" height="72" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.8" /><rect x="155" y="468" width="220" height="5" rx="8" fill="#1565C0"/><rect x="155" y="471" width="220" height="2" fill="#1565C0"/><circle cx="171" cy="484" r="12" fill="#1565C0"/><text x="171" y="489" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">W5</text><text x="187" y="497" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">接入完成</text><text x="187" y="511" font-size="12" font-weight="700" fill="#1565C0" font-family="PingFang SC,Microsoft YaHei,sans-serif">数据在线可用</text><text x="163" y="532" font-size="9.5" fill="#1565C0" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">原始文件进入只读保护状态</text>
+<rect x="687" y="70" width="220" height="72" rx="8" fill="#0002"/><rect x="685" y="68" width="220" height="72" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.8" /><rect x="685" y="68" width="220" height="5" rx="8" fill="#2E7D32"/><rect x="685" y="71" width="220" height="2" fill="#2E7D32"/><circle cx="701" cy="84" r="12" fill="#2E7D32"/><text x="701" y="89" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">R1</text><text x="717" y="97" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">访问终端</text><text x="717" y="111" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">发起检索请求</text><text x="693" y="132" font-size="9.5" fill="#2E7D32" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">多维度检索：时间 / 设备 / 人员 / 类型</text>
+<rect x="687" y="170" width="220" height="72" rx="8" fill="#0002"/><rect x="685" y="168" width="220" height="72" rx="8" fill="#FFF9C4" stroke="#2E7D32" stroke-width="1.8" stroke-dasharray="5,3"/><rect x="685" y="168" width="220" height="5" rx="8" fill="#2E7D32"/><rect x="685" y="171" width="220" height="2" fill="#2E7D32"/><circle cx="701" cy="184" r="12" fill="#2E7D32"/><text x="701" y="189" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">R2</text><text x="717" y="197" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">权限验证</text><text x="717" y="211" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">审批检查</text><text x="693" y="232" font-size="9.5" fill="#2E7D32" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">基于角色访问控制，审批流程校验</text>
+<rect x="687" y="270" width="220" height="72" rx="8" fill="#0002"/><rect x="685" y="268" width="220" height="72" rx="8" fill="#E3F2FD" stroke="#E65100" stroke-width="1.8" /><rect x="685" y="268" width="220" height="5" rx="8" fill="#E65100"/><rect x="685" y="271" width="220" height="2" fill="#E65100"/><circle cx="701" cy="284" r="12" fill="#E65100"/><text x="701" y="289" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">R3</text><text x="717" y="297" font-size="12" font-weight="700" fill="#E65100" font-family="PingFang SC,Microsoft YaHei,sans-serif">查询达梦数据库</text><text x="717" y="311" font-size="12" font-weight="700" fill="#E65100" font-family="PingFang SC,Microsoft YaHei,sans-serif">获取文件路径</text><text x="693" y="332" font-size="9.5" fill="#E65100" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">查询元数据，返回存储资源池访问路径</text>
+<rect x="687" y="370" width="220" height="72" rx="8" fill="#0002"/><rect x="685" y="368" width="220" height="72" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.8" /><rect x="685" y="368" width="220" height="5" rx="8" fill="#2E7D32"/><rect x="685" y="371" width="220" height="2" fill="#2E7D32"/><circle cx="701" cy="384" r="12" fill="#2E7D32"/><text x="701" y="389" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">R4</text><text x="717" y="397" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">从NAS存储资源池</text><text x="717" y="411" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">读取文件</text><text x="693" y="432" font-size="9.5" fill="#2E7D32" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">通过存储网络（≥10GbE）读取原始文件</text>
+<rect x="687" y="470" width="220" height="72" rx="8" fill="#0002"/><rect x="685" y="468" width="220" height="72" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="1.8" /><rect x="685" y="468" width="220" height="5" rx="8" fill="#2E7D32"/><rect x="685" y="471" width="220" height="2" fill="#2E7D32"/><circle cx="701" cy="484" r="12" fill="#2E7D32"/><text x="701" y="489" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="sans-serif">R5</text><text x="717" y="497" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">向终端提供</text><text x="717" y="511" font-size="12" font-weight="700" fill="#2E7D32" font-family="PingFang SC,Microsoft YaHei,sans-serif">播放/下载服务</text><text x="693" y="532" font-size="9.5" fill="#2E7D32" opacity=".7" font-family="PingFang SC,Microsoft YaHei,sans-serif">支持 ≥20 路并发播放，审计日志记录</text>
+<line x1="265" y1="140" x2="265" y2="166" stroke="#1565C0" stroke-width="2" marker-end="url(#arrow_write)"/>
+<line x1="265" y1="240" x2="265" y2="266" stroke="#1565C0" stroke-width="2" marker-end="url(#arrow_write)"/>
+<line x1="265" y1="340" x2="265" y2="366" stroke="#1565C0" stroke-width="2" marker-end="url(#arrow_write)"/>
+<line x1="265" y1="440" x2="265" y2="466" stroke="#1565C0" stroke-width="2" marker-end="url(#arrow_write)"/>
+<line x1="795" y1="140" x2="795" y2="166" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrow_read)"/>
+<line x1="795" y1="240" x2="795" y2="266" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrow_read)"/>
+<line x1="795" y1="340" x2="795" y2="366" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrow_read)"/>
+<line x1="795" y1="440" x2="795" y2="466" stroke="#2E7D32" stroke-width="2" marker-end="url(#arrow_read)"/>
+<path d="M 375 404 L 520 404 L 520 304 L 685 304" stroke="#E65100" stroke-width="1.5" fill="none" stroke-dasharray="5,3" opacity=".7"/>
+<rect x="478" y="344" width="104" height="20" rx="4" fill="white" stroke="#E65100" stroke-width="1"/><text x="530" y="358" text-anchor="middle" font-size="10" fill="#E65100" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">达梦数据库 V8.4</text>
+<path d="M 375 304 L 520 304 L 520 404 L 685 404" stroke="#6A1B9A" stroke-width="1.5" fill="none" stroke-dasharray="5,3" opacity=".7"/>
+<rect x="478" y="344" width="104" height="20" rx="4" fill="white" stroke="#6A1B9A" stroke-width="1"/><text x="530" y="358" text-anchor="middle" font-size="10" fill="#6A1B9A" font-weight="600" font-family="PingFang SC,Microsoft YaHei,sans-serif">NAS存储资源池</text>
+</svg>
+    </div>
+  </div>
+
+  <!-- 图例 -->
+  <div class="card">
+    <div class="section-label">图例说明</div>
+    <div class="legend-wrapper">
+      
+    </div>
+  </div>
+
+  <!-- 文字说明 -->
+  <div class="card">
+    <div class="section-label">说明</div>
+    <ul class="notes">
+      
+      <li>• 数据写入流程：接入节点是唯一合法入口，所有数据必须通过完整性校验后方可入库。</li>
+      
+      <li>• 校验失败的数据拒绝入库并记录异常，不写入正式存储区；系统具备断点续传机制。</li>
+      
+      <li>• 数据调阅流程：访问终端不直接访问存储资源池，所有调阅均经管理与检索平台代理。</li>
+      
+      <li>• 数据调阅须经审批流程，调阅操作纳入审计日志，审计日志独立存储并防篡改。</li>
+      
+      <li>• 原始执法音视频数据在存储全周期内保持只读保护，不得压缩、转码或结构重组。</li>
+      
+    </ul>
+  </div>
+
+  <!-- 页脚 -->
+  <div class="page-footer">
+    本图件依据 chart_registry A-02 规范生成 &nbsp;|&nbsp;
+    设备来源：investment_schema.md &nbsp;|&nbsp;
+    不含 IP 地址 &nbsp;|&nbsp; 不含品牌标识
+  </div>
+
+</body>
+</html>

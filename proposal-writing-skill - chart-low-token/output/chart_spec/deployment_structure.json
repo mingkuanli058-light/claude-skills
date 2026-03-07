@@ -1,0 +1,38 @@
+{
+  "chart_type": "deployment_structure",
+  "title": "通州分局双中心业务运行安全监测系统部署结构",
+  "meta": {
+    "project": "通州分局双中心业务运行安全监测系统",
+    "company": "北京市公安局通州分局",
+    "date": "2026",
+    "chart_style": "presentation"
+  },
+  "layers": [
+    "应用服务器",
+    "数据库服务器",
+    "存储服务器"
+  ],
+  "nodes": [
+    {"id": "server_checkin", "type": "server", "layer": "应用服务器", "label": "打卡管理服务器"},
+    {"id": "server_behavior", "type": "server", "layer": "应用服务器", "label": "视频行为分析服务器"},
+    {"id": "server_property", "type": "server", "layer": "应用服务器", "label": "涉案财物视频分析服务器"},
+    {"id": "db_main", "type": "database", "layer": "数据库服务器", "label": "主数据库"},
+    {"id": "db_backup", "type": "database", "layer": "数据库服务器", "label": "备份数据库"},
+    {"id": "storage_video", "type": "storage", "layer": "存储服务器", "label": "事件视频存储"},
+    {"id": "storage_data", "type": "storage", "layer": "存储服务器", "label": "业务数据存储"}
+  ],
+  "links": [
+    {"from": "server_checkin", "to": "db_main"},
+    {"from": "server_behavior", "to": "db_main"},
+    {"from": "server_property", "to": "db_main"},
+    {"from": "db_main", "to": "db_backup", "label": "数据同步"},
+    {"from": "server_checkin", "to": "storage_data"},
+    {"from": "server_behavior", "to": "storage_video"},
+    {"from": "server_property", "to": "storage_video"}
+  ],
+  "groups": [
+    {"id": "group_application", "label": "应用服务器集群", "nodes": ["server_checkin", "server_behavior", "server_property"]},
+    {"id": "group_database", "label": "数据库集群", "nodes": ["db_main", "db_backup"]},
+    {"id": "group_storage", "label": "存储集群", "nodes": ["storage_video", "storage_data"]}
+  ]
+}

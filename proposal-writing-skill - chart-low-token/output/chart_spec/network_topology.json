@@ -1,0 +1,39 @@
+{
+  "chart_type": "network_topology",
+  "title": "通州分局双中心业务运行安全监测系统网络拓扑",
+  "meta": {
+    "project": "通州分局双中心业务运行安全监测系统",
+    "company": "北京市公安局通州分局",
+    "date": "2026",
+    "chart_style": "presentation"
+  },
+  "layers": [
+    "接入终端区",
+    "核心网络区",
+    "业务服务区"
+  ],
+  "nodes": [
+    {"id": "terminal_face", "type": "terminal", "layer": "接入终端区", "label": "人脸识别终端"},
+    {"id": "camera_guard", "type": "camera", "layer": "接入终端区", "label": "岗位值守摄像头"},
+    {"id": "camera_property", "type": "camera", "layer": "接入终端区", "label": "保管室摄像头"},
+    {"id": "network_police", "type": "gateway", "layer": "核心网络区", "label": "公安网络"},
+    {"id": "firewall", "type": "firewall", "layer": "核心网络区", "label": "边界防火墙"},
+    {"id": "server_checkin", "type": "server", "layer": "业务服务区", "label": "打卡管理服务器"},
+    {"id": "server_behavior", "type": "server", "layer": "业务服务区", "label": "视频行为分析服务器"},
+    {"id": "server_property", "type": "server", "layer": "业务服务区", "label": "涉案财物视频分析服务器"}
+  ],
+  "links": [
+    {"from": "terminal_face", "to": "network_police"},
+    {"from": "camera_guard", "to": "network_police"},
+    {"from": "camera_property", "to": "network_police"},
+    {"from": "network_police", "to": "firewall"},
+    {"from": "firewall", "to": "server_checkin"},
+    {"from": "firewall", "to": "server_behavior"},
+    {"from": "firewall", "to": "server_property"}
+  ],
+  "groups": [
+    {"id": "group_terminal", "label": "前端设备", "nodes": ["terminal_face", "camera_guard", "camera_property"]},
+    {"id": "group_network", "label": "网络设备", "nodes": ["network_police", "firewall"]},
+    {"id": "group_server", "label": "服务器集群", "nodes": ["server_checkin", "server_behavior", "server_property"]}
+  ]
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>A-01 系统总体架构图</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+background:#ffffff;
+font-family:"Microsoft YaHei","微软雅黑",SimHei,Arial,sans-serif;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:20px;
+}
+svg{
+border:1px solid #e8e8e8;
+background:#fafafa;
+}
+</style>
+</head>
+
+<body>
+
+<svg id="architectureChart" width="1200" height="760" viewBox="0 0 1200 760"
+xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+
+<marker id="arrow" markerWidth="9" markerHeight="7" refX="9" refY="3.5" orient="auto">
+<polygon points="0 0, 9 3.5, 0 7" fill="#777"/>
+</marker>
+
+</defs>
+
+<!-- TITLE -->
+<text id="title_main" x="600" y="30" text-anchor="middle"
+font-size="20" font-weight="bold">系统总体架构图</text>
+
+<text id="title_project" x="600" y="50" text-anchor="middle"
+font-size="12" fill="#777">项目名称</text>
+
+<line x1="40" y1="60" x2="1160" y2="60"
+stroke="#ddd" stroke-width="1"/>
+
+<!-- 展示与交互层 -->
+<rect x="40" y="70" width="1120" height="110"
+fill="#EBF4FF" stroke="#4A7FBF" stroke-width="1.5"/>
+
+<rect x="40" y="70" width="26" height="110"
+fill="#4A7FBF"/>
+
+<text x="53" y="165"
+text-anchor="middle"
+font-size="12"
+font-weight="bold"
+fill="#fff"
+transform="rotate(-90,53,165)">
+展示与交互层
+</text>
+
+<g id="ui_nodes"></g>
+
+<!-- arrow -->
+<line x1="600" y1="180" x2="600" y2="200"
+stroke="#777" stroke-width="1.5"
+marker-end="url(#arrow)"/>
+
+<!-- 应用层 -->
+<rect x="40" y="200" width="1120" height="140"
+fill="#EDF7EE" stroke="#3A8A4F" stroke-width="1.5"/>
+
+<rect x="40" y="200" width="26" height="140"
+fill="#3A8A4F"/>
+
+<text x="53" y="310"
+text-anchor="middle"
+font-size="12"
+font-weight="bold"
+fill="#fff"
+transform="rotate(-90,53,310)">
+应用服务层
+</text>
+
+<text id="system_name"
+x="600" y="225"
+text-anchor="middle"
+font-size="14"
+font-weight="bold"
+fill="#1A6030">
+业务系统名称
+</text>
+
+<g id="service_modules"></g>
+
+<!-- arrow -->
+<line x1="600" y1="340" x2="600" y2="360"
+stroke="#777" stroke-width="1.5"
+marker-end="url(#arrow)"/>
+
+<!-- 数据层 -->
+<rect x="40" y="360" width="1120" height="110"
+fill="#FFFAEB" stroke="#C69B00" stroke-width="1.5"/>
+
+<rect x="40" y="360" width="26" height="110"
+fill="#C69B00"/>
+
+<text x="53" y="450"
+text-anchor="middle"
+font-size="12"
+font-weight="bold"
+fill="#fff"
+transform="rotate(-90,53,450)">
+数据层
+</text>
+
+<g id="data_nodes"></g>
+
+<!-- arrow -->
+<line x1="600" y1="470" x2="600" y2="490"
+stroke="#777" stroke-width="1.5"
+marker-end="url(#arrow)"/>
+
+<!-- 设备接入层 -->
+<rect x="40" y="490" width="1120" height="130"
+fill="#FFF0E6" stroke="#C06020" stroke-width="1.5"/>
+
+<rect x="40" y="490" width="26" height="130"
+fill="#C06020"/>
+
+<text x="53" y="600"
+text-anchor="middle"
+font-size="12"
+font-weight="bold"
+fill="#fff"
+transform="rotate(-90,53,600)">
+设备接入层
+</text>
+
+<g id="device_nodes"></g>
+
+</svg>
+
+<script>
+
+fetch("../../output/chart_spec/system_architecture.json")
+.then(res=>res.json())
+.then(spec=>{
+
+document.getElementById("title_project").textContent=spec.project_name
+document.getElementById("system_name").textContent=spec.system_name
+
+const uiLayer=document.getElementById("ui_nodes")
+const serviceLayer=document.getElementById("service_modules")
+const dataLayer=document.getElementById("data_nodes")
+const deviceLayer=document.getElementById("device_nodes")
+
+// UI节点
+spec.ui.forEach((n,i)=>{
+
+let x=80+i*180
+
+uiLayer.innerHTML+=`
+<rect x="${x}" y="90" width="150" height="70"
+fill="#fff" stroke="#4A7FBF"/>
+<text x="${x+75}" y="130"
+text-anchor="middle"
+font-size="11"
+fill="#2255AA">
+${n}
+</text>
+`
+
+})
+
+// 服务模块
+spec.modules.forEach((n,i)=>{
+
+let x=70+i*170
+
+serviceLayer.innerHTML+=`
+<rect x="${x}" y="240" width="150" height="70"
+fill="#fff" stroke="#3A8A4F"/>
+<text x="${x+75}" y="275"
+text-anchor="middle"
+font-size="11"
+fill="#1A6030">
+${n}
+</text>
+`
+
+})
+
+// 数据层
+spec.data.forEach((n,i)=>{
+
+let x=120+i*300
+
+dataLayer.innerHTML+=`
+<rect x="${x}" y="390" width="260" height="60"
+fill="#fff" stroke="#C69B00"/>
+<text x="${x+130}" y="425"
+text-anchor="middle"
+font-size="11"
+fill="#7B5800">
+${n}
+</text>
+`
+
+})
+
+// 设备
+spec.devices.forEach((n,i)=>{
+
+let x=120+i*300
+
+deviceLayer.innerHTML+=`
+<rect x="${x}" y="520" width="260" height="70"
+fill="#fff" stroke="#C06020"/>
+<text x="${x+130}" y="560"
+text-anchor="middle"
+font-size="11"
+fill="#8B3000">
+${n}
+</text>
+`
+
+})
+
+})
+
+</script>
+
+</body>
+</html>
